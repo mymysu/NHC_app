@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "16761457416",
+    "project_id": "db-water-resources",
+    "storage_bucket": "db-water-resources.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16761457416:android:0b40f145336acaa8d93abd",
+        "android_client_info": {
+          "package_name": "com.example.water_resources_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "16761457416-23s69ogahmq2ejb2m2iph0du4tknboio.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqVvoS3Ubf1itGcB6XKxbe9IA6X7z0VYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "16761457416-23s69ogahmq2ejb2m2iph0du4tknboio.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

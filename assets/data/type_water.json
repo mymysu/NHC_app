@@ -1,0 +1,108 @@
+[
+    {
+        "Source_EN": "surface water",
+        "Source_TH": "แหล่งน้ำผิวดิน",
+        "Type_Abbr": "NAT_WTR_BODY",
+        "Type_TH": "แหล่งน้ำผิวดินธรรมชาติ",
+        "ID_Type": 1,
+        "Sub_Type": [
+            {
+                "Type_EN": "Lake/Pond",
+                "Type_TH": "ทะเลสาบ/บ่อน้ำ",
+                "Size": [
+                    "MS",
+                    "ML",
+                    "L",
+                    "S"
+                ]
+            },
+            {
+                "Type_EN": "Swamp/Marsh",
+                "Type_TH": "หนอง/บึง/กุด",
+                "Size": [
+                    "MS",
+                    "ML",
+                    "L",
+                    "S"
+                ]
+            },
+            {
+                "Type_EN": "Spring/Hot-spring/Seep",
+                "Type_TH": "ตาน้ำ"
+            }
+        ]
+    },
+    {
+        "Source_EN": "surface water",
+        "Source_TH": "แหล่งน้ำผิวดิน",
+        "Type_Abbr": "MM_WTR_BODY",
+        "Type_TH": "แหล่งน้ำผิวดินธรรมชาติ",
+        "ID_Type": 2,
+        "Sub_Type": [
+            {
+                "Type_EN": "Reservoir",
+                "Type_TH": "อ่างเก็บน้ำ",
+                "Size": [
+                    "MS",
+                    "ML",
+                    "L",
+                    "S"
+                ]
+            },
+            {
+                "Type_EN": "Pool",
+                "Type_TH": "สระน้ำ/บ่อน้ำ(มนุษย์สร้าง)"
+            }
+        ]
+    },
+    {
+        "Source_EN": "waterway",
+        "Source_TH": "ทางน้ำ",
+        "Type_Abbr": "NAT_STREAM",
+        "Type_TH": "ทางน้ำธรรมชาติ",
+        "ID_Type": 3,
+        "Sub_Type": [
+            {
+                "Type_EN": "Stream/River",
+                "Type_TH": "ลำน้ำ/แม่น้ำ"
+            },
+            {
+                "Type_EN": "Estuary",
+                "Type_TH": "ปากน้ำ"
+            },
+            {
+                "Type_EN": "Artificial path",
+                "Type_TH": "เส้นสมมติ"
+            }
+        ]
+    },
+    {
+        "Source_EN": "waterway",
+        "Source_TH": "ทางน้ำ",
+        "Type_Abbr": "MM_CANAL",
+        "Type_TH": "ทางน้ำมนุษย์สร้าง",
+        "ID_Type": 4,
+        "Sub_Type": [
+            {
+                "Type_EN": "Canal",
+                "Type_TH": "คลอง"
+            },
+            {
+                "Type_EN": "Irrigation canal",
+                "Type_TH": "คลองชลประทาน"
+            },
+            {
+                "Type_EN": "Flume",
+                "Type_TH": "ราง"
+            },
+            {
+                "Type_EN": "Pipe",
+                "Type_TH": "ท่อส่งน้ำ"
+            },
+            {
+                "Type_EN": "Artificial path",
+                "Type_TH": "เส้นสมมติ"
+            }
+        ]
+    }
+]

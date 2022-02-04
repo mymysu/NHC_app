@@ -47,8 +47,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+                            image: AssetImage('assets/images/slide-hii-2.jpeg'),
                             colorFilter: ColorFilter.mode(
                                 Colors.black54, BlendMode.colorBurn)),
                       ),
@@ -106,7 +105,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 validator: MultiValidator([
                                   RequiredValidator(
-                                      errorText: 'กรุณาชื่อนาม-สกุล'),
+                                      errorText: 'กรุณากรอกชื่อนาม-สกุล'),
                                 ]),
                                 keyboardType: TextInputType.emailAddress,
                                 onSaved: (value) {
@@ -202,7 +201,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   profile.mobileNumber = value;
                                 },
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               TextFormField(
@@ -253,7 +252,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   border: OutlineInputBorder(),
                                   labelText: 'ตำแหน่งหน่วยงาน',
                                   labelStyle: TextStyle(color: Colors.white),
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                     Icons.supervised_user_circle,
                                     color: Colors.white,
                                   ),

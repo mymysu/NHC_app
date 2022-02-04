@@ -4,6 +4,9 @@ import 'package:water_resources_application/screen/add_water.dart';
 import 'package:water_resources_application/screen/main.dart';
 import 'package:water_resources_application/screen/more.dart';
 import 'package:water_resources_application/screen/news.dart';
+import 'package:water_resources_application/screen/test.dart';
+import 'package:water_resources_application/screen/test3.dart';
+import 'package:water_resources_application/widget/uploading_image.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

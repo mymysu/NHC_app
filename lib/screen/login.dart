@@ -52,8 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(
-                              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+                          image: AssetImage('assets/images/slide-hii-2.jpeg'),
                           colorFilter: ColorFilter.mode(
                               Colors.black54, BlendMode.colorBurn)),
                     ),

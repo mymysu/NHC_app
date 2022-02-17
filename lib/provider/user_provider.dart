@@ -15,7 +15,8 @@ class UserProvider with ChangeNotifier {
     Map<String, dynamic> userData = {
       'uid': userProfile.uid,
       'email': userProfile.email,
-      'fullName': userProfile.fullName,
+      'firstName': userProfile.firstName,
+      'lastName': userProfile.lastName,
       'position': userProfile.position,
       'mobileNumber': userProfile.mobileNumber,
     };
@@ -28,7 +29,8 @@ class UserProvider with ChangeNotifier {
 
     _userProfile.uid = userProfile.uid;
     _userProfile.email = userProfile.email;
-    _userProfile.fullName = userProfile.fullName;
+    _userProfile.firstName = userProfile.firstName;
+    _userProfile.lastName = userProfile.lastName;
     _userProfile.mobileNumber = userProfile.mobileNumber;
     _userProfile.position = userProfile.position;
 
@@ -37,7 +39,8 @@ class UserProvider with ChangeNotifier {
 
   void updateProfileToFirestore(String uid, Profile userProfile) async {
     Map<String, dynamic> userData = {
-      'fullName': userProfile.fullName,
+      'lastName': userProfile.lastName,
+      'firstName': userProfile.firstName,
       'mobileNumber': userProfile.mobileNumber,
       'mobileNumber': userProfile.mobileNumber,
     };
@@ -47,7 +50,8 @@ class UserProvider with ChangeNotifier {
         .doc(uid)
         .update(userData);
 
-    _userProfile.fullName = userProfile.fullName;
+    _userProfile.firstName = userProfile.firstName;
+    _userProfile.lastName = userProfile.lastName;
     _userProfile.mobileNumber = userProfile.mobileNumber;
     _userProfile.mobileNumber = userProfile.mobileNumber;
 
@@ -62,7 +66,9 @@ class UserProvider with ChangeNotifier {
 
     _userProfile.uid = userData['uid'];
     _userProfile.email = userData['email'];
-    _userProfile.fullName = userData['fullName'];
+    _userProfile.firstName = userData['firstName'];
+    _userProfile.lastName = userData['lastName'];
+
     _userProfile.mobileNumber = userData['mobileNumber'];
     _userProfile.mobileNumber = userData['mobileNumber'];
 
@@ -80,7 +86,8 @@ class UserProvider with ChangeNotifier {
     FirebaseAuth.instance.signOut();
     _userProfile.uid = null;
     _userProfile.email = '';
-    _userProfile.fullName = '';
+    _userProfile.firstName = '';
+    _userProfile.lastName = '';
     _userProfile.mobileNumber = '';
     _userProfile.mobileNumber = '';
 

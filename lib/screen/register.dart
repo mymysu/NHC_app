@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:water_resources_application/model/profile.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
 import 'package:water_resources_application/screen/home.dart';
@@ -23,6 +24,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+
     return FutureBuilder(
         future: firebase,
         builder: (context, snapshot) {
@@ -39,94 +42,161 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
           if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
+              backgroundColor: Color(0xFF11048B),
               body: SingleChildScrollView(
-                child: Stack(
+                child: Column(
                   children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('assets/images/slide-hii-2.jpeg'),
-                            colorFilter: ColorFilter.mode(
-                                Colors.black54, BlendMode.colorBurn)),
+                    Container(height: 150
+                        // decoration: BoxDecoration(
+                        //   image: DecorationImage(
+                        //       fit: BoxFit.cover,
+                        //       image: AssetImage('assets/images/slide-hii-2.jpeg'),
+                        //       colorFilter: ColorFilter.mode(
+                        //           Colors.black54, BlendMode.colorBurn)),
+                        // ),
+                        ),
+                    Stack(children: [
+                      Container(
+                        alignment: Alignment(200, 100),
+                        // margin: EdgeInsets.only(top: 100),
+                        height: height - 80,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(40),
+                            topRight: Radius.circular(40),
+                          ),
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Form(
-                          key: formKey,
+                      Form(
+                        key: formKey,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              SizedBox(
-                                height: 50,
-                              ),
                               Center(
-                                child: Text(
-                                  "ข้อมูลส่วนตัว",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: 25),
+                                  child: Text(
+                                "ข้อมูลส่วนตัว",
+                                style: GoogleFonts.prompt(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF11048B),
+                                ),
+                              )),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              SizedBox(
+                                child: TextFormField(
+                                  style: GoogleFonts.prompt(
+                                    color: Color(0xFF11048B),
+                                  ),
+                                  cursorColor: Color(0xFF11048B),
+                                  enableSuggestions: false,
+                                  autocorrect: false,
+                                  decoration: InputDecoration(
+                                    fillColor: Color(0xFF11048B),
+                                    labelText: 'ชื่อจริง',
+                                    labelStyle:
+                                        TextStyle(color: Color(0xFF11048B)),
+                                    prefixIcon: Icon(
+                                      Icons.person,
+                                      color: Color(0xFF11048B),
+                                    ),
+                                    enabledBorder: new OutlineInputBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(25.0),
+                                      borderSide:
+                                          BorderSide(color: Colors.blueAccent),
+                                    ),
+                                    focusedBorder: new OutlineInputBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(25.0),
+                                      borderSide:
+                                          BorderSide(color: Colors.blueAccent),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  validator: MultiValidator([
+                                    RequiredValidator(
+                                        errorText: 'กรุณากรอกชื่อจริง'),
+                                  ]),
+                                  keyboardType: TextInputType.emailAddress,
+                                  onSaved: (value) {
+                                    profile.firstName = value!;
+                                    // print(value);
+                                  },
                                 ),
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 15,
+                              ),
+                              SizedBox(
+                                width: height,
+                                child: TextFormField(
+                                  style: GoogleFonts.prompt(
+                                    color: Color(0xFF11048B),
+                                  ),
+                                  cursorColor: Color(0xFF11048B),
+                                  enableSuggestions: false,
+                                  autocorrect: false,
+                                  decoration: InputDecoration(
+                                    fillColor: Color(0xFF11048B),
+                                    labelText: 'นามสกุล',
+                                    labelStyle:
+                                        TextStyle(color: Color(0xFF11048B)),
+                                    prefixIcon: Icon(
+                                      Icons.person,
+                                      color: Color(0xFF11048B),
+                                    ),
+                                    enabledBorder: new OutlineInputBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(25.0),
+                                      borderSide:
+                                          BorderSide(color: Colors.blueAccent),
+                                    ),
+                                    focusedBorder: new OutlineInputBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(25.0),
+                                      borderSide:
+                                          BorderSide(color: Colors.blueAccent),
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                  ),
+                                  validator: MultiValidator([
+                                    RequiredValidator(
+                                        errorText: 'กรุณากรอกนามสกุล'),
+                                  ]),
+                                  keyboardType: TextInputType.emailAddress,
+                                  onSaved: (value) {
+                                    profile.lastName = value!;
+                                    // print(value);
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                height: 15,
                               ),
                               TextFormField(
-                                style: TextStyle(color: Colors.white),
-                                cursorColor: Colors.white,
+                                style: GoogleFonts.prompt(
+                                  color: Color(0xFF11048B),
+                                ),
                                 enableSuggestions: false,
                                 autocorrect: false,
                                 decoration: InputDecoration(
                                   fillColor: Colors.white,
-                                  labelText: 'ชื่อ นาม-สกุล',
-                                  labelStyle: TextStyle(color: Colors.white),
-                                  prefixIcon: Icon(
-                                    Icons.person,
-                                    color: Colors.white,
+                                  labelStyle: GoogleFonts.prompt(
+                                    color: Color(0xFF11048B),
                                   ),
-                                  enabledBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(25.0),
-                                    borderSide:
-                                        BorderSide(color: Colors.blueAccent),
-                                  ),
-                                  focusedBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(25.0),
-                                    borderSide:
-                                        BorderSide(color: Colors.blueAccent),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                ),
-                                validator: MultiValidator([
-                                  RequiredValidator(
-                                      errorText: 'กรุณากรอกชื่อนาม-สกุล'),
-                                ]),
-                                keyboardType: TextInputType.emailAddress,
-                                onSaved: (value) {
-                                  profile.fullName = value!;
-                                  // print(value);
-                                },
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              TextFormField(
-                                style: TextStyle(color: Colors.white),
-                                enableSuggestions: false,
-                                autocorrect: false,
-                                decoration: InputDecoration(
-                                  fillColor: Colors.white,
-                                  labelStyle: TextStyle(color: Colors.white),
                                   labelText: 'อีเมล',
                                   prefixIcon: Icon(
                                     Icons.email,
-                                    color: Colors.white,
+                                    color: Color(0xFF11048B),
                                   ),
                                   enabledBorder: new OutlineInputBorder(
                                     borderRadius:
@@ -158,17 +228,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 height: 10,
                               ),
                               TextFormField(
-                                style: TextStyle(color: Colors.white),
-                                cursorColor: Colors.white,
+                                style: GoogleFonts.prompt(
+                                  color: Color(0xFF11048B),
+                                ),
+                                cursorColor: Color(0xFF11048B),
                                 enableSuggestions: false,
                                 autocorrect: false,
                                 decoration: InputDecoration(
                                   fillColor: Colors.white,
                                   labelText: 'เบอร์มือถือ',
-                                  labelStyle: TextStyle(color: Colors.white),
+                                  labelStyle: GoogleFonts.prompt(
+                                    color: Color(0xFF11048B),
+                                  ),
                                   prefixIcon: Icon(
                                     Icons.phone_android,
-                                    color: Colors.white,
+                                    color: Color(0xFF11048B),
                                   ),
                                   enabledBorder: new OutlineInputBorder(
                                     borderRadius:
@@ -205,14 +279,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 height: 10,
                               ),
                               TextFormField(
-                                style: TextStyle(color: Colors.white),
-                                cursorColor: Colors.white,
+                                style: GoogleFonts.prompt(
+                                  color: Color(0xFF11048B),
+                                ),
+                                cursorColor: Color(0xFF11048B),
                                 decoration: InputDecoration(
                                   labelText: 'รหัสผ่าน',
-                                  labelStyle: TextStyle(color: Colors.white),
+                                  labelStyle: GoogleFonts.prompt(
+                                    color: Color(0xFF11048B),
+                                  ),
                                   prefixIcon: Icon(
                                     Icons.lock,
-                                    color: Colors.white,
+                                    color: Color(0xFF11048B),
                                   ),
                                   enabledBorder: new OutlineInputBorder(
                                     borderRadius:
@@ -245,16 +323,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 value: dropdownValue,
                                 icon: const Icon(
                                   Icons.keyboard_arrow_down,
-                                  color: Colors.white,
+                                  color: Color(0xFF11048B),
                                   size: 20.09,
                                 ),
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: 'ตำแหน่งหน่วยงาน',
-                                  labelStyle: TextStyle(color: Colors.white),
+                                  labelStyle: GoogleFonts.prompt(
+                                    color: Color(0xFF11048B),
+                                  ),
                                   prefixIcon: const Icon(
                                     Icons.supervised_user_circle,
-                                    color: Colors.white,
+                                    color: Color(0xFF11048B),
                                   ),
                                   enabledBorder: new OutlineInputBorder(
                                     borderRadius:
@@ -271,8 +351,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                                 iconSize: 24,
                                 elevation: 16,
-                                style: const TextStyle(color: Colors.white),
-                                dropdownColor: Colors.blueGrey,
+                                style: GoogleFonts.prompt(
+                                  color: Color(0xFF11048B),
+                                ),
+                                dropdownColor: Colors.white,
                                 isExpanded: true,
                                 onChanged: (String? newValue) {
                                   setState(() {
@@ -297,26 +379,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 }).toList(),
                               )),
                               SizedBox(
-                                height: 10,
+                                height: 20,
                               ),
                               SizedBox(
-                                width: double.infinity,
+                                // width: double.infinity,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 40.0, vertical: 15.0),
-                                    primary: Colors.blueAccent,
+                                    primary: Color(0xFF11048B),
                                     shape: StadiumBorder(),
                                   ),
                                   child: Text(
                                     'ลงทะเบียน',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
+                                    style: GoogleFonts.prompt(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                   onPressed: () async {
                                     if (formKey.currentState!.validate()) {
                                       formKey.currentState!.save();
+                                      print(profile);
                                       try {
                                         await FirebaseAuth.instance
                                             .createUserWithEmailAndPassword(
@@ -361,27 +445,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   },
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'มีบัญชีผู้ใช้อยู่แล้ว?',
-                                    style: TextStyle(
-                                        color: Colors.white70, fontSize: 18),
-                                  ),
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.pushReplacementNamed(
-                                            context, '/login');
-                                      },
-                                      child: Text('ไปล๊อคอิน',
-                                          style: TextStyle(
-                                              color: Colors.blue,
-                                              fontSize: 18)))
-                                ],
-                              ),
                             ],
-                          )),
-                    )
+                          ),
+                        ),
+                      )
+                    ])
                   ],
                 ),
               ),

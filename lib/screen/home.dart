@@ -1,9 +1,11 @@
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:water_resources_application/screen/add_water.dart';
 
 import 'package:water_resources_application/screen/main.dart';
 import 'package:water_resources_application/screen/more.dart';
 import 'package:water_resources_application/screen/news.dart';
+import 'package:water_resources_application/screen/selected_typewater.dart';
 import 'package:water_resources_application/screen/test.dart';
 import 'package:water_resources_application/screen/test3.dart';
 import 'package:water_resources_application/widget/uploading_image.dart';
@@ -17,24 +19,41 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Widget> showPages = [
-    MainScreen(),
+    // MainScreen(),
+    // HomePage3(),
+
     NewsScreen(),
-    AddWaterResourcesScreen(),
+    ChoiceTypeWaterAdd(),
     MoreScreen()
   ];
   int index = 0;
-  final List<BottomNavigationBarItem> bottomMenuListItem = [
-    BottomNavigationBarItem(icon: Icon(Icons.home), label: 'หน้าหลัก'),
-    BottomNavigationBarItem(
-        icon: Icon(Icons.connected_tv_sharp), label: 'ข่าว'),
-    BottomNavigationBarItem(icon: Icon(Icons.water), label: 'เพิ่มแหล่งน้ำ'),
-    BottomNavigationBarItem(icon: Icon(Icons.apps), label: 'เพิ่มเติม')
+  final List<TabItem<dynamic>> bottomMenuListItem = [
+    TabItem(
+        icon: Icon(
+          Icons.home,
+        ),
+        title: 'หน้าหลัก'),
+    // BottomNavigationBarItem(
+    //     icon: Icon(Icons.connected_tv_sharp), label: 'ข่าว'),
+    TabItem(
+        icon: Icon(
+          Icons.water,
+        ),
+        title: 'เพิ่มแหล่งน้ำ'),
+    TabItem(
+        icon: Icon(
+          Icons.apps,
+        ),
+        title: 'เพิ่มเติม')
   ];
   Widget appNavigationBar() {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
+    return ConvexAppBar(
+      backgroundColor: Colors.white,
+      color: Color(0xFF11048B),
+      activeColor: Colors.orange,
+      style: TabStyle.reactCircle,
       items: bottomMenuListItem,
-      currentIndex: index,
+      initialActiveIndex: index,
       onTap: (value) {
         setState(() {
           index = value;

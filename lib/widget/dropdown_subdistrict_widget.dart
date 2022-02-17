@@ -16,8 +16,15 @@ class SubDistrictWidget extends StatelessWidget {
       builder: (context, waterProvider, child) => DropdownSearch<SubDistrictTH>(
         mode: Mode.DIALOG,
         dropdownSearchDecoration: const InputDecoration(
+          fillColor: Colors.white,
+          filled: true,
           contentPadding: EdgeInsets.fromLTRB(12, 12, 0, 0),
-          border: InputBorder.none,
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.pink, width: 3),
+              borderRadius: BorderRadius.all(Radius.circular(25))),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Color(0xFF11048B), width: 3),
+              borderRadius: BorderRadius.all(Radius.circular(25))),
         ),
         onFind: (String? filter) => SubDistrictData.getSubDistrictDropdown(
             context, waterProvider.water.district.toString()),

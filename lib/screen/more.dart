@@ -24,7 +24,9 @@ class MoreScreen extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           buildName(userProvider.userProfile),
-          buildOutButton(userProvider, context)
+          buildEditUser(context),
+          buildHistory(context),
+          buildOutButton(userProvider, context),
         ],
       ),
     );
@@ -33,7 +35,7 @@ class MoreScreen extends StatelessWidget {
   Widget buildName(Profile profile) => Column(
         children: [
           Text(
-            profile.fullName.toString(),
+            "${profile.firstName.toString()} \t ${profile.lastName.toString()}",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           const SizedBox(height: 4),
@@ -65,4 +67,38 @@ class MoreScreen extends StatelessWidget {
           ),
         ),
       );
+}
+
+Widget buildEditUser(BuildContext context) {
+  return SizedBox(
+    width: double.infinity,
+    child: ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
+        primary: Colors.blueAccent,
+        shape: StadiumBorder(),
+      ),
+      child: Text('แก้ไขข้อมูลส่วนตัว'),
+      onPressed: () {
+        Navigator.pushReplacementNamed(context, '/editUser');
+      },
+    ),
+  );
+}
+
+Widget buildHistory(BuildContext context) {
+  return SizedBox(
+    width: double.infinity,
+    child: ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
+        primary: Colors.blueAccent,
+        shape: StadiumBorder(),
+      ),
+      child: Text('ประวัติการเพิ่มข้อมูลแหล่งน้ำ'),
+      onPressed: () {
+        Navigator.pushReplacementNamed(context, '/historyAdd');
+      },
+    ),
+  );
 }

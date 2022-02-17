@@ -3,11 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:water_resources_application/provider/dataWater_provider.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
+import 'package:water_resources_application/screen/edit_user.dart';
+import 'package:water_resources_application/screen/history_add.dart';
 
 import 'package:water_resources_application/screen/home.dart';
 import 'package:water_resources_application/screen/login.dart';
 import 'package:water_resources_application/screen/register.dart';
 import 'package:water_resources_application/screen/reset_email.dart';
+import 'package:water_resources_application/screen/selected_typewater.dart';
 // import 'package:water_resources_application/screen/test3.dart';
 
 void main() {
@@ -40,6 +43,9 @@ class MyApp extends StatelessWidget {
           '/login': (context) => LoginScreen(),
           '/register': (context) => RegisterScreen(),
           '/forgotPassword': (context) => ForgotPasswordScreen(),
+          '/editUser': (context) => EditUser(),
+          '/historyAdd': (context) => HistoryWater(),
+          '/choiceTypeWaterAdd': (context) => ChoiceTypeWaterAdd()
         },
       ),
     );

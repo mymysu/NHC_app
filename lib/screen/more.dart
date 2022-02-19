@@ -14,20 +14,23 @@ class MoreScreen extends StatelessWidget {
         Provider.of<UserProvider>(context, listen: true);
 
     return Scaffold(
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          ProfileWidget(
-            imagePath:
-                'https://images.unsplash.com/photo-1554080353-a576cf803bda?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80',
-            onClicked: () async {},
-          ),
-          const SizedBox(height: 24),
-          buildName(userProvider.userProfile),
-          buildEditUser(context),
-          buildHistory(context),
-          buildOutButton(userProvider, context),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(36.0),
+        child: ListView(
+          physics: BouncingScrollPhysics(),
+          children: [
+            ProfileWidget(
+              imagePath:
+                  'https://images.unsplash.com/photo-1554080353-a576cf803bda?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80',
+              onClicked: () async {},
+            ),
+            const SizedBox(height: 24),
+            buildName(userProvider.userProfile),
+            buildEditUser(context),
+            buildHistory(context),
+            buildOutButton(userProvider, context),
+          ],
+        ),
       ),
     );
   }

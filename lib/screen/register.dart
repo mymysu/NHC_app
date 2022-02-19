@@ -43,6 +43,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
           if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
               backgroundColor: Color(0xFF11048B),
+              appBar: AppBar(
+                backgroundColor: Color(0xFF11048B),
+                centerTitle: true,
+                leading: IconButton(
+                  padding: EdgeInsets.only(left: 20.0),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    size: 20,
+                  ),
+                  color: Colors.white,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
               body: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -107,14 +122,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     enabledBorder: new OutlineInputBorder(
                                       borderRadius:
                                           new BorderRadius.circular(25.0),
-                                      borderSide:
-                                          BorderSide(color: Colors.blueAccent),
+                                      borderSide: BorderSide(
+                                          color: Colors.indigo.shade900,
+                                          width: 2),
                                     ),
                                     focusedBorder: new OutlineInputBorder(
                                       borderRadius:
                                           new BorderRadius.circular(25.0),
-                                      borderSide:
-                                          BorderSide(color: Colors.blueAccent),
+                                      borderSide: BorderSide(
+                                          color: Colors.orange, width: 2),
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
@@ -155,14 +171,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     enabledBorder: new OutlineInputBorder(
                                       borderRadius:
                                           new BorderRadius.circular(25.0),
-                                      borderSide:
-                                          BorderSide(color: Colors.blueAccent),
+                                      borderSide: BorderSide(
+                                          color: Colors.indigo.shade900,
+                                          width: 2),
                                     ),
                                     focusedBorder: new OutlineInputBorder(
                                       borderRadius:
                                           new BorderRadius.circular(25.0),
-                                      borderSide:
-                                          BorderSide(color: Colors.blueAccent),
+                                      borderSide: BorderSide(
+                                          color: Colors.orange, width: 2),
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
@@ -201,14 +218,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   enabledBorder: new OutlineInputBorder(
                                     borderRadius:
                                         new BorderRadius.circular(25.0),
-                                    borderSide:
-                                        BorderSide(color: Colors.blueAccent),
+                                    borderSide: BorderSide(
+                                        color: Colors.indigo.shade900,
+                                        width: 2),
                                   ),
                                   focusedBorder: new OutlineInputBorder(
                                     borderRadius:
                                         new BorderRadius.circular(25.0),
-                                    borderSide:
-                                        BorderSide(color: Colors.blueAccent),
+                                    borderSide: BorderSide(
+                                        color: Colors.orange, width: 2),
                                   ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
@@ -247,14 +265,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   enabledBorder: new OutlineInputBorder(
                                     borderRadius:
                                         new BorderRadius.circular(25.0),
-                                    borderSide:
-                                        BorderSide(color: Colors.blueAccent),
+                                    borderSide: BorderSide(
+                                        color: Colors.indigo.shade900,
+                                        width: 2),
                                   ),
                                   focusedBorder: new OutlineInputBorder(
                                     borderRadius:
                                         new BorderRadius.circular(25.0),
-                                    borderSide:
-                                        BorderSide(color: Colors.blueAccent),
+                                    borderSide: BorderSide(
+                                        color: Colors.orange, width: 2),
                                   ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
@@ -295,14 +314,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   enabledBorder: new OutlineInputBorder(
                                     borderRadius:
                                         new BorderRadius.circular(25.0),
-                                    borderSide:
-                                        BorderSide(color: Colors.blueAccent),
+                                    borderSide: BorderSide(
+                                        color: Colors.indigo.shade900,
+                                        width: 2),
                                   ),
                                   focusedBorder: new OutlineInputBorder(
                                     borderRadius:
                                         new BorderRadius.circular(25.0),
-                                    borderSide:
-                                        BorderSide(color: Colors.blueAccent),
+                                    borderSide: BorderSide(
+                                        color: Colors.orange, width: 2),
                                   ),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15),
@@ -339,14 +359,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   enabledBorder: new OutlineInputBorder(
                                     borderRadius:
                                         new BorderRadius.circular(25.0),
-                                    borderSide:
-                                        BorderSide(color: Colors.blueAccent),
+                                    borderSide: BorderSide(
+                                        color: Colors.indigo.shade900,
+                                        width: 2),
                                   ),
                                   focusedBorder: new OutlineInputBorder(
                                     borderRadius:
                                         new BorderRadius.circular(25.0),
-                                    borderSide:
-                                        BorderSide(color: Colors.blueAccent),
+                                    borderSide: BorderSide(
+                                        color: Colors.orange, width: 2),
                                   ),
                                 ),
                                 iconSize: 24,

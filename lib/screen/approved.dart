@@ -10,7 +10,7 @@ class Approved extends StatelessWidget {
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of<UserProvider>(context);
     return FutureBuilder(
-        future: getHistoryWater(userProvider.userProfile.uid.toString()),
+        future: getHistoryWater(userProvider.userProfile.uid.toString(), true),
         builder:
             (BuildContext context, AsyncSnapshot<List<HistoryWater>> snapshot) {
           if (snapshot.hasError) {
@@ -24,7 +24,7 @@ class Approved extends StatelessWidget {
                 return ListTile(
                   title: Text(name.typeWater.toString()),
                   subtitle: Text(
-                      "${name.province} ${name.district} ${name.subdistrict}"),
+                      "${name.nameProvince} ${name.nameDistrict} ${name.nameSubdistrict}"),
                   // <Add>
                   trailing: PopupMenuButton(
                     itemBuilder: (context) {

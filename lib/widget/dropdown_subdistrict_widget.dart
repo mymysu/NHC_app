@@ -27,9 +27,10 @@ class SubDistrictWidget extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(25))),
         ),
         onFind: (String? filter) => SubDistrictData.getSubDistrictDropdown(
-            context, waterProvider.water.district.toString()),
+            context, waterProvider.water.districtId.toString()),
         onChanged: (var value) {
-          waterProvider.water.subdistrict = value!.subDistrictId;
+          waterProvider.water.nameSubdistrict = value!.nameSubdistrict;
+          waterProvider.water.subdistrictId = value.subdistrictId;
         },
         hint: "เลือก",
         showSearchBox: true,

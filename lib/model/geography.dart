@@ -1,16 +1,16 @@
 class Geography {
-  final String id;
-  final String name;
+  final String geographiesId;
+  final String nameGeo;
 
   Geography({
-    required this.id,
-    required this.name,
+    required this.geographiesId,
+    required this.nameGeo,
   });
 
   factory Geography.fromJson(Map<String, dynamic> json) {
     return Geography(
-      id: json['id'],
-      name: json['name'],
+      geographiesId: json["geographies_ID"],
+      nameGeo: json["name_geo"],
     );
   }
 
@@ -19,5 +19,5 @@ class Geography {
   }
 
   @override
-  String toString() => name;
+  String toString() => nameGeo;
 }

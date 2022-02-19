@@ -10,12 +10,16 @@ class Water {
   String? localName;
   double? latitude;
   double? longitude;
-  String? geography;
   String? riverWatershed;
   String? tributaryWatershed;
-  String? province;
-  String? district;
-  String? subdistrict;
+  String? geography;
+  String? nameProvince;
+  String? nameDistrict;
+  String? nameSubdistrict;
+  String? geographyId;
+  String? provinceId;
+  String? districtId;
+  String? subdistrictId;
   String? village;
   var geom;
   var image;
@@ -23,7 +27,6 @@ class Water {
   String? label;
   String? note;
   String? documentation;
-
   FilePickerResult? kmlFile;
 
   Water(
@@ -38,10 +41,12 @@ class Water {
       this.geography,
       this.riverWatershed,
       this.tributaryWatershed,
-      this.district,
-      this.province,
-      this.subdistrict,
-      this.village,
+      this.nameDistrict,
+      this.nameProvince,
+      this.nameSubdistrict,
+      this.districtId,
+      this.provinceId,
+      this.subdistrictId,
       this.geom,
       this.image,
       this.documentation,

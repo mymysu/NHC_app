@@ -1,28 +1,31 @@
 class SubDistrictTH {
-  final String subDistrictId;
-  final String subDistrictCode;
-  final String subDistrictName;
-  final String districtID;
-  final String provinceId;
-  final String geoId;
+  String subdistrictId;
+  String districtId;
+  String nameSubdistrict;
+  String nameEnSubdistrict;
+  String latSubdistrict;
+  String lngSubdistrict;
+  String zipcode;
 
   SubDistrictTH({
-    required this.subDistrictId,
-    required this.subDistrictCode,
-    required this.subDistrictName,
-    required this.districtID,
-    required this.provinceId,
-    required this.geoId,
+    required this.subdistrictId,
+    required this.districtId,
+    required this.nameSubdistrict,
+    required this.nameEnSubdistrict,
+    required this.latSubdistrict,
+    required this.lngSubdistrict,
+    required this.zipcode,
   });
 
   factory SubDistrictTH.fromJson(Map<String, dynamic> json) {
     return SubDistrictTH(
-      subDistrictId: json['SUB_DISTRICT_ID'].toString(),
-      subDistrictCode: json['SUB_DISTRICT_CODE'].toString(),
-      subDistrictName: json['SUB_DISTRICT_NAME'].toString(),
-      districtID: json['DISTRICT_ID'].toString(),
-      provinceId: json['PROVINCE_ID'].toString(),
-      geoId: json['GEO_ID'].toString(),
+      subdistrictId: json["subdistrict_ID"],
+      districtId: json["district_ID"],
+      nameSubdistrict: json["name_subdistrict"],
+      nameEnSubdistrict: json["name_en_subdistrict"],
+      latSubdistrict: json["lat_subdistrict"],
+      lngSubdistrict: json["lng_subdistrict"],
+      zipcode: json["zipcode"],
     );
   }
 
@@ -33,10 +36,10 @@ class SubDistrictTH {
     }
     return list
         .map((item) => SubDistrictTH.fromJson(item))
-        .where((element) => element.districtID == indexProvince)
+        .where((element) => element.districtId == indexProvince)
         .toList();
   }
 
   @override
-  String toString() => subDistrictName;
+  String toString() => nameSubdistrict;
 }

@@ -7,7 +7,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:water_resources_application/model/data_mm_wtr_body.dart';
+
 import 'package:water_resources_application/provider/dataWater_provider.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
 import 'package:water_resources_application/widget/button_upfileKML.dart';
@@ -15,9 +15,11 @@ import 'package:water_resources_application/widget/dropdown_district_widget.dart
 import 'package:water_resources_application/widget/dropdown_province_widget.dart';
 import 'package:water_resources_application/widget/dropdown_subdistrict_widget.dart';
 import 'package:water_resources_application/widget/dropdown_typewater_widget.dart';
-import 'package:water_resources_application/widget/imageUp.dart';
+import 'package:water_resources_application/widget/image_up.dart';
 import 'package:path/path.dart' as path;
 import 'dart:io';
+
+import 'package:water_resources_application/widget/xml_up.dart';
 
 class AddWaterResourcesScreen extends StatefulWidget {
   AddWaterResourcesScreen({Key? key, required this.typeWater})
@@ -29,13 +31,14 @@ class AddWaterResourcesScreen extends StatefulWidget {
 }
 
 class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
-  DataNatWtrBody datawater = DataNatWtrBody();
+  // DataNatWtrBody datawater = DataNatWtrBody();
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of<UserProvider>(context);
     DataWater dataWater = Provider.of<DataWater>(context);
+
     var height = MediaQuery.of(context).size.height;
     var size_page = MediaQuery.of(context).size;
     late Position _currentPosition;
@@ -106,10 +109,9 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                             padding: const EdgeInsets.all(16.0),
                             child: Text(
                               '${widget.typeWater}',
-                              style: GoogleFonts.prompt(
+                              style: TextStyle(
                                 fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF11048B),
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -298,41 +300,10 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.1,
                             ),
-                            Consumer<DataWater>(
-                                builder: (context, dataWater, child) =>
-                                    RaisedButton(
-                                      color: Color(0xFFFA7D00),
-                                      child: Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.upload_file_outlined,
-                                            color: Colors.white,
-                                            size: 25,
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text(
-                                            "ไฟล์ .KML",
-                                            style: GoogleFonts.prompt(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      onPressed: () async {
-                                        dataWater.water.kmlFile =
-                                            await FilePicker.platform.pickFiles(
-                                          type: FileType.custom,
-                                          allowedExtensions: ['kml'],
-                                        );
-                                        print(dataWater.water.kmlFile);
-                                      },
-                                    ))
                           ],
                         ),
+                        Divider(),
+                        XmlUP(),
                         Divider(),
                         ImageUP(),
                         Divider(

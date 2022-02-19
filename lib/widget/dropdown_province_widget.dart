@@ -31,8 +31,9 @@ class ProvinceWidget extends StatelessWidget {
         },
         // onFind: (String? filter) => getProvincedropdown(filter),
         onChanged: (var value) {
-          waterProvider.water.province = value!.provinceId;
-          // print("${waterProvider.water.province} ติดonChanged");
+          waterProvider.water.nameProvince = value!.nameProvince;
+          waterProvider.water.provinceId = value.provinceId;
+          waterProvider.water.geographyId = value.geographiesId;
         },
         showSearchBox: true,
         searchFieldProps: TextFieldProps(

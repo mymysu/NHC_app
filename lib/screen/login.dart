@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          height: 300,
+                          height: 100,
                         ),
                         Center(
                           child: SizedBox(
@@ -178,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Text(
                                       'ลืมรหัสผ่าน ?',
                                       style: GoogleFonts.prompt(
-                                          fontSize: 15,
+                                          fontSize: 16,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.blueAccent),
                                     ),
@@ -187,9 +187,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Divider(
                                   height: 15,
                                 ),
-                                Container(
-                                  // width: double.infinity,
-                                  alignment: Alignment.center,
+                                SizedBox(
+                                  width: double.infinity,
+                                  // alignment: Alignment.center,
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       padding: EdgeInsets.symmetric(
@@ -232,7 +232,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Text(
                                       'เข้าสู่ระบบ',
                                       style: GoogleFonts.prompt(
-                                          fontSize: 18, color: Colors.white),
+                                          fontSize: 15, color: Colors.white),
                                     ),
                                   ),
                                 ),
@@ -241,7 +241,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 Text(
                                   'ยังไม่ได้สมัครสมาชิก ?',
-                                  style: TextStyle(color: Colors.white),
+                                  style: GoogleFonts.prompt(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blueAccent),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -255,7 +258,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                       primary: Colors.blueAccent,
                                       shape: StadiumBorder(),
                                     ),
-                                    child: Text('สมัครสมาชิก'),
+                                    child: Text(
+                                      'สมัครสมาชิก',
+                                      style: GoogleFonts.prompt(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
                                     onPressed: () {
                                       Navigator.pushReplacementNamed(
                                           context, '/register');

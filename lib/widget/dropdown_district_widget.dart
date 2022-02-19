@@ -29,9 +29,11 @@ class DistrictWidget extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(25))),
         ),
         onFind: (String? filter) => DistrictData.getDistrictdropdown(
-            context, waterProvider.water.province.toString()),
+            context, waterProvider.water.provinceId.toString()),
         onChanged: (var value) {
-          waterProvider.water.district = value!.districtId;
+          waterProvider.water.nameDistrict = value!.nameDistrict;
+          waterProvider.water.districtId = value.districtId;
+
           // print(waterProvider.water.district);
         },
         showSearchBox: true,

@@ -8,7 +8,7 @@ class ProvincesData {
   static Future<List<ProvinceTH>> getProvincedropdown(
       BuildContext context) async {
     final assetBundle = DefaultAssetBundle.of(context);
-    final data = await assetBundle.loadString("assets/data/provinces.json");
+    final data = await assetBundle.loadString("assets/data/th_province.json");
     final body = json.decode(data);
     if (body != null) {
       return ProvinceTH.fromJsonList(body);

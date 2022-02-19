@@ -1,25 +1,22 @@
 class District {
-  final String districtId;
-  final String districtCode;
-  final String districtName;
-  final String provinceId;
-  final String geodistrictId;
+  String districtId;
+  String nameDistrict;
+  String nameEnDistrict;
+  String provinceId;
 
   District({
     required this.districtId,
-    required this.districtCode,
-    required this.districtName,
+    required this.nameDistrict,
+    required this.nameEnDistrict,
     required this.provinceId,
-    required this.geodistrictId,
   });
 
   factory District.fromJson(Map<String, dynamic> json) {
     return District(
-      districtId: json['DISTRICT_ID'].toString(),
-      districtCode: json["DISTRICT_CODE"].toString(),
-      districtName: json['DISTRICT_NAME'].toString(),
-      provinceId: json['PROVINCE_ID'].toString(),
-      geodistrictId: json['GEO_ID'].toString(),
+      districtId: json["district_ID"],
+      nameDistrict: json["name_district"],
+      nameEnDistrict: json["name_en_district"],
+      provinceId: json["province_ID"],
     );
   }
 
@@ -34,5 +31,5 @@ class District {
   }
 
   @override
-  String toString() => districtName;
+  String toString() => nameDistrict;
 }

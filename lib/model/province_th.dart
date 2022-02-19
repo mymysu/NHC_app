@@ -1,22 +1,22 @@
 class ProvinceTH {
-  final String provinceId;
-  final String provinceCode;
-  final String provinceName;
-  final String geoId;
+  String provinceId;
+  String nameProvince;
+  String nameEnProvince;
+  String geographiesId;
 
   ProvinceTH({
     required this.provinceId,
-    required this.provinceCode,
-    required this.provinceName,
-    required this.geoId,
+    required this.nameProvince,
+    required this.nameEnProvince,
+    required this.geographiesId,
   });
 
   factory ProvinceTH.fromJson(Map<String, dynamic> json) {
     return ProvinceTH(
-      provinceId: json['PROVINCE_ID'].toString(),
-      provinceCode: json['PROVINCE_CODE'].toString(),
-      provinceName: json['PROVINCE_NAME'].toString(),
-      geoId: json['GEO_ID'].toString(),
+      provinceId: json["province_ID"],
+      nameProvince: json["name_province"],
+      nameEnProvince: json["name_en_province"],
+      geographiesId: json["geographies_ID"],
     );
   }
 
@@ -25,5 +25,5 @@ class ProvinceTH {
   }
 
   @override
-  String toString() => provinceName;
+  String toString() => nameProvince;
 }

@@ -152,56 +152,38 @@ class _ImageUPState extends State<ImageUP> {
                                   children: [
                                     Card(
                                       child: (imageFile == null)
-                                          ? Container(
-                                              height: 67,
-                                              width: 100,
-                                              child: Icon(
-                                                Icons.image_outlined,
-                                                color: Colors.blueAccent[100],
-                                                size: 50,
-                                              ),
-                                            )
-                                          : Image.file(
-                                              File(imageFile![6].path),
-                                              height: 67,
-                                              width: 100,
-                                            ),
+                                          ? image()
+                                          : imageFile!.length >= 7
+                                              ? Image.file(
+                                                  File(imageFile![6].path),
+                                                  height: 67,
+                                                  width: 100,
+                                                )
+                                              : image(),
                                     ),
                                     Card(
                                       child: (imageFile == null)
-                                          ? Container(
-                                              height: 67,
-                                              width: 100,
-                                              child: Icon(
-                                                Icons.image_outlined,
-                                                color: Colors.blueAccent[100],
-                                                size: 50,
-                                              ),
-                                            )
-                                          : Image.file(
-                                              File(imageFile![7].path),
-                                              // fit: BoxFit.scaleDown,
-                                              height: 67,
-                                              width: 100,
-                                            ),
+                                          ? image()
+                                          : imageFile!.length >= 8
+                                              ? Image.file(
+                                                  File(imageFile![7].path),
+                                                  // fit: BoxFit.scaleDown,
+                                                  height: 67,
+                                                  width: 100,
+                                                )
+                                              : image(),
                                     ),
                                     Card(
                                       child: (imageFile == null)
-                                          ? Container(
-                                              height: 67,
-                                              width: 100,
-                                              child: Icon(
-                                                Icons.image_outlined,
-                                                color: Colors.blueAccent[100],
-                                                size: 50,
-                                              ),
-                                            )
-                                          : Image.file(
-                                              File(imageFile![7].path),
-                                              // fit: BoxFit.scaleDown,
-                                              height: 67,
-                                              width: 100,
-                                            ),
+                                          ? image()
+                                          : imageFile!.length >= 9
+                                              ? Image.file(
+                                                  File(imageFile![8].path),
+                                                  // fit: BoxFit.scaleDown,
+                                                  height: 67,
+                                                  width: 100,
+                                                )
+                                              : image(),
                                     ),
                                   ],
                                 ),
@@ -257,6 +239,9 @@ class _ImageUPState extends State<ImageUP> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(25.0))),
                                   onPressed: () {
+                                    setState(() {
+                                      waterProvider.water.image = [];
+                                    });
                                     imageFile = null;
                                     Navigator.pop(context);
                                   },
@@ -277,7 +262,10 @@ class _ImageUPState extends State<ImageUP> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(16.0))),
                                   onPressed: () {
-                                    waterProvider.water.image = imageFile;
+                                    setState(() {
+                                      waterProvider.water.image = imageFile;
+                                    });
+
                                     Navigator.pop(context);
                                     print(waterProvider.water.image);
                                   },
@@ -303,7 +291,8 @@ class _ImageUPState extends State<ImageUP> {
   @override
   Widget build(BuildContext context) {
     var size_page = MediaQuery.of(context).size;
-    List<XFile>? imageFile;
+    List<XFile>? imageFile = [];
+
     return Consumer<DataWater>(
         builder: (context, waterProvider, child) => Container(
               decoration: BoxDecoration(
@@ -314,57 +303,67 @@ class _ImageUPState extends State<ImageUP> {
                   width: 3, //width of border
                 ),
               ),
-              height: size_page.height * 0.3,
+              height: size_page.height * 0.2,
               width: size_page.width * 0.9,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Row(
                 children: [
+                  SizedBox(
+                    width: 10,
+                  ),
                   Icon(
                     Icons.cloud_upload,
                     color: Color(0xFF40C0FF),
-                    size: 80,
-                  ),
-                  Container(
-                      margin: EdgeInsets.all(8),
-                      child: Text(
-                        "ภาพถ่ายแหล่งน้ำบริเวณโดยรอบ",
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.prompt(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF40C0FF),
-                        ),
-                      )),
-                  SizedBox(
-                    height: 10,
+                    size: 70,
                   ),
                   SizedBox(
-                    width: size_page.width * 0.4,
-                    child: RaisedButton(
-                      color: Color(0xFF11048B),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.upload_file_outlined,
-                            color: Colors.white,
-                            size: 25,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
+                    width: 30,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                          margin: EdgeInsets.all(8),
+                          child: Text(
+                            "ภาพถ่ายแหล่งน้ำ\nบริเวณโดยรอบ",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.prompt(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF40C0FF),
+                            ),
+                          )),
+                      Container(
+                          margin: EdgeInsets.all(8),
+                          child: Text(
+                            "${(waterProvider.water.image ?? "NULL") == "NULL" ? "0" : waterProvider.water.image.length} / 9",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.prompt(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF40C0FF),
+                            ),
+                          )),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      SizedBox(
+                        width: size_page.width * 0.4,
+                        child: RaisedButton(
+                          color: Color(0xFF11048B),
+                          child: Text(
                             "อัปโหลดรูปภาพ",
                             style: GoogleFonts.prompt(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
-                          )
-                        ],
+                          ),
+                          onPressed: () =>
+                              {_showDialogImage(context, imageFile)},
+                        ),
                       ),
-                      onPressed: () => {_showDialogImage(context, imageFile)},
-                    ),
+                    ],
                   ),
                 ],
               ),

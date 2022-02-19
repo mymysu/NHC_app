@@ -1,26 +1,26 @@
 [
     {
-        "GEO_ID": 1,
-        "GEO_NAME": "ภาคเหนือ"
+        "geographies_ID": "1",
+        "name_geo": "ภาคเหนือ"
     },
     {
-        "GEO_ID": 2,
-        "GEO_NAME": "ภาคกลาง"
+        "geographies_ID": "2",
+        "name_geo": "ภาคกลาง"
     },
     {
-        "GEO_ID": 3,
-        "GEO_NAME": "ภาคตะวันออกเฉียงเหนือ"
+        "geographies_ID": "3",
+        "name_geo": "ภาคตะวันออกเฉียงเหนือ"
     },
     {
-        "GEO_ID": 4,
-        "GEO_NAME": "ภาคตะวันตก"
+        "geographies_ID": "4",
+        "name_geo": "ภาคตะวันตก"
     },
     {
-        "GEO_ID": 5,
-        "GEO_NAME": "ภาคตะวันออก"
+        "geographies_ID": "5",
+        "name_geo": "ภาคตะวันออก"
     },
     {
-        "GEO_ID": 6,
-        "GEO_NAME": "ภาคใต้"
+        "geographies_ID": "6",
+        "name_geo": "ภาคใต้"
     }
 ]

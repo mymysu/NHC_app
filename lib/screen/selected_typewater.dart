@@ -138,33 +138,9 @@ class ChoiceTypeWaterAdd extends StatelessWidget {
           ),
           body: TabBarView(children: [
             CardType(),
-            Center(
-              child: Container(
-                color: Colors.white,
-                child: Text(
-                  "Gallery",
-                  style: TextStyle(fontSize: 22, color: Colors.blue),
-                ),
-              ),
-            ),
-            Center(
-              child: Container(
-                color: Colors.white,
-                child: Text(
-                  "Gallery",
-                  style: TextStyle(fontSize: 22, color: Colors.blue),
-                ),
-              ),
-            ),
-            Center(
-              child: Container(
-                color: Colors.white,
-                child: Text(
-                  "Gallery",
-                  style: TextStyle(fontSize: 22, color: Colors.blue),
-                ),
-              ),
-            ),
+            CardType(),
+            CardType(),
+            CardType(),
           ]),
         ));
   }

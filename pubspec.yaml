@@ -38,14 +38,14 @@ dependencies:
   firebase_storage: ^10.2.7
   form_field_validator: ^1.1.0
   fluttertoast: ^8.0.8
-  firebase_messaging: ^10.0.7
+  firebase_messaging: ^11.2.7
   cloud_firestore: ^3.1.7
   provider: ^6.0.1
 
   google_maps_flutter: ^2.1.0
   geolocator: ^8.0.5
   google_fonts: ^2.1.0
-  firebase_analytics: ^8.3.4
+  firebase_analytics: ^9.1.1
   image_picker: ^0.8.4+4
   video_player: ^2.2.9
   file_picker: ^4.3.3
@@ -59,6 +59,7 @@ dependencies:
       url: https://github.com/Realank/flutter_datetime_picker.git
       ref: master
   intl: ^0.17.0
+  shared_preferences: ^2.0.13
   url_launcher: ^6.0.2
   location: ^4.3.0
   convex_bottom_bar: ^3.0.0
@@ -71,6 +72,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_native_splash: ^2.1.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

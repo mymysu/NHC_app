@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:water_resources_application/screen/approved.dart';
+import 'package:water_resources_application/screen/screen_approved.dart';
 import 'package:water_resources_application/widget/waiting_approval.dart';
 
 class HistoryWater extends StatefulWidget {
@@ -41,7 +41,7 @@ class _HistoryWaterState extends State<HistoryWater>
           ),
           color: Colors.white,
           onPressed: () {
-            Navigator.pushNamed(context, "/");
+            Navigator.popAndPushNamed(context, "/");
           },
         ),
         bottom: TabBar(

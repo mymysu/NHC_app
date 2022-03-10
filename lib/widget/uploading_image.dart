@@ -95,8 +95,9 @@ class CameraWidgetState extends State {
   }
 
   void _openGallery(BuildContext context) async {
-    final pickedFile =
-        await ImagePicker().getImage(source: ImageSource.gallery);
+    final pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+    );
     setState(() {
       imageFile = pickedFile!;
     });

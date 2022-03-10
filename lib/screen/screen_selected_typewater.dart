@@ -10,7 +10,7 @@ class ChoiceTypeWaterAdd extends StatelessWidget {
     var size_page = MediaQuery.of(context).size;
 
     return DefaultTabController(
-        length: 4,
+        length: 7,
         child: Scaffold(
           backgroundColor: Color(0xFF11048B),
           appBar: AppBar(
@@ -54,15 +54,27 @@ class ChoiceTypeWaterAdd extends StatelessWidget {
                         Tab(
                           child: Container(
                             padding: EdgeInsets.all(12),
-                            // color: Colors.white,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                border:
-                                    Border.all(color: Colors.white, width: 1)),
+                            // color: Colors.brown,
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(
-                                "แหล่งน้ำผิวดิน[ธรรมชาติ]",
+                                "ทั้งหมด",
+                                style: GoogleFonts.prompt(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: Container(
+                            padding: EdgeInsets.all(12),
+                            // color: Colors.brown,
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "แหล่งน้ำผิวดินธรรมชาติ",
                                 style: GoogleFonts.prompt(
                                   fontSize: 12,
                                   color: Colors.white,
@@ -75,31 +87,52 @@ class ChoiceTypeWaterAdd extends StatelessWidget {
                           child: Container(
                             padding: EdgeInsets.all(12),
                             // color: Colors.white,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                border:
-                                    Border.all(color: Colors.white, width: 1)),
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                "แหล่งน้ำผิวดิน [มนุษย์สร้างขึ้น]",
-                                style: GoogleFonts.prompt(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Tab(
-                          child: Container(
-                            padding: EdgeInsets.all(12),
 
-                            // color: Colors.white,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                border:
-                                    Border.all(color: Colors.white, width: 1)),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "แหล่งน้ำผิวดินมนุษย์สร้างขึ้น",
+                                style: GoogleFonts.prompt(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: Container(
+                            padding: EdgeInsets.all(12),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "ทางน้ำธรรมชาติ",
+                                style: GoogleFonts.prompt(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: Container(
+                            padding: EdgeInsets.all(12),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "ทางน้ำมนุษย์สร้าง",
+                                style: GoogleFonts.prompt(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: Container(
+                            padding: EdgeInsets.all(12),
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(
@@ -115,16 +148,10 @@ class ChoiceTypeWaterAdd extends StatelessWidget {
                         Tab(
                           child: Container(
                             padding: EdgeInsets.all(12),
-
-                            // color: Colors.white,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                border:
-                                    Border.all(color: Colors.white, width: 1)),
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(
-                                "ทางน้ำ[ธรรมชาติ]",
+                                "อาคารชลศาสตร์",
                                 style: GoogleFonts.prompt(
                                   fontSize: 12,
                                   color: Colors.white,
@@ -137,10 +164,13 @@ class ChoiceTypeWaterAdd extends StatelessWidget {
                 )),
           ),
           body: TabBarView(children: [
-            CardType(),
-            CardType(),
-            CardType(),
-            CardType(),
+            CardType(typewater: "all"),
+            CardType(typewater: "NAT_WTR_BODY"),
+            CardType(typewater: "MM_WTR_BODY"),
+            CardType(typewater: "NAT_STREAM"),
+            CardType(typewater: "MM_CANAL"),
+            CardType(typewater: "HYDRAUL_BUILD"),
+            CardType(typewater: "UNDERGROUND"),
           ]),
         ));
   }

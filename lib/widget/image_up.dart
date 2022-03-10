@@ -334,7 +334,7 @@ class _ImageUPState extends State<ImageUP> {
                             ),
                           )),
                       Container(
-                          margin: EdgeInsets.all(8),
+                          margin: EdgeInsets.all(4),
                           child: Text(
                             "${(waterProvider.water.image ?? "NULL") == "NULL" ? "0" : waterProvider.water.image.length} / 9",
                             textAlign: TextAlign.center,
@@ -345,12 +345,9 @@ class _ImageUPState extends State<ImageUP> {
                             ),
                           )),
                       SizedBox(
-                        height: 5,
-                      ),
-                      SizedBox(
                         width: size_page.width * 0.4,
                         child: RaisedButton(
-                          color: Color(0xFF11048B),
+                          color: Color(0xFF40C0FF),
                           child: Text(
                             "อัปโหลดรูปภาพ",
                             style: GoogleFonts.prompt(

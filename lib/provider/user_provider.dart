@@ -42,7 +42,6 @@ class UserProvider with ChangeNotifier {
       'lastName': userProfile.lastName,
       'firstName': userProfile.firstName,
       'mobileNumber': userProfile.mobileNumber,
-      'mobileNumber': userProfile.mobileNumber,
     };
 
     await FirebaseFirestore.instance
@@ -52,7 +51,6 @@ class UserProvider with ChangeNotifier {
 
     _userProfile.firstName = userProfile.firstName;
     _userProfile.lastName = userProfile.lastName;
-    _userProfile.mobileNumber = userProfile.mobileNumber;
     _userProfile.mobileNumber = userProfile.mobileNumber;
 
     notifyListeners();

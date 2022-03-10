@@ -7,7 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:water_resources_application/model/profile.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
-import 'package:water_resources_application/screen/home.dart';
+import 'package:water_resources_application/screen/screen_home.dart';
 
 class EditUser extends StatelessWidget {
   const EditUser({Key? key}) : super(key: key);
@@ -33,9 +33,9 @@ class EditUser extends StatelessWidget {
                     Icons.arrow_back_ios,
                     size: 20,
                   ),
-                  color: Colors.black,
+                  color: Colors.amber,
                   onPressed: () {
-                    Navigator.pushNamed(context, "/");
+                    Navigator.popAndPushNamed(context, "/");
                   },
                 ),
               ),
@@ -56,7 +56,7 @@ class EditUser extends StatelessWidget {
                   ),
                   color: Colors.black,
                   onPressed: () {
-                    Navigator.pushNamed(context, "/");
+                    Navigator.popAndPushNamed(context, "/");
                   },
                 ),
               ),

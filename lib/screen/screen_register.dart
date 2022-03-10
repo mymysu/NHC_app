@@ -6,7 +6,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:water_resources_application/model/profile.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
-import 'package:water_resources_application/screen/home.dart';
+import 'package:water_resources_application/screen/screen_home.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -115,20 +115,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     labelText: 'ชื่อจริง',
                                     labelStyle:
                                         TextStyle(color: Color(0xFF11048B)),
-                                    prefixIcon: Icon(
+                                    prefixIcon: const Icon(
                                       Icons.person,
                                       color: Color(0xFF11048B),
                                     ),
-                                    enabledBorder: new OutlineInputBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(25.0),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(25.0),
                                       borderSide: BorderSide(
                                           color: Colors.indigo.shade900,
                                           width: 2),
                                     ),
-                                    focusedBorder: new OutlineInputBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(25.0),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(25.0),
                                       borderSide: BorderSide(
                                           color: Colors.orange, width: 2),
                                     ),
@@ -168,16 +166,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       Icons.person,
                                       color: Color(0xFF11048B),
                                     ),
-                                    enabledBorder: new OutlineInputBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(25.0),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(25.0),
                                       borderSide: BorderSide(
                                           color: Colors.indigo.shade900,
                                           width: 2),
                                     ),
-                                    focusedBorder: new OutlineInputBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(25.0),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(25.0),
                                       borderSide: BorderSide(
                                           color: Colors.orange, width: 2),
                                     ),
@@ -215,16 +211,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     Icons.email,
                                     color: Color(0xFF11048B),
                                   ),
-                                  enabledBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(25.0),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
                                     borderSide: BorderSide(
                                         color: Colors.indigo.shade900,
                                         width: 2),
                                   ),
-                                  focusedBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(25.0),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
                                     borderSide: BorderSide(
                                         color: Colors.orange, width: 2),
                                   ),
@@ -262,16 +256,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     Icons.phone_android,
                                     color: Color(0xFF11048B),
                                   ),
-                                  enabledBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(25.0),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
                                     borderSide: BorderSide(
                                         color: Colors.indigo.shade900,
                                         width: 2),
                                   ),
-                                  focusedBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(25.0),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
                                     borderSide: BorderSide(
                                         color: Colors.orange, width: 2),
                                   ),
@@ -311,16 +303,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     Icons.lock,
                                     color: Color(0xFF11048B),
                                   ),
-                                  enabledBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(25.0),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
                                     borderSide: BorderSide(
                                         color: Colors.indigo.shade900,
                                         width: 2),
                                   ),
-                                  focusedBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(25.0),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
                                     borderSide: BorderSide(
                                         color: Colors.orange, width: 2),
                                   ),
@@ -356,16 +346,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     Icons.supervised_user_circle,
                                     color: Color(0xFF11048B),
                                   ),
-                                  enabledBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(25.0),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
                                     borderSide: BorderSide(
                                         color: Colors.indigo.shade900,
                                         width: 2),
                                   ),
-                                  focusedBorder: new OutlineInputBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(25.0),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(25.0),
                                     borderSide: BorderSide(
                                         color: Colors.orange, width: 2),
                                   ),

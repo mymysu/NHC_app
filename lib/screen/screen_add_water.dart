@@ -1,30 +1,24 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
+import 'package:water_resources_application/model/data_water.dart';
 import 'package:water_resources_application/provider/dataWater_provider.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
-import 'package:water_resources_application/widget/button_upfileKML.dart';
 import 'package:water_resources_application/widget/dropdown_district_widget.dart';
 import 'package:water_resources_application/widget/dropdown_province_widget.dart';
 import 'package:water_resources_application/widget/dropdown_subdistrict_widget.dart';
-import 'package:water_resources_application/widget/dropdown_typewater_widget.dart';
 import 'package:water_resources_application/widget/image_up.dart';
-import 'package:path/path.dart' as path;
-import 'dart:io';
-
+import 'package:water_resources_application/widget/location.dart';
 import 'package:water_resources_application/widget/xml_up.dart';
 
 class AddWaterResourcesScreen extends StatefulWidget {
   AddWaterResourcesScreen({Key? key, required this.typeWater})
       : super(key: key);
-  String typeWater;
+  WaterSourceDetails typeWater;
   @override
   State<AddWaterResourcesScreen> createState() =>
       _AddWaterResourcesScreenState();
@@ -68,7 +62,7 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                   Container(
                     alignment: Alignment(200, 100),
                     // margin: EdgeInsets.only(top: 100),
-                    height: height + (height * 0.7),
+                    height: height + (height * 0.8),
                     decoration: BoxDecoration(
                       color: Colors.lightBlue[100],
                       borderRadius: BorderRadius.only(
@@ -81,6 +75,40 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                     padding: const EdgeInsets.all(30),
                     child: Column(
                       children: [
+                        Text(
+                          'ชื่อแหล่งน้ำ',
+                          textAlign: TextAlign.left,
+                          style: GoogleFonts.prompt(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF11048B),
+                          ),
+                        ),
+                        TextFormField(
+                          // keyboardType: TextInputType.multiline,
+
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            // hintText: "",
+                            hintStyle: GoogleFonts.prompt(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              // color: Color(0xFF40C0FF),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.pink, width: 3),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25))),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Color(0xFF11048B), width: 3),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25))),
+                          ),
+                          onSaved: (value) => dataWater.water.nameTH = value,
+                        ),
                         Container(
                           alignment: Alignment.topLeft,
                           child: Text(
@@ -108,7 +136,7 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
                             child: Text(
-                              '${widget.typeWater}',
+                              '${widget.typeWater.type_th}',
                               style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.black,
@@ -179,136 +207,6 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                         Divider(),
                         SubDistrictWidget(),
                         Divider(),
-                        Row(
-                          children: [
-                            Container(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'ละติจู',
-                                style: GoogleFonts.prompt(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF11048B),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.3,
-                            ),
-                            Container(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'ลองติจู',
-                                style: GoogleFonts.prompt(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF11048B),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Divider(),
-                        Row(
-                          children: [
-                            Container(
-                              height: size_page.height * 0.07,
-                              width: size_page.width * 0.3,
-                              alignment: Alignment.topLeft,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                  color: Color(0xFF11048B), //color of border
-                                  width: 3, //width of border
-                                ),
-                              ),
-                              child: Text(
-                                dataWater.curren
-                                    ? "${dataWater.water.latitude}"
-                                    : "",
-                              ),
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.1,
-                            ),
-                            Container(
-                                height: size_page.height * 0.07,
-                                width: size_page.width * 0.3,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(
-                                    color: Color(0xFF11048B), //color of border
-                                    width: 3, //width of border
-                                  ),
-                                ),
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  dataWater.curren
-                                      ? "${dataWater.water.longitude}"
-                                      : "",
-                                )),
-                          ],
-                        ),
-                        Divider(),
-                        Row(
-                          children: [
-                            RaisedButton(
-                              color: Color(0xFF11048B),
-                              child: Row(
-                                children: [
-                                  const Icon(
-                                    Icons.pin_drop_rounded,
-                                    color: Colors.white,
-                                    size: 25,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    "พิกัดปัจจุบัน",
-                                    style: GoogleFonts.prompt(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              onPressed: () async {
-                                await Geolocator.requestPermission();
-                                Geolocator.getCurrentPosition(
-                                        desiredAccuracy: LocationAccuracy.best,
-                                        forceAndroidLocationManager: true)
-                                    .then((Position position) {
-                                  _currentPosition = position;
-                                  dataWater.water.latitude =
-                                      _currentPosition.latitude;
-                                  dataWater.water.longitude =
-                                      _currentPosition.longitude;
-                                  setState(() {
-                                    _currentPosition = position;
-                                    dataWater.curren = true;
-                                    dataWater.water.geom = _currentPosition;
-                                  });
-                                }).catchError((e) {
-                                  print(e);
-                                });
-                              },
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.1,
-                            ),
-                          ],
-                        ),
-                        Divider(),
-                        XmlUP(),
-                        Divider(),
-                        ImageUP(),
-                        Divider(
-                          height: 20,
-                        ),
                         TextFormField(
                           // keyboardType: TextInputType.multiline,
                           maxLines: 5,
@@ -334,6 +232,12 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                           ),
                           onSaved: (value) => dataWater.water.note = value,
                         ),
+                        Divider(),
+                        Location(),
+                        Divider(),
+                        XmlUP(),
+                        Divider(),
+                        ImageUP(),
                         Divider(
                           height: 20,
                         ),
@@ -345,22 +249,24 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                           ),
 
                           onPressed: () async {
-                            print("ลงทะเบียนน้ำ");
-                            formKey.currentState!.save();
-                            print(dataWater.water.latitude);
-                            print(dataWater.water.latitude);
-
-                            dataWater.addWaterResourcesToFirestore(
-                                dataWater, widget.typeWater, userProvider);
-                            formKey.currentState!.reset();
-                            Navigator.pushReplacementNamed(
-                                context, '/historyAdd');
-                            Fluttertoast.showToast(
-                              msg: "เพิ่มข้อมูลสำเสร็จ",
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.CENTER,
-                            );
-                            // print("ยืนยันการเพิ่มข้อมูลแหล่งน้ำ");
+                            if (userProvider.userProfile.uid == null) {
+                              Fluttertoast.showToast(
+                                msg: " ลงทะเบียนเข้าใช้งานก่อน ",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                              );
+                            } else {
+                              formKey.currentState!.save();
+                              dataWater.addWaterResourcesToFirestore(context,
+                                  dataWater, widget.typeWater, userProvider);
+                              Navigator.popAndPushNamed(context, '/historyAdd');
+                              formKey.currentState!.reset();
+                              Fluttertoast.showToast(
+                                msg: "เพิ่มข้อมูลสำเสร็จ",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                              );
+                            }
                           },
 
                           child: Padding(

@@ -22,27 +22,27 @@ class Approved extends StatelessWidget {
               itemBuilder: (_, i) {
                 var name = snapshot.data![i];
                 return ListTile(
-                  title: Text(name.typeWater.toString()),
+                  title: Text(name.nameTH.toString()),
                   subtitle: Text(
                       "${name.nameProvince} ${name.nameDistrict} ${name.nameSubdistrict}"),
                   // <Add>
-                  trailing: PopupMenuButton(
-                    itemBuilder: (context) {
-                      return [
-                        PopupMenuItem(
-                          value: 'edit',
-                          child: Text('Edit'),
-                        ),
-                        PopupMenuItem(
-                          value: 'delete',
-                          child: Text('Delete'),
-                        )
-                      ];
-                    },
-                    onSelected: (String value) {
-                      print('You Click on po up menu item');
-                    },
-                  ),
+                  // trailing: PopupMenuButton(
+                  //   itemBuilder: (context) {
+                  //     return [
+                  //       PopupMenuItem(
+                  //         value: 'edit',
+                  //         child: Text('Edit'),
+                  //       ),
+                  //       PopupMenuItem(
+                  //         value: 'delete',
+                  //         child: Text('Delete'),
+                  //       )
+                  //     ];
+                  //   },
+                  //   onSelected: (String value) {
+                  //     print('You Click on po up menu item');
+                  //   },
+                  // ),
                   // </Add>
                 );
               },

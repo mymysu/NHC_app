@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_resources_application/model/profile.dart';
 
 class UserProvider with ChangeNotifier {
@@ -33,7 +34,14 @@ class UserProvider with ChangeNotifier {
     _userProfile.lastName = userProfile.lastName;
     _userProfile.mobileNumber = userProfile.mobileNumber;
     _userProfile.position = userProfile.position;
-
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('email', userProfile.email.toString());
+    await prefs.setStringList('user', <String>[
+      _userProfile.email.toString(),
+      _userProfile.firstName.toString(),
+      _userProfile.lastName.toString(),
+      _userProfile.mobileNumber.toString()
+    ]);
     notifyListeners();
   }
 
@@ -52,7 +60,14 @@ class UserProvider with ChangeNotifier {
     _userProfile.firstName = userProfile.firstName;
     _userProfile.lastName = userProfile.lastName;
     _userProfile.mobileNumber = userProfile.mobileNumber;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
+    await prefs.setStringList('user', <String>[
+      _userProfile.email.toString(),
+      _userProfile.firstName.toString(),
+      _userProfile.lastName.toString(),
+      _userProfile.mobileNumber.toString()
+    ]);
     notifyListeners();
   }
 
@@ -66,23 +81,32 @@ class UserProvider with ChangeNotifier {
     _userProfile.email = userData['email'];
     _userProfile.firstName = userData['firstName'];
     _userProfile.lastName = userData['lastName'];
-
     _userProfile.mobileNumber = userData['mobileNumber'];
-    _userProfile.mobileNumber = userData['mobileNumber'];
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('user', <String>[
+      _userProfile.email.toString(),
+      _userProfile.firstName.toString(),
+      _userProfile.lastName.toString(),
+      _userProfile.mobileNumber.toString()
+    ]);
+    var user = prefs.getStringList("user");
 
+    print(user);
     notifyListeners();
   }
 
-  void signOut() {
+  void signOut() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var d = prefs.remove('user');
+    print(d);
     String? userId = FirebaseAuth.instance.currentUser?.uid;
 
-    if (userId != null) {
-      //TODO remove FCM token from user profile
-      FirebaseMessaging.instance.getToken().then((token) {});
-    }
+    // if (userId != null) {
+    //   FirebaseMessaging.instance.getToken().then((token) {});
+    // }
 
     FirebaseAuth.instance.signOut();
-    _userProfile.uid = null;
+    _userProfile.uid = "";
     _userProfile.email = '';
     _userProfile.firstName = '';
     _userProfile.lastName = '';

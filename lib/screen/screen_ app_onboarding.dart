@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:water_resources_application/app_styles.dart';
 import 'package:water_resources_application/model/onboard_data.dart';
-import 'package:water_resources_application/screen/screen_selected_typewater.dart';
 import 'package:water_resources_application/size_configs.dart';
 import 'package:water_resources_application/widget/button_onboard_nav.dart';
 import 'package:water_resources_application/widget/button_selected_typewater_text.dart';
@@ -48,45 +48,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 });
               },
               itemCount: onboardingContents.length,
-              itemBuilder: ((context, index) => Column(
-                    children: [
-                      SizedBox(
-                        height: sizeV * 5,
-                      ),
-                      Text(onboardingContents[index].title,
-                          style: kTitle, textAlign: TextAlign.center),
-                      SizedBox(
-                        height: sizeV * 5,
-                      ),
-                      Container(
-                        height: sizeV * 40,
-                        child: Image.asset(
-                          onboardingContents[index].image,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                      SizedBox(
-                        height: sizeV * 5,
-                      ),
-                      RichText(
-                        textAlign: TextAlign.center,
-                        text: TextSpan(style: kBodyText1, children: [
-                          TextSpan(text: 'WE CAN '),
-                          TextSpan(
-                              text: 'HELP YOU ',
-                              style: TextStyle(color: kPrimaryColor)),
-                          TextSpan(text: 'TO BE A BETTER '),
-                          TextSpan(text: 'VERSION OF '),
-                          TextSpan(
-                              text: 'YOURSELF ',
-                              style: TextStyle(color: kPrimaryColor)),
-                        ]),
-                      ),
-                      SizedBox(
-                        height: sizeV * 5,
-                      ),
-                    ],
-                  )),
+              itemBuilder: ((context, index) => index == 0
+                  ? onboard_page1(
+                      sizeV: sizeV,
+                      index: index,
+                    )
+                  : onboard_page2(sizeV: sizeV, index: index)),
             ),
           ),
           Expanded(
@@ -94,7 +61,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             child: currenPage == onboardingContents.length - 1
                 ? MyTextButton(
                     bgcolor: kPrimaryColor,
-                    buttonName: 'Get Started',
+                    buttonName: 'เพิ่มข้อมูลแหล่งน้ำ',
                     onPreesed: () {
                       Navigator.pushNamed(context, '/choiceTypeWaterAdd');
                     },
@@ -103,7 +70,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       OnBoardNavBtn(
-                        name: 'Skip',
+                        name: 'ข้าม',
                         onPressed: () {
                           Navigator.pushNamed(context, '/choiceTypeWaterAdd');
                         },
@@ -113,7 +80,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             (index) => dotIndicator(index)),
                       ),
                       OnBoardNavBtn(
-                        name: 'Next',
+                        name: 'ต่อไป',
                         onPressed: () {
                           _pageController.nextPage(
                               duration: Duration(microseconds: 400),
@@ -125,6 +92,141 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           )
         ],
       )),
+    );
+  }
+}
+
+class onboard_page1 extends StatelessWidget {
+  const onboard_page1({
+    Key? key,
+    required this.sizeV,
+    required this.index,
+  }) : super(key: key);
+
+  final double sizeV;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: sizeV * 5,
+        ),
+        Text(onboardingContents[index].title,
+            style: kTitle, textAlign: TextAlign.center),
+        SizedBox(
+          height: sizeV * 5,
+        ),
+        Container(
+          height: sizeV * 40,
+          child: Image.asset(
+            onboardingContents[index].image,
+            fit: BoxFit.contain,
+          ),
+        ),
+        SizedBox(
+          height: sizeV * 5,
+        ),
+        RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(style: kBodyText1, children: [
+            TextSpan(text: onboardingContents[index].details1),
+            TextSpan(
+                text: onboardingContents[index].details2,
+                style: TextStyle(color: kPrimaryColor)),
+            // TextSpan(text: 'TO BE A BETTER '),
+            // TextSpan(text: 'VERSION OF '),
+            // TextSpan(
+            //     text: 'YOURSELF ',
+            //     style: TextStyle(color: kPrimaryColor)),
+          ]),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: InkWell(
+            onTap: () => Navigator.pushNamed(context, '/datawatersource'),
+            borderRadius: BorderRadius.circular(6),
+            splashColor: Colors.black12,
+            child: Container(
+              height: 35,
+              width: sizeV * 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(22),
+                color: Colors.green,
+              ),
+              child: Center(
+                child: Text(
+                  "ความหมายแหล่งน้ำ",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.prompt(
+                    color: bgadddataColor,
+                    fontSize: SizeConfig.blockSizeH! * 4,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: sizeV * 5,
+        ),
+      ],
+    );
+  }
+}
+
+class onboard_page2 extends StatelessWidget {
+  const onboard_page2({
+    Key? key,
+    required this.sizeV,
+    required this.index,
+  }) : super(key: key);
+
+  final double sizeV;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: sizeV * 5,
+        ),
+        Text(onboardingContents[index].title,
+            style: kTitle, textAlign: TextAlign.center),
+        SizedBox(
+          height: sizeV * 5,
+        ),
+        Container(
+          height: sizeV * 40,
+          child: Image.asset(
+            onboardingContents[index].image,
+            fit: BoxFit.contain,
+          ),
+        ),
+        SizedBox(
+          height: sizeV * 5,
+        ),
+        RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(style: kBodyText1, children: [
+            TextSpan(text: "${onboardingContents[index].details1}\n"),
+            TextSpan(
+                text: onboardingContents[index].details2,
+                style: TextStyle(color: kPrimaryColor, fontSize: sizeV * 2)),
+            // TextSpan(text: 'TO BE A BETTER '),
+            // TextSpan(text: 'VERSION OF '),
+            // TextSpan(
+            //     text: 'YOURSELF ',
+            //     style: TextStyle(color: kPrimaryColor)),
+          ]),
+        ),
+        SizedBox(
+          height: sizeV * 5,
+        ),
+      ],
     );
   }
 }

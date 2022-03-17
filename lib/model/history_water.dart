@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HistoryWater {
-  String? typeWater, nameProvince, nameDistrict, nameSubdistrict;
+  String? nameTH, nameProvince, nameDistrict, nameSubdistrict;
   bool? status;
-  Timestamp? date;
+  String? date;
   HistoryWater(
-      {this.typeWater,
+      {this.nameTH,
       this.nameProvince,
       this.nameDistrict,
       this.nameSubdistrict,
@@ -23,11 +23,11 @@ Future<List<HistoryWater>> getHistoryWater(String uid, bool status) async {
   return qShot.docs
       .map(
         (doc) => HistoryWater(
-          typeWater: (doc.data() as dynamic)['typeWater'],
+          nameTH: (doc.data() as dynamic)['name_TH'],
           nameProvince: (doc.data() as dynamic)['nameProvince'],
           nameDistrict: (doc.data() as dynamic)['nameDistrict'],
           nameSubdistrict: (doc.data() as dynamic)['nameSubdistrict'],
-          date: (doc.data() as dynamic)['date'],
+          date: (doc.data() as dynamic)['date'].toString(),
           status: (doc.data() as dynamic)['status'],
         ),
       )

@@ -1,49 +1,82 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_resources_application/model/profile.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
 import 'package:water_resources_application/widget/profile_widget.dart.dart';
 
 class MoreScreen extends StatelessWidget {
-  const MoreScreen({Key? key}) : super(key: key);
+  MoreScreen({Key? key}) : super(key: key);
+  var user;
+  getUserData() async {
+    final SharedPreferences _prefs = await SharedPreferences.getInstance();
+    final SharedPreferences prefs = await _prefs;
+    user = prefs.getStringList("user");
+    return user;
+  }
 
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: true);
-
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(36.0),
-        child: ListView(
-          physics: BouncingScrollPhysics(),
-          children: [
-            ProfileWidget(
-              imagePath:
-                  'https://images.unsplash.com/photo-1554080353-a576cf803bda?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80',
-              onClicked: () async {},
+    // getUserData();
+    return FutureBuilder(
+      future: getUserData(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Error'),
             ),
-            const SizedBox(height: 24),
-            buildName(userProvider.userProfile),
-            buildEditUser(context),
-            buildHistory(context),
-            buildOutButton(userProvider, context),
-          ],
-        ),
-      ),
+            body: Center(
+              child: Text("${snapshot.error}"),
+            ),
+          );
+        }
+
+        if (snapshot.connectionState == ConnectionState.done) {
+          print(snapshot.data);
+          return Scaffold(
+            body: Padding(
+              padding: const EdgeInsets.all(36.0),
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                children: [
+                  ProfileWidget(
+                    imagePath:
+                        'https://images.unsplash.com/photo-1554080353-a576cf803bda?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80',
+                    onClicked: () async {},
+                  ),
+                  const SizedBox(height: 24),
+                  buildName(snapshot.data),
+                  buildEditUser(context),
+                  buildHistory(context),
+                  buildOutButton(userProvider, context),
+                ],
+              ),
+            ),
+          );
+        }
+
+        return Scaffold(
+          body: Center(
+            child: Center(child: CircularProgressIndicator()),
+          ),
+        );
+      },
     );
   }
 
-  Widget buildName(Profile profile) => Column(
+  Widget buildName(var profile) => Column(
         children: [
           Text(
-            "${profile.firstName.toString()} \t ${profile.lastName.toString()}",
+            "${profile[1] ?? "ชื่อจริง"} \t ${profile[2] ?? "นามสกุล"}",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           const SizedBox(height: 4),
           Text(
-            profile.email.toString(),
+            profile[0] ?? "อีเมล",
             style: TextStyle(color: Colors.grey),
           )
         ],
@@ -59,7 +92,7 @@ class MoreScreen extends StatelessWidget {
           ),
           onPressed: () async {
             userProvider.signOut();
-            Navigator.pushReplacementNamed(context, '/login');
+            Navigator.popAndPushNamed(context, '/login');
           },
           child: Text(
             'ออกจากระบบ',

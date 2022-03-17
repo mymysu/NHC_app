@@ -4,20 +4,6 @@ import 'package:water_resources_application/model/history_water.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
 
 class WaitApproval extends StatelessWidget {
-  final List<String> _names = [
-    'Liam',
-    'Noah',
-    'Oliver',
-    'William',
-    'Elijah',
-    'James',
-    'Benjamin',
-    'Lucas',
-    'Mason',
-    'Ethan',
-    'Alexander'
-  ];
-
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of<UserProvider>(context);
@@ -35,7 +21,7 @@ class WaitApproval extends StatelessWidget {
                 var name = snapshot.data![i];
                 return Card(
                   child: ListTile(
-                    title: Text(name.typeWater.toString()),
+                    title: Text(name.nameTH.toString()),
                     subtitle: Text(
                         "${name.nameProvince} ${name.nameDistrict} ${name.nameSubdistrict}"),
                     // <Add>
@@ -67,7 +53,7 @@ class WaitApproval extends StatelessWidget {
           return Center(
             child: CircularProgressIndicator(
               color: Colors.indigo[900],
-              strokeWidth: 10,
+              strokeWidth: 5,
             ),
           );
         });

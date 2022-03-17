@@ -56,13 +56,17 @@ class DataWater with ChangeNotifier {
     WaterSourceDetails typeWater,
     UserProvider userProvider,
   ) async {
+    print(dataWater.water.note);
+    print(dataWater.water.nameTH);
+
     List<String> fileName = [];
     List<File> imageFile = [];
     List<String> nameFileImage = [];
     String nameFileXml = "";
-    print((dataWater.water.kmlFile ?? "NULL") != "NULL");
+    String ckkmlFile = (dataWater.water.kmlFile ?? "NULL").toString();
+    String ckImage = (dataWater.water.image ?? "NULL").toString();
 
-    if ((dataWater.water.image ?? "NULL") != "NULL") {
+    if (ckImage != "NULL") {
       for (int i = 0; i < dataWater.water.image!.length; i++) {
         fileName.add(path.basename(dataWater.water.image![i].path));
         imageFile.add(File(dataWater.water.image![i].path));
@@ -76,7 +80,8 @@ class DataWater with ChangeNotifier {
                   imageFile[i],
                   SettableMetadata(customMetadata: {
                     'uploaded_by': userProvider.userProfile.uid.toString(),
-                    'description': typeWater.typeWater.toString()
+                    'description':
+                        "typeWarte:${typeWater.typeAbbr} subtypeWarte:${typeWater.subtypeEN}"
                   }))
               .then((value) {
             nameFileImage.add(value.ref.name);
@@ -86,7 +91,8 @@ class DataWater with ChangeNotifier {
           print(error.code);
         }
       }
-    } else if ((dataWater.water.kmlFile ?? "NULL") != "NULL") {
+    }
+    if (ckkmlFile != "NULL") {
       print("up kmlFile");
       try {
         await FirebaseStorage.instance
@@ -95,60 +101,63 @@ class DataWater with ChangeNotifier {
                 File(dataWater.water.kmlFile!.files[0].path!),
                 SettableMetadata(customMetadata: {
                   'uploaded_by': userProvider.userProfile.uid.toString(),
-                  'description': typeWater.typeWater.toString()
+                  'description':
+                      "typeWarte:${typeWater.typeAbbr} subtypeWarte:${typeWater.subtypeEN}"
                 }))
             .then((value) => nameFileXml = "value.ref.name");
       } on FirebaseException catch (error) {
         print("error up kmlFile");
         print(error.code);
       }
-    } else {
-      print(" up json");
-      try {
-        DateTime now = DateTime.now();
-        final DateFormat formatter = DateFormat('dd/MM/yyyy');
-        final String formatted = formatter.format(now);
-
-        await FirebaseFirestore.instance
-            .collection("water_source_information_new")
-            .add({
-          "nameTH": dataWater.water.nameTH,
-          "typeWater": typeWater.typeWater,
-          "subtypeWater": typeWater.type_th,
-          "nameFileXml": nameFileXml.toString(),
-          "geographyId": dataWater.water.geographyId,
-          "geography": dataWater.water.geography,
-          "nameFileImage": nameFileImage,
-          "provinceId": dataWater.water.provinceId,
-          "districtId": dataWater.water.districtId,
-          "subdistrictId": dataWater.water.subdistrictId,
-          "nameProvince": dataWater.water.nameProvince,
-          "nameDistrict": dataWater.water.nameDistrict,
-          "nameSubdistrict": dataWater.water.nameSubdistrict,
-          "latitude": dataWater.water.latitude,
-          "longitude": dataWater.water.longitude,
-          "note": dataWater.water.note,
-          "uid": userProvider.userProfile.uid.toString(),
-          "email": userProvider.userProfile.email,
-          "date": formatted,
-          "status": false
-        }).then((value) {
-          Fluttertoast.showToast(
-              msg: "เพิ่มข้อมูลสำเสร็จ",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 15,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0);
-        });
-      } on FirebaseException catch (error) {
-        print("error up json");
-        print(error.code);
-      }
-      // }
     }
-    Navigator.restorablePushReplacementNamed(context, '/historyAdd');
-    print(nameFileImage.length);
+    print(" up json");
+    try {
+      DateTime now = DateTime.now();
+      final DateFormat formatter = DateFormat('dd/MM/yyyy');
+      final String formatted = formatter.format(now);
+
+      await FirebaseFirestore.instance
+          .collection("water_source_information_new")
+          .add({
+        "name_TH": dataWater.water.nameTH ?? "",
+        "type_ID": typeWater.typeID,
+        "type_TH": typeWater.typeTH,
+        "type_Abbr": typeWater.typeAbbr,
+        "subtype_ID": typeWater.subtypeID,
+        "subtype_TH": typeWater.subtypeTH,
+        "subtype_EN": typeWater.subtypeEN,
+        "name_FileXml": nameFileXml.toString(),
+        "name_FileImage": nameFileImage,
+        "geography_ID": dataWater.water.geographyId,
+        "geography": dataWater.water.geography,
+        "latitude": dataWater.water.latitude,
+        "longitude": dataWater.water.longitude,
+        "province_ID": dataWater.water.provinceId,
+        "district_ID": dataWater.water.districtId,
+        "subdistrict_ID": dataWater.water.subdistrictId,
+        "nameProvince": dataWater.water.nameProvince,
+        "nameDistrict": dataWater.water.nameDistrict,
+        "nameSubdistrict": dataWater.water.nameSubdistrict,
+        "note": dataWater.water.note ?? "",
+        "uid": userProvider.userProfile.uid.toString(),
+        "email": userProvider.userProfile.email,
+        "date": formatted,
+        "status": false
+      }).then((value) {
+        Fluttertoast.showToast(
+            msg: "เพิ่มข้อมูลสำเสร็จ",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 15,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      });
+    } on FirebaseException catch (error) {
+      print("error up json");
+      print(error.code);
+    }
+    Navigator.pop(context);
+    Navigator.popAndPushNamed(context, '/historyAdd');
   }
 }

@@ -12,7 +12,7 @@ class Datawatersource extends StatelessWidget {
     return DefaultTabController(
         length: 7,
         child: Scaffold(
-          backgroundColor: Color.fromARGB(255, 166, 194, 242),
+          backgroundColor: Color.fromARGB(255, 232, 237, 251),
           appBar: AppBar(
             elevation: 0.0,
             leading: IconButton(
@@ -21,7 +21,7 @@ class Datawatersource extends StatelessWidget {
                 Navigator.pop(context);
               },
             ),
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.blueAccent[700],
             title: Text(
               "ความหมายของแหล่งน้ำ",
               style: GoogleFonts.prompt(
@@ -36,13 +36,13 @@ class Datawatersource extends StatelessWidget {
                 preferredSize: Size.fromHeight(50),
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  color: Colors.green,
+                  color: Colors.blue[300],
                   child: TabBar(
                       isScrollable: true,
                       unselectedLabelColor: Colors.white,
                       indicatorColor: Colors.white,
                       indicatorSize: TabBarIndicatorSize.tab,
-                      indicator: BoxDecoration(color: Colors.green[900]),
+                      indicator: BoxDecoration(color: Colors.blue[900]),
                       tabs: [
                         Tab(
                           child: Container(

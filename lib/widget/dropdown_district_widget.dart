@@ -1,11 +1,10 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:water_resources_application/api/district_api.dart';
 import 'package:water_resources_application/model/district_th.dart';
-
 import 'package:water_resources_application/provider/dataWater_provider.dart';
+import 'package:water_resources_application/app_styles.dart';
 
 class DistrictWidget extends StatelessWidget {
   DistrictWidget({
@@ -48,13 +47,7 @@ class DistrictWidget extends StatelessWidget {
         popupTitle: Container(
           height: 80,
           width: 120,
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColorDark,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
-            ),
-          ),
+          decoration: bDecoration,
           child: Center(
             child: Text(
               'อำเภอ',

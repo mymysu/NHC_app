@@ -46,19 +46,27 @@ class _ImageUPState extends State<ImageUP> {
                       width: size_page.width * 0.87,
                       height: size_page.height * 0.6,
                       padding: EdgeInsets.all(8),
-                      color: Color(0xFF11048B),
+                      color: Colors.white,
                       child: Column(
                         children: [
-                          Container(
-                            height: 40,
-                            color: Color(0xFF11048B),
-                            child: Text(
-                              "อัพโหลดรูปภาพประกอบข้อมูลแหล่งน้ำ",
-                              style: GoogleFonts.prompt(
-                                fontSize: 18,
-                                color: Colors.white,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "อัพโหลดรูปภาพ",
+                                style: GoogleFonts.prompt(
+                                  fontSize: 18,
+                                  color: Color(0xFF11048B),
+                                ),
                               ),
-                            ),
+                              Text(
+                                "ประกอบข้อมูลแหล่งน้ำ",
+                                style: GoogleFonts.prompt(
+                                  fontSize: 18,
+                                  color: Color(0xFF11048B),
+                                ),
+                              ),
+                            ],
                           ),
                           SizedBox(
                             height: 15,
@@ -190,8 +198,8 @@ class _ImageUPState extends State<ImageUP> {
                               ],
                             ),
                           ),
-                          Divider(
-                              height: MediaQuery.of(context).size.width * 0.04),
+                          SizedBox(
+                              height: MediaQuery.of(context).size.width * 0.02),
                           Container(
                             margin: EdgeInsets.only(
                                 left: MediaQuery.of(context).size.width * 0.45),
@@ -227,60 +235,58 @@ class _ImageUPState extends State<ImageUP> {
                               // color: const Color(0xFF1BC0C5),
                             ),
                           ),
-                          Container(
-                            // color: Colors.amberAccent,
-                            margin: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height * 0.07,
-                                left: MediaQuery.of(context).size.width * 0.35),
-                            child: Row(
-                              children: [
-                                RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(25.0))),
-                                  onPressed: () {
-                                    setState(() {
-                                      waterProvider.water.image = [];
-                                    });
-                                    imageFile = null;
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text(
-                                    "ยกเลิก",
-                                    style: GoogleFonts.prompt(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(25.0))),
+                                onPressed: () {
+                                  setState(() {
+                                    waterProvider.water.image = [];
+                                  });
+                                  imageFile = null;
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  "ยกเลิก",
+                                  style: GoogleFonts.prompt(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
-                                  color: Colors.red,
                                 ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(16.0))),
-                                  onPressed: () {
-                                    setState(() {
-                                      waterProvider.water.image = imageFile;
-                                    });
+                                color: Colors.red,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(16.0))),
+                                onPressed: () {
+                                  setState(() {
+                                    waterProvider.water.image = imageFile;
+                                  });
 
-                                    Navigator.pop(context);
-                                    print(waterProvider.water.image);
-                                  },
-                                  child: Text(
-                                    "ยืนยัน",
-                                    style: GoogleFonts.prompt(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
+                                  Navigator.pop(context);
+                                  print(waterProvider.water.image);
+                                },
+                                child: Text(
+                                  "ยืนยัน",
+                                  style: GoogleFonts.prompt(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
                                   ),
-                                  color: Colors.green,
                                 ),
-                              ],
-                            ),
-                          )
+                                color: Colors.green,
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),

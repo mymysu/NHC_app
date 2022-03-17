@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
+import 'package:water_resources_application/size_configs.dart';
 
 class LoginProfile {
   late String email;
@@ -26,6 +26,25 @@ class _LoginScreenState extends State<LoginScreen> {
   LoginProfile profile = LoginProfile();
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
   UserProvider userProvider = UserProvider();
+  showAlertDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      content: new Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          CircularProgressIndicator(),
+          Container(
+              margin: EdgeInsets.only(left: 5), child: Text("รอสักครู่.....")),
+        ],
+      ),
+    );
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
           if (snapshot.connectionState == ConnectionState.done) {
             return Scaffold(
-              backgroundColor: Colors.black,
+              backgroundColor: Colors.white,
               body: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -58,19 +77,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         Center(
                           child: SizedBox(
-                            width: 150,
+                            width: 180,
                             child: Image.asset('assets/images/logo2.png'),
                           ),
                         ),
-                        Divider(
-                          height: 40,
+                        SizedBox(
+                          height: 30,
                         ),
                         Text(
                           "ยินดีต้อนรับ",
                           style: GoogleFonts.prompt(
                             fontSize: 30,
                             fontWeight: FontWeight.bold,
-                            color: Colors.blue[100],
+                            color: Colors.blue[800],
                           ),
                         ),
                         Text(
@@ -78,10 +97,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: GoogleFonts.prompt(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.blue[700],
+                            color: Colors.blue,
                           ),
                         ),
-                        Divider(
+                        SizedBox(
                           height: 50,
                         ),
                         Padding(
@@ -92,18 +111,18 @@ class _LoginScreenState extends State<LoginScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.white,
+                                  style: TextStyle(color: Colors.blueAccent),
+                                  cursorColor: Colors.blueAccent,
                                   enableSuggestions: false,
                                   autocorrect: false,
                                   decoration: InputDecoration(
-                                    fillColor: Colors.white,
+                                    fillColor: Colors.blueAccent,
                                     labelText: 'อีเมล',
-                                    labelStyle:
-                                        GoogleFonts.prompt(color: Colors.white),
+                                    labelStyle: GoogleFonts.prompt(
+                                        color: Colors.blueAccent),
                                     prefixIcon: const Icon(
                                       Icons.email,
-                                      color: Colors.white,
+                                      color: Colors.blueAccent,
                                     ),
                                     enabledBorder: new OutlineInputBorder(
                                       borderRadius:
@@ -131,19 +150,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                     profile.email = value!;
                                   },
                                 ),
-                                Divider(
+                                SizedBox(
                                   height: 20,
                                 ),
                                 TextFormField(
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(color: Colors.blueAccent),
                                   cursorColor: Colors.white,
                                   decoration: InputDecoration(
                                     labelText: 'รหัสผ่าน',
-                                    labelStyle:
-                                        GoogleFonts.prompt(color: Colors.white),
+                                    labelStyle: GoogleFonts.prompt(
+                                        color: Colors.blueAccent),
                                     prefixIcon: Icon(
                                       Icons.lock,
-                                      color: Colors.white,
+                                      color: Colors.blueAccent,
                                     ),
                                     enabledBorder: new OutlineInputBorder(
                                       borderRadius:
@@ -184,7 +203,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                   ),
                                 ),
-                                Divider(
+                                SizedBox(
                                   height: 15,
                                 ),
                                 SizedBox(
@@ -204,6 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       if (formKey.currentState!.validate()) {
                                         formKey.currentState!.save();
                                         try {
+                                          showAlertDialog(context);
                                           await FirebaseAuth.instance
                                               .signInWithEmailAndPassword(
                                                   email: profile.email,
@@ -218,6 +238,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             print(userProvider
                                                 .userProfile.firstName);
                                             print("\n\n");
+                                            Navigator.pop(context);
                                             Navigator.pushReplacementNamed(
                                                 context, '/');
                                           });
@@ -232,7 +253,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     child: Text(
                                       'เข้าสู่ระบบ',
                                       style: GoogleFonts.prompt(
-                                          fontSize: 15, color: Colors.white),
+                                        fontSize: 15,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),

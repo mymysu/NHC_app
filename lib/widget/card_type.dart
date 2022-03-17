@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:water_resources_application/model/data_water.dart';
 import 'package:water_resources_application/screen/screen_add_water.dart';
+import 'package:water_resources_application/size_configs.dart';
 
 class CardType extends StatelessWidget {
   CardType({Key? key, required this.typewater}) : super(key: key);
@@ -60,7 +61,7 @@ class CardType extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                snapshot.data![index].type_th.toString(),
+                                snapshot.data![index].subtypeTH.toString(),
                                 style: GoogleFonts.prompt(
                                   fontWeight: FontWeight.w900,
                                   fontSize: 16,
@@ -68,7 +69,7 @@ class CardType extends StatelessWidget {
                                 ),
                               ),
                               Container(
-                                width: 200,
+                                width: 150,
                                 child: Text(
                                   snapshot.data![index].details.toString(),
                                   style: GoogleFonts.prompt(

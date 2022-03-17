@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:water_resources_application/provider/dataWater_provider.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
+import 'package:water_resources_application/screen/screen_data_watersource.dart';
 import 'package:water_resources_application/screen/screen_edit_user.dart';
 import 'package:water_resources_application/screen/screen_history_add.dart';
 
@@ -13,8 +15,15 @@ import 'package:water_resources_application/screen/screen_reset_email.dart';
 import 'package:water_resources_application/screen/screen_selected_typewater.dart';
 // import 'package:water_resources_application/screen/test3.dart';
 
-void main() {
-  runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var email = prefs.getString('email');
+  List<String>? userlogin = prefs.getStringList('user');
+
+  runApp(MyApp(
+    userlogin: userlogin,
+  ));
   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
   //   systemNavigationBarColor: Colors.pink, // navigation bar color
   //   statusBarColor: Colors.pink, // status bar color
@@ -23,9 +32,13 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  final userlogin;
+
+  MyApp({required this.userlogin});
 
   @override
   Widget build(BuildContext context) {
+    print(userlogin);
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<UserProvider>(
@@ -40,7 +53,7 @@ class MyApp extends StatelessWidget {
             ),
             // home: HomeScreen(title: 'water source data'),
 
-            initialRoute: user.isLogin == Null ? '/' : '/login',
+            initialRoute: userlogin == null ? '/login' : '/',
             routes: {
               '/': (context) => HomeScreen(),
               '/login': (context) => LoginScreen(),
@@ -48,7 +61,8 @@ class MyApp extends StatelessWidget {
               '/forgotPassword': (context) => ForgotPasswordScreen(),
               '/editUser': (context) => EditUser(),
               '/historyAdd': (context) => HistoryWater(),
-              '/choiceTypeWaterAdd': (context) => ChoiceTypeWaterAdd()
+              '/choiceTypeWaterAdd': (context) => ChoiceTypeWaterAdd(),
+              '/datawatersource': (context) => Datawatersource()
             },
           ),
         ));

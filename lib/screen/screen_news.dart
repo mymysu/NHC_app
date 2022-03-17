@@ -9,18 +9,9 @@ class NewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> entries = <String>['A', 'B', 'C'];
-    final List<int> colorCodes = <int>[600, 500, 100];
-    final List<Map<String, dynamic>> _items = List.generate(
-        100,
-        (index) => {
-              "id": index,
-              "title": "Item $index",
-              "subtitle": "Subtitle $index"
-            });
     return Scaffold(
       appBar: AppBar(
-        title: Text('หน้าหลัก'),
+        title: const Text('หน้าหลัก'),
         backgroundColor: Colors.indigo.shade900,
       ),
       body: SingleChildScrollView(
@@ -54,6 +45,7 @@ class NewsScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,6 +128,7 @@ class NewsScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,7 +140,7 @@ class NewsScreen extends StatelessWidget {
                                 color: Colors.brown.shade900,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
@@ -195,32 +188,6 @@ class NewsScreen extends StatelessWidget {
           ],
         ),
       ),
-      // body: ListTileTheme(
-      //   contentPadding: EdgeInsets.all(15),
-      //   iconColor: Colors.red,
-      //   textColor: Colors.black54,
-      //   tileColor: Colors.yellow[100],
-      //   style: ListTileStyle.list,
-      //   dense: true,
-      //   child: ListView.builder(
-      //     itemCount: _items.length,
-      //     itemBuilder: (_, index) => Card(
-      //       margin: EdgeInsets.all(10),
-      //       child: ListTile(
-      //         title: Text(_items[index]['title']),
-      //         subtitle: Text(_items[index]['subtitle']),
-      //         trailing: Row(
-      //           mainAxisSize: MainAxisSize.min,
-      //           children: [
-      //             IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
-      //             IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
-      //             IconButton(onPressed: () {}, icon: Icon(Icons.add_box)),
-      //           ],
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // )
     );
   }
 }

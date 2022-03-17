@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:water_resources_application/app_styles.dart';
 
 import 'package:water_resources_application/provider/dataWater_provider.dart';
 
@@ -18,6 +19,7 @@ class Location extends StatefulWidget {
 }
 
 class _LocationState extends State<Location> {
+  bool showProgress = false;
   final formKey = GlobalKey<FormState>();
   Future<void> _showDialogFile(BuildContext context) {
     var size_page = MediaQuery.of(context).size;
@@ -38,10 +40,14 @@ class _LocationState extends State<Location> {
                     ),
                     title: Text(
                       "ตำแหน่งแหล่งน้ำ",
-                      style: TextStyle(fontSize: 24.0),
+                      style: GoogleFonts.prompt(
+                        fontSize: 24.0,
+                        color: aPrimaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     content: Container(
-                      height: MediaQuery.of(context).size.height * 0.32,
+                      height: MediaQuery.of(context).size.height * 0.35,
                       child: Form(
                         key: formKey,
                         child: SingleChildScrollView(
@@ -55,6 +61,8 @@ class _LocationState extends State<Location> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   "กรอกตำแหน่ง",
+                                  style:
+                                      GoogleFonts.prompt(color: aPrimaryColor),
                                 ),
                               ),
                               Container(
@@ -62,8 +70,8 @@ class _LocationState extends State<Location> {
                                 child: TextFormField(
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(),
-                                      hintText: 'Enter latitude',
-                                      labelText: 'latitude'),
+                                      hintText: 'กรอกเลขละติจู',
+                                      labelText: 'ละติจู'),
                                   onSaved: (value) {
                                     setState(() {
                                       waterProvider.water.latitude =
@@ -77,8 +85,8 @@ class _LocationState extends State<Location> {
                                 child: TextFormField(
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(),
-                                      hintText: 'Enter longitude',
-                                      labelText: 'longitude'),
+                                      hintText: 'กรอกเลขลองติจู',
+                                      labelText: 'ลองติจู'),
                                   onSaved: (value) {
                                     setState(() {
                                       waterProvider.water.longitude =
@@ -98,11 +106,15 @@ class _LocationState extends State<Location> {
                                     Navigator.of(context).pop();
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    primary: Colors.black,
+                                    primary: Colors.orange,
                                     // fixedSize: Size(250, 50),
                                   ),
                                   child: Text(
                                     "ยืนยัน",
+                                    style: GoogleFonts.prompt(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -131,11 +143,53 @@ class _LocationState extends State<Location> {
         });
   }
 
+  Future<void> getLocation(
+      BuildContext context, DataWater waterProvider) async {
+    late Position _currentPosition;
+    Geolocator.requestPermission();
+    Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.best,
+            forceAndroidLocationManager: true)
+        .then((Position position) {
+      _currentPosition = position;
+      waterProvider.water.latitude = _currentPosition.latitude;
+      waterProvider.water.longitude = _currentPosition.longitude;
+      setState(() {
+        _currentPosition = position;
+        waterProvider.curren = true;
+        waterProvider.water.geom = _currentPosition;
+        showProgress = true;
+        Navigator.pop(context);
+      });
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  showAlertDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      content: new Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          CircularProgressIndicator(),
+          Container(
+              margin: EdgeInsets.only(left: 5), child: Text("รอสักครู่.....")),
+        ],
+      ),
+    );
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var size_page = MediaQuery.of(context).size;
     FilePickerResult? kmlFile = null;
-    late Position _currentPosition;
 
     return Consumer<DataWater>(
         builder: (context, waterProvider, child) => Container(
@@ -204,24 +258,9 @@ class _LocationState extends State<Location> {
                               ),
                             ),
                             onPressed: () async {
-                              await Geolocator.requestPermission();
-                              Geolocator.getCurrentPosition(
-                                      desiredAccuracy: LocationAccuracy.best,
-                                      forceAndroidLocationManager: true)
-                                  .then((Position position) {
-                                _currentPosition = position;
-                                waterProvider.water.latitude =
-                                    _currentPosition.latitude;
-                                waterProvider.water.longitude =
-                                    _currentPosition.longitude;
-                                setState(() {
-                                  _currentPosition = position;
-                                  waterProvider.curren = true;
-                                  waterProvider.water.geom = _currentPosition;
-                                });
-                              }).catchError((e) {
-                                print(e);
-                              });
+                              // _showDialogFile(context);
+                              showAlertDialog(context);
+                              await getLocation(context, waterProvider);
                             },
                           ),
                           SizedBox(

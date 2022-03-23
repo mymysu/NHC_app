@@ -62,7 +62,7 @@ class DataWater with ChangeNotifier {
     List<String> fileName = [];
     List<File> imageFile = [];
     List<String> nameFileImage = [];
-    String nameFileXml = "";
+    String nameFileXml = " ";
     String ckkmlFile = (dataWater.water.kmlFile ?? "NULL").toString();
     String ckImage = (dataWater.water.image ?? "NULL").toString();
 
@@ -84,7 +84,9 @@ class DataWater with ChangeNotifier {
                         "typeWarte:${typeWater.typeAbbr} subtypeWarte:${typeWater.subtypeEN}"
                   }))
               .then((value) {
-            nameFileImage.add(value.ref.name);
+            value.ref
+                .getDownloadURL()
+                .then((value) => nameFileImage.add(value));
           });
         } on FirebaseException catch (error) {
           print("error up imageFile");
@@ -104,7 +106,12 @@ class DataWater with ChangeNotifier {
                   'description':
                       "typeWarte:${typeWater.typeAbbr} subtypeWarte:${typeWater.subtypeEN}"
                 }))
-            .then((value) => nameFileXml = "value.ref.name");
+            .then((value) {
+          value.ref.getDownloadURL().then((value) {
+            nameFileXml = value;
+            print(nameFileXml);
+          });
+        });
       } on FirebaseException catch (error) {
         print("error up kmlFile");
         print(error.code);
@@ -126,8 +133,8 @@ class DataWater with ChangeNotifier {
         "subtype_ID": typeWater.subtypeID,
         "subtype_TH": typeWater.subtypeTH,
         "subtype_EN": typeWater.subtypeEN,
-        "name_FileXml": nameFileXml.toString(),
-        "name_FileImage": nameFileImage,
+        "URL_FileXml": nameFileXml,
+        "URL_FileImage": nameFileImage,
         "geography_ID": dataWater.water.geographyId,
         "geography": dataWater.water.geography,
         "latitude": dataWater.water.latitude,

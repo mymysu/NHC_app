@@ -355,8 +355,9 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                           );
                         } else {
                           formKey.currentState!.save();
+                          dataWater.water.note = "ข้างบ่อน้ำใหญ่";
+                          dataWater.water.nameTH = "หนองน้ำใหญ่";
                           print(dataWater.water.note);
-
                           _showDialogFile(context, dataWater, widget.typeWater,
                               userProvider);
                           formKey.currentState!.reset();

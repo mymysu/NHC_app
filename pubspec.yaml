@@ -42,32 +42,19 @@ dependencies:
   cloud_firestore: ^3.1.7
   provider: ^6.0.1
 
-  google_maps_flutter: ^2.1.0
   geolocator: ^8.0.5
   google_fonts: ^2.1.0
   firebase_analytics: ^9.1.1
   image_picker: ^0.8.4+4
-  video_player: ^2.2.9
   file_picker: ^4.3.3
-
   dropdown_search: ^2.0.1
   dio: ^4.0.3
-
-  flutter_google_places: ^0.3.0
-  flutter_datetime_picker:
-    git:
-      url: https://github.com/Realank/flutter_datetime_picker.git
-      ref: master
   intl: ^0.17.0
   shared_preferences: ^2.0.13
   url_launcher: ^6.0.2
   location: ^4.3.0
   convex_bottom_bar: ^3.0.0
   dependencies:
-  baseflow_plugin_template:
-    git:
-      url: git://github.com/Baseflow/baseflow_plugin_template.git
-      ref: v2.1.0
 
 dev_dependencies:
   flutter_test:

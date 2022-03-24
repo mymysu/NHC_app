@@ -1,13 +1,9 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:water_resources_application/screen/screen_add_water.dart';
-
-import 'package:water_resources_application/screen/screen_main.dart';
 import 'package:water_resources_application/screen/screen_more.dart';
 import 'package:water_resources_application/screen/screen_news.dart';
 import 'package:water_resources_application/screen/screen_selected_typewater.dart';
-import 'package:water_resources_application/screen/test.dart';
-import 'package:water_resources_application/screen/test3.dart';
 import 'package:water_resources_application/widget/uploading_image.dart';
 
 class HomeScreen extends StatefulWidget {

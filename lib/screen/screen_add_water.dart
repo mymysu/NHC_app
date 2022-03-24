@@ -15,9 +15,9 @@ import 'package:water_resources_application/widget/page_add_water2.dart';
 import 'package:water_resources_application/widget/page_add_water3.dart';
 
 class AddWaterResourcesScreen extends StatefulWidget {
-  AddWaterResourcesScreen({Key? key, required this.typeWater})
+  AddWaterResourcesScreen({Key? key})
       : super(key: key);
-  WaterSourceDetails typeWater;
+
   @override
   State<AddWaterResourcesScreen> createState() =>
       _AddWaterResourcesScreenState();
@@ -153,10 +153,10 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   showAlertDialog(context);
-                                  dataWater.addWaterResourcesToFirestore(
-                                      context,
-                                      dataWater,
-                                      widget.typeWater,
+                                  // dataWater.addWaterResourcesToFirestore(
+                                  //     context,
+                                  //     dataWater,
+                                  
                                       userProvider);
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -358,8 +358,8 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                           dataWater.water.note = "ข้างบ่อน้ำใหญ่";
                           dataWater.water.nameTH = "หนองน้ำใหญ่";
                           print(dataWater.water.note);
-                          _showDialogFile(context, dataWater, widget.typeWater,
-                              userProvider);
+                          // _showDialogFile(context, dataWater, widget.typeWater,
+                          //     userProvider);
                           formKey.currentState!.reset();
                         }
                       },

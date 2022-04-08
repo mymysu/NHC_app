@@ -1,3 +1,5 @@
+import 'package:water_resources_application/provider/dataWater_provider.dart';
+
 class District {
   String districtId;
   String nameDistrict;
@@ -20,10 +22,15 @@ class District {
     );
   }
 
-  static List<District> fromJsonList(List list, String indexProvince) {
+  static List<District> fromJsonList(
+      List list, String indexProvince, DataWater waterProvider) {
+    waterProvider.water.listNameDistrict =
+        list.map((item) => District.fromJson(item)).toList();
+    print(waterProvider.water.listNameDistrict);
     if (indexProvince == "0" || (indexProvince == "null")) {
       return list.map((item) => District.fromJson(item)).toList();
     }
+
     return list
         .map((item) => District.fromJson(item))
         .where((element) => element.provinceId == indexProvince)

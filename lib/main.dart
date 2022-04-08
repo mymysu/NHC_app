@@ -18,6 +18,9 @@ import 'package:water_resources_application/screen/screen_selected_typewater.dar
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    return ErrorWidget(details.exception);
+  };
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var email = prefs.getString('email');
   List<String>? userlogin = prefs.getStringList('user');
@@ -64,7 +67,7 @@ class MyApp extends StatelessWidget {
               '/forgotPassword': (context) => ForgotPasswordScreen(),
               '/editUser': (context) => EditUser(),
               '/historyAdd': (context) => HistoryWater(),
-              '/choiceTypeWaterAdd': (context) => ChoiceTypeWaterAdd(),
+              // '/choiceTypeWaterAdd': (context) => ChoiceTypeWaterAdd(),
               '/datawatersource': (context) => Datawatersource()
             },
           ),

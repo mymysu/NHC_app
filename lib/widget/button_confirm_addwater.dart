@@ -12,7 +12,7 @@ class Buttonconfirm extends StatelessWidget {
   }) : super(key: key);
   final String buttonName;
   final VoidCallback onPreesed;
-  final Color bgcolor;
+  final bgcolor;
 
   @override
   Widget build(BuildContext context) {

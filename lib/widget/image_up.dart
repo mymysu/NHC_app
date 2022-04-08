@@ -209,11 +209,13 @@ class _ImageUPState extends State<ImageUP> {
                                       BorderRadius.all(Radius.circular(25.0))),
 
                               onPressed: () async {
-                                List<XFile>? pickedFile = await ImagePicker()
-                                    .pickMultiImage(imageQuality: 8);
+                                List<XFile>? photos =
+                                    await ImagePicker().pickMultiImage();
+                                // List<XFile>? pickedFile = await ImagePicker()
+                                //     .pickMultiImage(imageQuality: 8);
                                 // waterProvider.water.image = pickedFile;
                                 Navigator.pop(context);
-                                _showDialogImage(context, pickedFile);
+                                _showDialogImage(context, photos);
                               },
                               child: Row(
                                 children: [

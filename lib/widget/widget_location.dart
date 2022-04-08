@@ -2,23 +2,31 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:water_resources_application/api/district_api.dart';
+import 'package:water_resources_application/api/province_api.dart';
+import 'package:water_resources_application/api/subdistrict_api.dart';
 import 'package:water_resources_application/app_styles.dart';
+import 'package:water_resources_application/model/district_th.dart';
+import 'package:water_resources_application/model/province_th.dart';
+import 'package:water_resources_application/model/subdistricts_th.dart';
 
 import 'package:water_resources_application/provider/dataWater_provider.dart';
+import 'package:water_resources_application/widget/get_location_water.dart';
 
-class Location extends StatefulWidget {
-  Location({
+class LocationWidget extends StatefulWidget {
+  LocationWidget({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<Location> createState() => _LocationState();
+  State<LocationWidget> createState() => _LocationWidgetState();
 }
 
-class _LocationState extends State<Location> {
+class _LocationWidgetState extends State<LocationWidget> {
   bool showProgress = false;
   final formKey = GlobalKey<FormState>();
   Future<void> _showDialogFile(BuildContext context) {
@@ -118,22 +126,6 @@ class _LocationState extends State<Location> {
                                   ),
                                 ),
                               ),
-                              // Container(
-                              //   padding: const EdgeInsets.all(8.0),
-                              //   child: Text('Note'),
-                              // ),
-                              // Padding(
-                              //   padding: const EdgeInsets.all(8.0),
-                              //   child: Text(
-                              //     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt'
-                              //     ' ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud'
-                              //     ' exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-                              //     ' Duis aute irure dolor in reprehenderit in voluptate velit esse cillum '
-                              //     'dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,'
-                              //     ' sunt in culpa qui officia deserunt mollit anim id est laborum.',
-                              //     style: TextStyle(fontSize: 12),
-                              //   ),
-                              // ),
                             ],
                           ),
                         ),
@@ -143,32 +135,9 @@ class _LocationState extends State<Location> {
         });
   }
 
-  Future<void> getLocation(
-      BuildContext context, DataWater waterProvider) async {
-    late Position _currentPosition;
-    Geolocator.requestPermission();
-    Geolocator.getCurrentPosition(
-            desiredAccuracy: LocationAccuracy.best,
-            forceAndroidLocationManager: true)
-        .then((Position position) {
-      _currentPosition = position;
-      waterProvider.water.latitude = _currentPosition.latitude;
-      waterProvider.water.longitude = _currentPosition.longitude;
-      setState(() {
-        _currentPosition = position;
-        waterProvider.curren = true;
-        waterProvider.water.geom = _currentPosition;
-        showProgress = true;
-        Navigator.pop(context);
-      });
-    }).catchError((e) {
-      print(e);
-    });
-  }
-
   showAlertDialog(BuildContext context) {
     AlertDialog alert = AlertDialog(
-      content: new Row(
+      content: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           CircularProgressIndicator(),
@@ -186,6 +155,9 @@ class _LocationState extends State<Location> {
     );
   }
 
+  String location = 'Null, Press Button';
+  String Address = 'search';
+
   @override
   Widget build(BuildContext context) {
     var size_page = MediaQuery.of(context).size;
@@ -201,50 +173,109 @@ class _LocationState extends State<Location> {
                   width: 3, //width of border
                 ),
               ),
-              height: size_page.height * 0.18,
+              height: size_page.height * 0.35,
               width: size_page.width * 0.9,
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: 10,
+                    height: 20,
                   ),
-                  Icon(
-                    Icons.location_on_outlined,
-                    color: Color(0xFF11048B),
-                    size: 70,
-                  ),
+                  Container(
+                      margin: EdgeInsets.all(5),
+                      child: Text(
+                        "ตำแหน่งแหล่งน้ำ",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.prompt(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF11048B),
+                        ),
+                      )),
                   SizedBox(
-                    width: 5,
+                    height: 10,
                   ),
-                  Column(
+                  Padding(
+                    padding: const EdgeInsets.only(left: 24, bottom: 12),
+                    child: RichText(
+                      text: TextSpan(
+                          text: 'ละติจู , ลองติจู : ',
+                          style: GoogleFonts.prompt(
+                            color: Color(0xFF11048B),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text:
+                                  " ${(waterProvider.water.latitude ?? "NULL") == "NULL" ? "0" : waterProvider.water.longitude!.toStringAsFixed(6)} , ${(waterProvider.water.longitude ?? "NULL") == "NULL" ? "0" : waterProvider.water.latitude!.toStringAsFixed(6)}",
+                              style: GoogleFonts.prompt(
+                                  color: Colors.blueAccent, fontSize: 16),
+                            )
+                          ]),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 24, bottom: 12),
+                    child: RichText(
+                      text: TextSpan(
+                          text: 'จังหวัด : ',
+                          style: GoogleFonts.prompt(
+                            color: Color(0xFF11048B),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: " ${waterProvider.water.nameProvince}",
+                              style: GoogleFonts.prompt(
+                                  color: Colors.blueAccent, fontSize: 16),
+                            )
+                          ]),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 24, bottom: 12),
+                    child: RichText(
+                      text: TextSpan(
+                          text: 'อำเภอ : ',
+                          style: GoogleFonts.prompt(
+                            color: Color(0xFF11048B),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: " ${waterProvider.water.nameDistrict}",
+                              style: GoogleFonts.prompt(
+                                  color: Colors.blueAccent, fontSize: 16),
+                            )
+                          ]),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 24, bottom: 12),
+                    child: RichText(
+                      text: TextSpan(
+                          text: 'ตำบล : ',
+                          style: GoogleFonts.prompt(
+                            color: Color(0xFF11048B),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: " ${waterProvider.water.nameSubdistrict}",
+                              style: GoogleFonts.prompt(
+                                  color: Colors.blueAccent, fontSize: 16),
+                            )
+                          ]),
+                    ),
+                  ),
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                          margin: EdgeInsets.all(5),
-                          child: Text(
-                            "ตำแหน่งแหล่งน้ำ",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.prompt(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF11048B),
-                            ),
-                          )),
-                      Container(
-                          margin: EdgeInsets.all(5),
-                          child: Text(
-                            "${(waterProvider.water.latitude ?? "NULL") == "NULL" ? "0" : waterProvider.water.longitude!.toStringAsFixed(6)} , ${(waterProvider.water.longitude ?? "NULL") == "NULL" ? "0" : waterProvider.water.latitude!.toStringAsFixed(6)}",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.prompt(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF11048B),
-                            ),
-                          )),
-                      // SizedBox(
-                      //   height: 5,
-                      // ),
                       Row(
                         children: [
                           RaisedButton(
@@ -258,9 +289,16 @@ class _LocationState extends State<Location> {
                               ),
                             ),
                             onPressed: () async {
-                              // _showDialogFile(context);
                               showAlertDialog(context);
-                              await getLocation(context, waterProvider);
+                              Position position = await LocationWaterSource
+                                  .getGeoLocationPosition();
+                              location =
+                                  'Lat: ${position.latitude} , Long: ${position.longitude}';
+                              LocationWaterSource.getAddressFromLatLong(
+                                position,
+                                waterProvider,
+                                context,
+                              );
                             },
                           ),
                           SizedBox(

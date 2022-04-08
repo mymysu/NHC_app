@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:water_resources_application/screen/screen_add_water.dart';
 import 'package:water_resources_application/screen/screen_more.dart';
 import 'package:water_resources_application/screen/screen_news.dart';
-import 'package:water_resources_application/screen/screen_selected_typewater.dart';
-import 'package:water_resources_application/widget/uploading_image.dart';
+import 'package:water_resources_application/screen/screen_start_add_water.dart';
+import 'package:water_resources_application/screen/test.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,11 +15,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Widget> showPages = [
-    // MainScreen(),
-    // HomePage3(),
-
     NewsScreen(),
-    ChoiceTypeWaterAdd(),
+    BeginAddwater(),
+    // AddWaterResourcesScreen(),
+    // ChoiceTypeWaterAdd(),
+
     MoreScreen()
   ];
   int index = 0;

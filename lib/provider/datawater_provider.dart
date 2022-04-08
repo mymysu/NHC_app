@@ -36,34 +36,29 @@ class DataWater with ChangeNotifier {
   //   return _water.province = data;
   // }
 
-  void setProfileFromFirestore(Water? data) {
-    _water.id = data!.id;
-    _water.type = data.type;
-    _water.nameTH = data.nameTH;
-    _water.longitude = data.longitude;
-    _water.latitude = data.latitude;
-    _water.nameProvince = data.nameProvince;
-    _water.nameDistrict = data.nameDistrict;
-    _water.nameSubdistrict = data.nameSubdistrict;
-    _water.image = data.image;
+  // void setProfileFromFirestore(Water? data) {
+  //   _water.id = data!.id;
+  //   _water.type = data.type;
+  //   _water.nameTH = data.nameTH;
+  //   _water.longitude = data.longitude;
+  //   _water.latitude = data.latitude;
+  //   _water.nameProvince = data.nameProvince;
+  //   _water.nameDistrict = data.nameDistrict;
+  //   _water.nameSubdistrict = data.nameSubdistrict;
+  //   _water.image = data.image;
 
-    // notifyListeners();
-  }
+  //   // notifyListeners();
+  // }
 
   void addWaterResourcesToFirestore(
     BuildContext context,
     DataWater dataWater,
-    WaterSourceDetails typeWater,
+    // WaterSourceDetails typeWater,
     UserProvider userProvider,
   ) async {
-    print(dataWater.water.note);
-    print(dataWater.water.nameTH);
-
     List<String> fileName = [];
     List<File> imageFile = [];
-    List<String> nameFileImage = [];
-    String nameFileXml = " ";
-    String ckkmlFile = (dataWater.water.kmlFile ?? "NULL").toString();
+    // String ckkmlFile = (dataWater.water.kmlFile ?? "NULL").toString();
     String ckImage = (dataWater.water.image ?? "NULL").toString();
 
     if (ckImage != "NULL") {
@@ -81,12 +76,12 @@ class DataWater with ChangeNotifier {
                   SettableMetadata(customMetadata: {
                     'uploaded_by': userProvider.userProfile.uid.toString(),
                     'description':
-                        "typeWarte:${typeWater.typeAbbr} subtypeWarte:${typeWater.subtypeEN}"
+                        "typeWarte:{typeWater.typeAbbr} subtypeWarte:{typeWater.subtypeEN}"
                   }))
               .then((value) {
             value.ref
                 .getDownloadURL()
-                .then((value) => nameFileImage.add(value));
+                .then((value) => dataWater.water.urlFileImage?.add(value));
           });
         } on FirebaseException catch (error) {
           print("error up imageFile");
@@ -94,29 +89,29 @@ class DataWater with ChangeNotifier {
         }
       }
     }
-    if (ckkmlFile != "NULL") {
-      print("up kmlFile");
-      try {
-        await FirebaseStorage.instance
-            .ref("/kml_resources/${dataWater.water.kmlFile!.names[0]}")
-            .putFile(
-                File(dataWater.water.kmlFile!.files[0].path!),
-                SettableMetadata(customMetadata: {
-                  'uploaded_by': userProvider.userProfile.uid.toString(),
-                  'description':
-                      "typeWarte:${typeWater.typeAbbr} subtypeWarte:${typeWater.subtypeEN}"
-                }))
-            .then((value) {
-          value.ref.getDownloadURL().then((value) {
-            nameFileXml = value;
-            print(nameFileXml);
-          });
-        });
-      } on FirebaseException catch (error) {
-        print("error up kmlFile");
-        print(error.code);
-      }
-    }
+    // if (ckkmlFile != "NULL") {
+    //   print("up kmlFile");
+    //   try {
+    //     await FirebaseStorage.instance
+    //         .ref("/kml_resources/${dataWater.water.kmlFile!.names[0]}")
+    //         .putFile(
+    //             File(dataWater.water.kmlFile!.files[0].path!),
+    //             SettableMetadata(customMetadata: {
+    //               'uploaded_by': userProvider.userProfile.uid.toString(),
+    //               'description':
+    //                   "typeWarte:{typeWater.typeAbbr} subtypeWarte:{typeWater.subtypeEN}"
+    //             }))
+    //         .then((value) {
+    //       value.ref.getDownloadURL().then((value) {
+    //         dataWater.water.urlkmlFile = value;
+    //       });
+    //     });
+    //   } on FirebaseException catch (error) {
+    //     print("error up kmlFile");
+    //     print(error.code);
+    //   }
+    // }
+    // print(dataWater.water.urlkmlFile);
     print(" up json");
     try {
       DateTime now = DateTime.now();
@@ -126,15 +121,9 @@ class DataWater with ChangeNotifier {
       await FirebaseFirestore.instance
           .collection("water_source_information_new")
           .add({
-        "name_TH": dataWater.water.nameTH ?? "",
-        "type_ID": typeWater.typeID,
-        "type_TH": typeWater.typeTH,
-        "type_Abbr": typeWater.typeAbbr,
-        "subtype_ID": typeWater.subtypeID,
-        "subtype_TH": typeWater.subtypeTH,
-        "subtype_EN": typeWater.subtypeEN,
-        "URL_FileXml": nameFileXml,
-        "URL_FileImage": nameFileImage,
+        // "name_TH": dataWater.water.nameTH ?? "",
+        // "URL_FileXml": dataWater.water.urlkmlFile,
+        "URL_FileImage": dataWater.water.urlFileImage,
         "geography_ID": dataWater.water.geographyId,
         "geography": dataWater.water.geography,
         "latitude": dataWater.water.latitude,
@@ -164,7 +153,7 @@ class DataWater with ChangeNotifier {
       print("error up json");
       print(error.code);
     }
-    Navigator.pop(context);
-    Navigator.popAndPushNamed(context, '/historyAdd');
+    // Navigator.pop(context);
+    // Navigator.popAndPushNamed(context, '/historyAdd');
   }
 }

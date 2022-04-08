@@ -6,7 +6,7 @@ import 'package:water_resources_application/screen/screen_add_water.dart';
 import 'package:water_resources_application/widget/dropdown_district_widget.dart';
 import 'package:water_resources_application/widget/dropdown_province_widget.dart';
 import 'package:water_resources_application/widget/dropdown_subdistrict_widget.dart';
-import 'package:water_resources_application/widget/location.dart';
+import 'package:water_resources_application/widget/widget_location.dart';
 
 class AddwaterPage2 extends StatelessWidget {
   const AddwaterPage2({
@@ -93,7 +93,7 @@ class AddwaterPage2 extends StatelessWidget {
                   ),
                   SubDistrictWidget(),
                   Divider(),
-                  Location(),
+                  LocationWidget(),
                 ],
               ),
             ),

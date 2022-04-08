@@ -1,3 +1,5 @@
+import 'package:water_resources_application/provider/dataWater_provider.dart';
+
 class ProvinceTH {
   String provinceId;
   String nameProvince;
@@ -20,7 +22,10 @@ class ProvinceTH {
     );
   }
 
-  static List<ProvinceTH> fromJsonList(List list) {
+  static List<ProvinceTH> fromJsonList(List list, DataWater waterProvider) {
+    waterProvider.water.listNameProvince =
+        list.map((item) => ProvinceTH.fromJson(item)).toList();
+
     return list.map((item) => ProvinceTH.fromJson(item)).toList();
   }
 

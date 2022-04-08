@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class WaterSourceDetails {
-  String? subtypeEN,
+  String subtypeEN,
       subtypeID,
       subtypeTH,
       typeID,
@@ -9,25 +9,24 @@ class WaterSourceDetails {
       typeAbbr,
       details,
       sizewater;
-  bool? status;
-  Timestamp? date;
 
-  WaterSourceDetails(
-      {this.subtypeTH,
-      this.subtypeEN,
-      this.details,
-      this.sizewater,
-      this.typeAbbr,
-      this.typeID,
-      this.subtypeID,
-      this.date,
-      this.typeTH,
-      this.status});
+  WaterSourceDetails({
+    required this.subtypeTH,
+    required this.subtypeEN,
+    required this.details,
+    required this.sizewater,
+    required this.typeAbbr,
+    required this.typeID,
+    required this.subtypeID,
+    required this.typeTH,
+  });
+
+  @override
+  String toString() => subtypeTH;
 }
 
 Future<List<WaterSourceDetails>> getWaterSourceDetails(String nameClass) async {
   QuerySnapshot qShot;
-  // print(nameClass);
 
   if (nameClass == "all") {
     qShot =
@@ -38,7 +37,6 @@ Future<List<WaterSourceDetails>> getWaterSourceDetails(String nameClass) async {
         .where('type_abbr', isEqualTo: nameClass)
         .get();
   }
-
   return qShot.docs
       .map(
         (doc) => WaterSourceDetails(
@@ -55,17 +53,17 @@ Future<List<WaterSourceDetails>> getWaterSourceDetails(String nameClass) async {
       .toList();
 }
 
-Future<List<WaterSourceDetails>> getWaterSourceSize(String nameClass) async {
-  QuerySnapshot qShot = await FirebaseFirestore.instance
-      .collection('size_data_water_source')
-      .get();
+// Future<List<WaterSourceDetails>> getWaterSourceSize(String nameClass) async {
+//   QuerySnapshot qShot = await FirebaseFirestore.instance
+//       .collection('size_data_water_source')
+//       .get();
 
-  return qShot.docs
-      .map(
-        (doc) => WaterSourceDetails(
-          details: (doc.data() as dynamic)['details'],
-          sizewater: (doc.data() as dynamic)['size'],
-        ),
-      )
-      .toList();
-}
+//   return qShot.docs
+//       .map(
+//         (doc) => WaterSourceDetails(
+//           details: (doc.data() as dynamic)['details'],
+//           sizewater: (doc.data() as dynamic)['size'],
+//         ),
+//       )
+//       .toList();
+// }

@@ -8,27 +8,9 @@ import 'package:water_resources_application/provider/dataWater_provider.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
 import 'dart:async';
 
-class ShowdialogConfirm {
-  static showAlertDialog(BuildContext context) {
-    AlertDialog alert = AlertDialog(
-      content: new Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          CircularProgressIndicator(),
-          Container(
-              margin: EdgeInsets.only(left: 5), child: Text("รอสักครู่.....")),
-        ],
-      ),
-    );
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
+import 'package:water_resources_application/widget/widget_alertdialog_loding.dart';
 
+class ShowdialogConfirm {
   static Future<void> showDialogConfirm(
       BuildContext context, DataWater dataWater, UserProvider userProvider) {
     var size_page = MediaQuery.of(context).size;
@@ -116,7 +98,7 @@ class ShowdialogConfirm {
                             textdata('ประเภทข้อมูลแหล่งน้ำ',
                                 "\n   ${dataWater.water.typeTH}  ${dataWater.water.subTypeTH}"),
                             textdata("ละติจู ลองติจู",
-                                "\n   ${dataWater.water.latitude},${dataWater.water.longitude}"),
+                                "\n   ${dataWater.water.latitude!.toStringAsFixed(6)},${dataWater.water.longitude!.toStringAsFixed(6)}"),
                             Padding(
                               padding:
                                   const EdgeInsets.only(left: 8, bottom: 8),
@@ -175,7 +157,7 @@ class ShowdialogConfirm {
                             textdata("คำอธิบายเพิ่มเติม",
                                 "\n   ${dataWater.water.note}"),
                             textdata("ไฟล์รูปภาพ",
-                                "\n   ${(waterProvider.water.image ?? "NULL") == "NULL" ? "0" : waterProvider.water.image.length} / 9"),
+                                "\n   ${(waterProvider.water.image ?? "NULL") == "NULL" ? "0" : waterProvider.water.image.length} / 5"),
                             Container(
                               width: double.infinity,
                               height: 60,
@@ -183,11 +165,8 @@ class ShowdialogConfirm {
                               child: ElevatedButton(
                                 onPressed: () {
                                   showAlertDialog(context);
-                                  // dataWater.addWaterResourcesToFirestore(
-                                  //     context,
-                                  //     dataWater,
-                                  //     widget.typeWater,
-                                  //     userProvider);
+                                  dataWater.addWaterResourcesToFirestore(
+                                      context, dataWater, userProvider);
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.orange,

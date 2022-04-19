@@ -41,7 +41,7 @@ class ProvinceWidget extends StatelessWidget {
             waterProvider.water.nameProvince = value!.nameProvince;
             waterProvider.water.provinceId = value.provinceId;
             waterProvider.water.geographyId = value.geographiesId;
-            waterProvider.water.geography =
+            waterProvider.water.nameGeography =
                 geography[int.parse(value.geographiesId) - 1].nameGeo;
           },
           showSearchBox: true,

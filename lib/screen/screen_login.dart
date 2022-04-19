@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
 import 'package:water_resources_application/size_configs.dart';
+import 'package:water_resources_application/widget/widget_alertdialog_loding.dart';
 
 class LoginProfile {
   late String email;
@@ -26,25 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
   LoginProfile profile = LoginProfile();
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
   UserProvider userProvider = UserProvider();
-  showAlertDialog(BuildContext context) {
-    AlertDialog alert = AlertDialog(
-      content: new Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          CircularProgressIndicator(),
-          Container(
-              margin: EdgeInsets.only(left: 5), child: Text("รอสักครู่.....")),
-        ],
-      ),
-    );
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       borderRadius:
                                           new BorderRadius.circular(25.0),
                                       borderSide: BorderSide(
-                                          color: Colors.orange, width: 3),
+                                          color: Colors.orangeAccent, width: 3),
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
@@ -142,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   validator: MultiValidator([
                                     RequiredValidator(
-                                        errorText: 'กรุณาป้อนอีเมล'),
+                                        errorText: 'กรุณากรอกอีเมล'),
                                     EmailValidator(errorText: 'อีเมลไม่ถูกต้อง')
                                   ]),
                                   keyboardType: TextInputType.emailAddress,
@@ -174,14 +156,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                       borderRadius:
                                           new BorderRadius.circular(25.0),
                                       borderSide: BorderSide(
-                                          color: Colors.orange, width: 3),
+                                          color: Colors.orangeAccent, width: 3),
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
                                     ),
                                   ),
                                   validator: RequiredValidator(
-                                      errorText: 'กรุณาป้อนรหัสผ่าน'),
+                                      errorText: 'กรุณากรอกรหัสผ่าน'),
                                   obscureText: true,
                                   onSaved: (value) {
                                     profile.password = value!;
@@ -243,9 +225,27 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 context, '/');
                                           });
                                         } on FirebaseAuthException catch (e) {
-                                          print(e.code);
+                                          Navigator.pop(context);
+                                          String? message = e.message;
+                                          print(e.message!);
+                                          if (e.code ==
+                                              "The password is invalid or the user does not have a password.") {
+                                            message =
+                                                "รหัสผ่านไม่ถูกต้องหรือผู้ใช้ไม่ถูกต้อง";
+                                          } else if (e.code ==
+                                              "There is no user record corresponding to this identifier. The user may have been deleted.") {
+                                            message =
+                                                "ไม่มีบันทึกผู้ใช้ที่สอดคล้อง";
+                                          } else if (e.code ==
+                                              "We have blocked all requests from this device due to unusual activity. Try again later.") {
+                                            message =
+                                                "มีข้อผิดพลาด ลองอีกครั้งในภายหลัง";
+                                          } else {
+                                            message = e.message!;
+                                          }
+
                                           Fluttertoast.showToast(
-                                              msg: e.message!,
+                                              msg: message,
                                               gravity: ToastGravity.CENTER);
                                         }
                                       }

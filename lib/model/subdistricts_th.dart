@@ -36,7 +36,7 @@ class SubDistrictTH {
     // print(indexProvince);
     waterProvider.water.listNameSubdistrict =
         list.map((item) => SubDistrictTH.fromJson(item)).toList();
-    print(waterProvider.water.listNameDistrict);
+    // print(waterProvider.water.listNameDistrict);
 
     if (indexProvince == "0" || indexProvince == "null") {
       return list.map((item) => SubDistrictTH.fromJson(item)).toList();

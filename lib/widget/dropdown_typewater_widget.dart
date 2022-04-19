@@ -34,9 +34,10 @@ class TypeWaterWidget extends StatelessWidget {
         onFind: (String? filter) => getWaterSourceDetails("all"),
         onChanged: (var value) {
           waterProvider.water.subTypeTH = value!.subtypeTH;
+          waterProvider.water.subtypeAbbr = value.subtypeAbbr;
           waterProvider.water.subTypeID = value.subtypeID;
           waterProvider.water.typeTH = value.typeTH;
-          waterProvider.water.typeEN = value.typeAbbr;
+          waterProvider.water.typeAbbr = value.typeAbbr;
           waterProvider.water.typeID = value.typeID;
         },
         showSearchBox: true,

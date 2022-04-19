@@ -19,7 +19,8 @@ class _ImagewaterState extends State<Imagewater> {
 
   @override
   Widget build(BuildContext context) {
-    DataWater dataWater = Provider.of<DataWater>(context);
+    DataWater waterProvider = Provider.of<DataWater>(context);
+    _imgObjs = waterProvider.water.image;
     final configs = ImagePickerConfigs();
     configs.appBarTextColor = Colors.white;
     configs.appBarBackgroundColor = Colors.green;
@@ -42,7 +43,8 @@ class _ImagewaterState extends State<Imagewater> {
             ),
             itemBuilder: (BuildContext context, int index) {
               // final image = _imgObjs[index];
-              return (_imgObjs.length > 0) && (index != 5)
+              return ((_imgObjs.length > 0) && (index != 5)) &&
+                      _imgObjs.length > index
                   ? Padding(
                       padding: const EdgeInsets.all(2),
                       child: Image.file(File(_imgObjs[index].modifiedPath),
@@ -65,11 +67,12 @@ class _ImagewaterState extends State<Imagewater> {
                             if ((objects?.length ?? 0) > 0) {
                               setState(() {
                                 _imgObjs = objects!;
+                                waterProvider.water.image = _imgObjs;
                               });
                             }
                           },
                           child: const Icon(
-                            Icons.add,
+                            Icons.camera_alt_outlined,
                             color: Colors.blueAccent,
                             size: 50,
                           ),

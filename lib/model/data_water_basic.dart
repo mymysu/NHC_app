@@ -8,8 +8,8 @@ class Water {
   String? id;
   String? typeTH;
   String? subTypeTH;
-  String? typeEN;
-  String? subTypeEN;
+  String? typeAbbr;
+  String? subtypeAbbr;
   String? typeID;
   String? subTypeID;
   String? source;
@@ -20,7 +20,7 @@ class Water {
   double? longitude;
   String? riverWatershed;
   String? tributaryWatershed;
-  String? geography;
+  String? nameGeography;
   String? nameProvince;
   String? nameDistrict;
   String? nameSubdistrict;
@@ -36,16 +36,14 @@ class Water {
   String? note;
   String? documentation;
   FilePickerResult? kmlFile;
-  String? urlkmlFile;
-  List<String>? urlFileImage;
   List<ProvinceTH>? listNameProvince;
   List<District>? listNameDistrict;
   List<SubDistrictTH>? listNameSubdistrict;
 
   Water(
       {this.id,
-      this.typeEN,
-      this.subTypeEN,
+      this.typeAbbr,
+      this.subtypeAbbr,
       this.typeTH,
       this.subTypeTH,
       this.typeID,
@@ -56,7 +54,7 @@ class Water {
       this.localName,
       this.latitude,
       this.longitude,
-      this.geography,
+      this.nameGeography,
       this.riverWatershed,
       this.tributaryWatershed,
       this.nameDistrict,
@@ -72,8 +70,6 @@ class Water {
       this.labelAdmin,
       this.note,
       this.kmlFile,
-      this.urlkmlFile,
-      this.urlFileImage,
       this.listNameDistrict,
       this.listNameProvince,
       this.listNameSubdistrict});

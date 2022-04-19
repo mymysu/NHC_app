@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class WaterSourceDetails {
-  String subtypeEN,
+  String subtypeAbbr,
       subtypeID,
       subtypeTH,
       typeID,
@@ -12,7 +12,7 @@ class WaterSourceDetails {
 
   WaterSourceDetails({
     required this.subtypeTH,
-    required this.subtypeEN,
+    required this.subtypeAbbr,
     required this.details,
     required this.sizewater,
     required this.typeAbbr,
@@ -42,7 +42,7 @@ Future<List<WaterSourceDetails>> getWaterSourceDetails(String nameClass) async {
         (doc) => WaterSourceDetails(
           subtypeID: (doc.data() as dynamic)['subtype_ID'],
           subtypeTH: (doc.data() as dynamic)['subtype_TH'],
-          subtypeEN: (doc.data() as dynamic)['subtype_EN'],
+          subtypeAbbr: (doc.data() as dynamic)['subtype_EN'],
           typeID: (doc.data() as dynamic)['type_ID'],
           typeAbbr: (doc.data() as dynamic)['type_abbr'],
           typeTH: (doc.data() as dynamic)['type_TH'],

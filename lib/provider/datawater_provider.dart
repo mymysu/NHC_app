@@ -7,6 +7,7 @@ import 'package:water_resources_application/model/data_water.dart';
 import 'package:water_resources_application/model/data_water_basic.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as path;
+import 'package:water_resources_application/model/history_water.dart';
 import 'dart:io';
 
 import 'package:water_resources_application/provider/user_provider.dart';
@@ -32,112 +33,87 @@ class DataWater with ChangeNotifier {
     return _water = value;
   }
 
-  // set Water(String? data) {
-  //   return _water.province = data;
-  // }
-
-  // void setProfileFromFirestore(Water? data) {
-  //   _water.id = data!.id;
-  //   _water.type = data.type;
-  //   _water.nameTH = data.nameTH;
-  //   _water.longitude = data.longitude;
-  //   _water.latitude = data.latitude;
-  //   _water.nameProvince = data.nameProvince;
-  //   _water.nameDistrict = data.nameDistrict;
-  //   _water.nameSubdistrict = data.nameSubdistrict;
-  //   _water.image = data.image;
-
-  //   // notifyListeners();
-  // }
-
   void addWaterResourcesToFirestore(
     BuildContext context,
     DataWater dataWater,
-    // WaterSourceDetails typeWater,
     UserProvider userProvider,
   ) async {
-    List<String> fileName = [];
+    List<String> fileNameURL = [];
     List<File> imageFile = [];
+    DateTime now = DateTime.now();
+    final DateFormat formatter = DateFormat('ddMMyyyyhhmmss');
+    // final DateFormat formatter2 = DateFormat('dd/MM/yyyy hh:mm:ss');
+    final String formatted = formatter.format(now);
+    // final String formatted2 = formatter2.format(now);
+
+    String FileNameimage =
+        "/image_resources/${formatted}-${dataWater.water.typeID}-${dataWater.water.subTypeID}";
     // String ckkmlFile = (dataWater.water.kmlFile ?? "NULL").toString();
     String ckImage = (dataWater.water.image ?? "NULL").toString();
+    print(formatted);
 
     if (ckImage != "NULL") {
       for (int i = 0; i < dataWater.water.image!.length; i++) {
-        fileName.add(path.basename(dataWater.water.image![i].path));
-        imageFile.add(File(dataWater.water.image![i].path));
+        imageFile.add(File(dataWater.water.image![i].originalPath));
       }
       for (int i = 0; i < dataWater.water.image!.length; i++) {
         try {
           print("up imageFile");
           await FirebaseStorage.instance
-              .ref("/image_resources/${fileName[i]}")
+              .ref(
+                  "$FileNameimage/${formatted}-${dataWater.water.typeID}-${dataWater.water.subTypeID}-${i + 1}")
               .putFile(
                   imageFile[i],
                   SettableMetadata(customMetadata: {
                     'uploaded_by': userProvider.userProfile.uid.toString(),
                     'description':
-                        "typeWarte:{typeWater.typeAbbr} subtypeWarte:{typeWater.subtypeEN}"
+                        "Type_ID: ${dataWater.water.typeID}\nType_Abbr: ${dataWater.water.typeAbbr}\nType_TH: ${dataWater.water.typeTH}\nsubType_ID: ${dataWater.water.subTypeID}\nsubType_EN: ${dataWater.water.subtypeAbbr}\nsubType_TH: ${dataWater.water.subTypeTH}"
                   }))
               .then((value) {
-            value.ref
-                .getDownloadURL()
-                .then((value) => dataWater.water.urlFileImage?.add(value));
+            value.ref.getDownloadURL().then((value) {
+              // print(value);
+              fileNameURL.add(value);
+              // print(fileNameURL[i]);
+              // print(fileNameURL.length);
+            });
           });
         } on FirebaseException catch (error) {
           print("error up imageFile");
           print(error.code);
         }
       }
+      await Future.delayed(Duration(seconds: 1));
     }
-    // if (ckkmlFile != "NULL") {
-    //   print("up kmlFile");
-    //   try {
-    //     await FirebaseStorage.instance
-    //         .ref("/kml_resources/${dataWater.water.kmlFile!.names[0]}")
-    //         .putFile(
-    //             File(dataWater.water.kmlFile!.files[0].path!),
-    //             SettableMetadata(customMetadata: {
-    //               'uploaded_by': userProvider.userProfile.uid.toString(),
-    //               'description':
-    //                   "typeWarte:{typeWater.typeAbbr} subtypeWarte:{typeWater.subtypeEN}"
-    //             }))
-    //         .then((value) {
-    //       value.ref.getDownloadURL().then((value) {
-    //         dataWater.water.urlkmlFile = value;
-    //       });
-    //     });
-    //   } on FirebaseException catch (error) {
-    //     print("error up kmlFile");
-    //     print(error.code);
-    //   }
-    // }
-    // print(dataWater.water.urlkmlFile);
     print(" up json");
     try {
-      DateTime now = DateTime.now();
-      final DateFormat formatter = DateFormat('dd/MM/yyyy');
-      final String formatted = formatter.format(now);
-
       await FirebaseFirestore.instance
           .collection("water_source_information_new")
-          .add({
+          .doc(
+              "${formatted}${dataWater.water.typeID}${dataWater.water.subTypeID}")
+          .set({
         // "name_TH": dataWater.water.nameTH ?? "",
         // "URL_FileXml": dataWater.water.urlkmlFile,
-        "URL_FileImage": dataWater.water.urlFileImage,
-        "geography_ID": dataWater.water.geographyId,
-        "geography": dataWater.water.geography,
+        "type_Abbr": dataWater.water.typeAbbr,
+        "type_TH": dataWater.water.typeTH,
+        "type_ID": dataWater.water.typeID,
+        "subType_EN": dataWater.water.subtypeAbbr,
+        "subType_TH": dataWater.water.subTypeTH,
+        "subType_ID": dataWater.water.subTypeID,
+        "URL_FileImage": fileNameURL,
         "latitude": dataWater.water.latitude,
         "longitude": dataWater.water.longitude,
+        "geography_ID": dataWater.water.geographyId,
         "province_ID": dataWater.water.provinceId,
         "district_ID": dataWater.water.districtId,
         "subdistrict_ID": dataWater.water.subdistrictId,
+        "nameGeography": dataWater.water.nameGeography,
         "nameProvince": dataWater.water.nameProvince,
         "nameDistrict": dataWater.water.nameDistrict,
         "nameSubdistrict": dataWater.water.nameSubdistrict,
         "note": dataWater.water.note ?? "",
         "uid": userProvider.userProfile.uid.toString(),
         "email": userProvider.userProfile.email,
-        "date": formatted,
+        "date": now,
         "status": false
       }).then((value) {
         Fluttertoast.showToast(
@@ -153,7 +129,31 @@ class DataWater with ChangeNotifier {
       print("error up json");
       print(error.code);
     }
-    // Navigator.pop(context);
-    // Navigator.popAndPushNamed(context, '/historyAdd');
+    Navigator.pop(context);
+    Navigator.popAndPushNamed(context, '/historyAdd');
+
+    // // if (ckkmlFile != "NULL") {
+    // //   print("up kmlFile");
+    // //   try {
+    // //     await FirebaseStorage.instance
+    // //         .ref("/kml_resources/${dataWater.water.kmlFile!.names[0]}")
+    // //         .putFile(
+    // //             File(dataWater.water.kmlFile!.files[0].path!),
+    // //             SettableMetadata(customMetadata: {
+    // //               'uploaded_by': userProvider.userProfile.uid.toString(),
+    // //               'description':
+    // //                   "typeWarte:{typeWater.typeAbbr} subtypeWarte:{typeWater.subtypeAbbr}"
+    // //             }))
+    // //         .then((value) {
+    // //       value.ref.getDownloadURL().then((value) {
+    // //         dataWater.water.urlkmlFile = value;
+    // //       });
+    // //     });
+    // //   } on FirebaseException catch (error) {
+    // //     print("error up kmlFile");
+    // //     print(error.code);
+    // //   }
+    // // }
+    // // print(dataWater.water.urlkmlFile);
   }
 }

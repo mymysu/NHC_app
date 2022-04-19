@@ -55,7 +55,6 @@ dependencies:
   location: ^4.3.0
   convex_bottom_bar: ^3.0.0
   multi_image_picker2: ^5.0.2
-
   advance_image_picker: ^0.1.6+1
   geocoding: ^2.0.4
 

@@ -93,7 +93,7 @@ class AddwaterPage2 extends StatelessWidget {
                   ),
                   SubDistrictWidget(),
                   Divider(),
-                  LocationWidget(),
+                  // LocationWidget(),
                 ],
               ),
             ),

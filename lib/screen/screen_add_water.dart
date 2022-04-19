@@ -40,11 +40,12 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
             Navigator.pop(context);
           },
         ),
+        centerTitle: true,
         backgroundColor: Colors.blueAccent[700],
         title: Text(
-          "ความหมายของแหล่งน้ำ",
+          "เพิ่มข้อมูลแหล่งน้ำ",
           style: GoogleFonts.prompt(
-            fontSize: 25,
+            fontSize: 22,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
@@ -59,12 +60,12 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.only(top: 10, bottom: 10),
                   child: Text(
                     "รูปภาพประกอบข้อมูลแหล่งน้ำ",
                     style: GoogleFonts.prompt(
                       color: addPrimaryColor,
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.start,
@@ -75,12 +76,12 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                   height: 10,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.only(top: 10, bottom: 10),
                   child: Text(
                     "ประเภทแหล่งน้ำ",
                     style: GoogleFonts.prompt(
                       color: addPrimaryColor,
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.start,
@@ -89,12 +90,12 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                 TypeWaterWidget(),
                 LocationWidget(),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Text(
                     "คำอธิบายเพิ่มเติม",
                     style: GoogleFonts.prompt(
                       color: addPrimaryColor,
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.start,
@@ -129,18 +130,30 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                     width: MediaQuery.of(context).size.width,
                     child: TextButton(
                       onPressed: () {
-                        // if (userProvider.userProfile.uid == null) {
-                        //   Fluttertoast.showToast(
-                        //     msg: " ลงทะเบียนเข้าใช้งานก่อน ",
-                        //     toastLength: Toast.LENGTH_SHORT,
-                        //     gravity: ToastGravity.CENTER,
-                        //   );
-                        // } else {
-                        formKey.currentState!.save();
-                        ShowdialogConfirm.showDialogConfirm(
-                            context, dataWater, userProvider);
-                        formKey.currentState!.reset();
-                        // }
+                        if (userProvider.userProfile.uid == null) {
+                          Fluttertoast.showToast(
+                            msg: " ลงทะเบียนเข้าใช้งานก่อน ",
+                            textColor: Colors.orange,
+                            backgroundColor: Colors.black,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                          );
+                        }
+                        if (dataWater.water.subTypeTH == null) {
+                          Fluttertoast.showToast(
+                            msg: "โปรดเลือก ประเภทแหล่งน้ำ ",
+                            textColor: Colors.orange,
+                            backgroundColor: Colors.black,
+                            fontSize: 18,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                          );
+                        } else {
+                          formKey.currentState!.save();
+                          ShowdialogConfirm.showDialogConfirm(
+                              context, dataWater, userProvider);
+                          formKey.currentState!.reset();
+                        }
                       },
                       child: Text(
                         'เพิ่มข้อมูล',

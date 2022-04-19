@@ -26,7 +26,7 @@ class District {
       List list, String indexProvince, DataWater waterProvider) {
     waterProvider.water.listNameDistrict =
         list.map((item) => District.fromJson(item)).toList();
-    print(waterProvider.water.listNameDistrict);
+    // print(waterProvider.water.listNameDistrict);
     if (indexProvince == "0" || (indexProvince == "null")) {
       return list.map((item) => District.fromJson(item)).toList();
     }

@@ -31,7 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("ติด");
+    UserProvider userProvider = Provider.of<UserProvider>(context);
+
     return FutureBuilder(
         future: firebase,
         builder: (context, snapshot) {
@@ -235,7 +236,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               .signInWithEmailAndPassword(
                                                   email: profile.email,
                                                   password: profile.password)
-                                              .then((value) {
+                                              .then((value) async {
                                             userProvider
                                                 .getProfileFromFirestore(
                                                     value.user?.uid);

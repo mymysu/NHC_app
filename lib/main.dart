@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,10 +27,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(userlogin);
-
-    User? result = FirebaseAuth.instance.currentUser;
-
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<UserProvider>(
@@ -44,7 +39,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            initialRoute: result == null ? '/login' : '/',
+            initialRoute: '/login',
             routes: {
               '/': (context) => HomeScreen(),
               '/login': (context) => LoginScreen(),

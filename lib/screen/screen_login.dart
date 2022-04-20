@@ -27,10 +27,11 @@ class _LoginScreenState extends State<LoginScreen> {
   LoginProfile profile = LoginProfile();
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
   UserProvider userProvider = UserProvider();
+  User? result = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider = Provider.of<UserProvider>(context);
+    print("ติด");
     return FutureBuilder(
         future: firebase,
         builder: (context, snapshot) {
@@ -92,16 +93,27 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 5, bottom: 5),
+                                  child: Text(
+                                    "อีเมล",
+                                    style: GoogleFonts.prompt(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blueAccent[700],
+                                    ),
+                                  ),
+                                ),
                                 TextFormField(
-                                  style: TextStyle(color: Colors.blueAccent),
+                                  style: TextStyle(
+                                      color: Colors.blueAccent.shade700),
                                   cursorColor: Colors.blueAccent,
                                   enableSuggestions: false,
                                   autocorrect: false,
+                                  initialValue: result!.email,
                                   decoration: InputDecoration(
                                     fillColor: Colors.blueAccent,
-                                    labelText: 'อีเมล',
-                                    labelStyle: GoogleFonts.prompt(
-                                        color: Colors.blueAccent),
                                     prefixIcon: const Icon(
                                       Icons.email,
                                       color: Colors.blueAccent,
@@ -135,13 +147,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                 SizedBox(
                                   height: 20,
                                 ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 5, bottom: 5),
+                                  child: Text(
+                                    "รหัสผ่าน",
+                                    style: GoogleFonts.prompt(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.blueAccent[700],
+                                    ),
+                                  ),
+                                ),
                                 TextFormField(
-                                  style: TextStyle(color: Colors.blueAccent),
-                                  cursorColor: Colors.white,
+                                  style: TextStyle(
+                                      color: Colors.blueAccent.shade700),
+                                  cursorColor: Colors.blueAccent,
+                                  initialValue:
+                                      userProvider.userProfile.password,
+                                  keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
-                                    labelText: 'รหัสผ่าน',
-                                    labelStyle: GoogleFonts.prompt(
-                                        color: Colors.blueAccent),
                                     prefixIcon: Icon(
                                       Icons.lock,
                                       color: Colors.blueAccent,

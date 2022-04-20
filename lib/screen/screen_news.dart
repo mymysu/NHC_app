@@ -13,10 +13,6 @@ class NewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserProvider userProvider = Provider.of<UserProvider>(context);
-    User? result = FirebaseAuth.instance.currentUser;
-    userProvider.getProfileFromFirestore(result!.uid);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(

@@ -50,17 +50,17 @@ class ElementWater {
 }
 
 class SubType {
-  String typeEn;
+  String typeAbbr;
   String typeTh;
   List<String>? size;
   SubType({
-    required this.typeEn,
+    required this.typeAbbr,
     required this.typeTh,
     required this.size,
   });
 
   factory SubType.fromJson(Map<String, dynamic> json) => SubType(
-        typeEn: json["Type_EN"],
+        typeAbbr: json["Type_EN"],
         typeTh: json["Type_TH"].toString(),
         size: json["Size"] == null
             ? ["null"]
@@ -68,7 +68,7 @@ class SubType {
       );
 
   Map<String, dynamic> toJson() => {
-        "Type_EN": typeEn,
+        "Type_EN": typeAbbr,
         "Type_TH": typeTh,
         "Size":
             size == null ? ["null"] : List<dynamic>.from(size!.map((x) => x)),

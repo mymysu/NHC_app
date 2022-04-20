@@ -1,9 +1,17 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:water_resources_application/model/district_th.dart';
+import 'package:water_resources_application/model/province_th.dart';
+import 'package:water_resources_application/model/subdistricts_th.dart';
 
 class Water {
   String? id;
-  String? type;
+  String? typeTH;
+  String? subTypeTH;
+  String? typeAbbr;
+  String? subtypeAbbr;
+  String? typeID;
+  String? subTypeID;
   String? source;
   String? nameTH;
   String? nameEN;
@@ -12,7 +20,7 @@ class Water {
   double? longitude;
   String? riverWatershed;
   String? tributaryWatershed;
-  String? geography;
+  String? nameGeography;
   String? nameProvince;
   String? nameDistrict;
   String? nameSubdistrict;
@@ -28,17 +36,25 @@ class Water {
   String? note;
   String? documentation;
   FilePickerResult? kmlFile;
+  List<ProvinceTH>? listNameProvince;
+  List<District>? listNameDistrict;
+  List<SubDistrictTH>? listNameSubdistrict;
 
   Water(
       {this.id,
-      this.type,
+      this.typeAbbr,
+      this.subtypeAbbr,
+      this.typeTH,
+      this.subTypeTH,
+      this.typeID,
+      this.subTypeID,
       this.source,
       this.nameTH,
       this.nameEN,
       this.localName,
       this.latitude,
       this.longitude,
-      this.geography,
+      this.nameGeography,
       this.riverWatershed,
       this.tributaryWatershed,
       this.nameDistrict,
@@ -53,5 +69,8 @@ class Water {
       this.label,
       this.labelAdmin,
       this.note,
-      this.kmlFile});
+      this.kmlFile,
+      this.listNameDistrict,
+      this.listNameProvince,
+      this.listNameSubdistrict});
 }

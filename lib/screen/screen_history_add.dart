@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:water_resources_application/screen/screen_approved.dart';
-import 'package:water_resources_application/widget/waiting_approval.dart';
+import 'package:water_resources_application/widget/page_approved.dart';
+import 'package:water_resources_application/widget/page_cancel.dart';
+import 'package:water_resources_application/widget/page_unapproved.dart';
+import 'package:water_resources_application/widget/page_waiting_approval.dart';
 
 class HistoryWater extends StatefulWidget {
   const HistoryWater({Key? key}) : super(key: key);
@@ -16,14 +18,14 @@ class _HistoryWaterState extends State<HistoryWater>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF11048B),
+        backgroundColor: Colors.blueAccent.shade700,
         title: Text(
           'ประวัติการเพิ่มข้อมูล',
           style: GoogleFonts.prompt(
@@ -41,27 +43,52 @@ class _HistoryWaterState extends State<HistoryWater>
           ),
           color: Colors.white,
           onPressed: () {
-            Navigator.popAndPushNamed(context, "/");
+            Navigator.popAndPushNamed(
+              context,
+              "/",
+            );
           },
         ),
         bottom: TabBar(
           controller: _tabController,
-          indicatorColor: Colors.orange,
+          // indicatorColor: Colors.orange.shade900,
+          indicator: UnderlineTabIndicator(
+            borderSide: BorderSide(width: 5, color: Colors.orangeAccent),
+            // insets: EdgeInsets.symmetric(vertical: 10),
+          ),
           tabs: [
             Tab(
               child: Text(
-                "รอการอนุมัติ",
+                "รอนุมัติ",
                 style: GoogleFonts.prompt(
-                  fontSize: 16,
+                  fontSize: 14,
                   color: Colors.white,
                 ),
               ),
             ),
             Tab(
               child: Text(
-                "ข้อมูลได้อนุมัติ",
+                "ได้รับอนุมัติ",
                 style: GoogleFonts.prompt(
-                  fontSize: 16,
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Tab(
+              child: Text(
+                "ไม่ได้รับอนุมัติ",
+                style: GoogleFonts.prompt(
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Tab(
+              child: Text(
+                "รายการยกเลิก",
+                style: GoogleFonts.prompt(
+                  fontSize: 14,
                   color: Colors.white,
                 ),
               ),
@@ -74,8 +101,10 @@ class _HistoryWaterState extends State<HistoryWater>
       body: TabBarView(
         controller: _tabController,
         children: [
-          WaitApproval(),
-          Approved(),
+          WaitapprovalPage(),
+          ApprovedPage(),
+          UnapprovalPage(),
+          CancelPage(),
         ],
       ),
     );

@@ -11,13 +11,13 @@ const eBorderyColor = Color(0xFF11048B);
 Color bgadddataColor = Color.fromARGB(255, 255, 255, 255);
 Color addPrimaryColor = Color(0xFF11048B);
 
-final kTitle = TextStyle(
-  fontSize: SizeConfig.blockSizeH! * 7,
+final kTitle = GoogleFonts.prompt(
+  fontSize: SizeConfig.blockSizeH! * 6,
   color: kSecondaryColor,
   fontWeight: FontWeight.bold,
 );
 
-final kBodyText1 = TextStyle(
+final kBodyText1 = GoogleFonts.prompt(
   color: kSecondaryColor,
   fontSize: SizeConfig.blockSizeH! * 4.5,
   fontWeight: FontWeight.bold,
@@ -29,9 +29,9 @@ final aTitle = GoogleFonts.prompt(
   fontWeight: FontWeight.bold,
 );
 
-final aBodyText1 = TextStyle(
+final aBodyText1 = GoogleFonts.prompt(
   color: Color.fromARGB(255, 66, 48, 235),
-  fontSize: SizeConfig.blockSizeH! * 3,
+  fontSize: SizeConfig.blockSizeH! * 2.5,
 );
 
 final bDecoration = BoxDecoration(

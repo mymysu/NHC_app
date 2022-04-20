@@ -16,7 +16,7 @@ class Datawatersource extends StatelessWidget {
           appBar: AppBar(
             elevation: 0.0,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back_rounded),
+              icon: const Icon(Icons.arrow_back_ios_new),
               onPressed: () {
                 Navigator.pop(context);
               },

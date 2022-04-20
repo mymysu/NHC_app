@@ -23,8 +23,8 @@ class SubDistrictWidget extends StatelessWidget {
           focusedBorder: outlineInputBorderfocused,
           enabledBorder: outlineInputBorderenabled,
         ),
-        onFind: (String? filter) => SubDistrictData.getSubDistrictDropdown(
-            context, waterProvider.water.districtId.toString()),
+        // onFind: (String? filter) => SubDistrictData.getSubDistrictDropdown(
+        //     context, waterProvider.water.districtId.toString()),
         onChanged: (var value) {
           waterProvider.water.nameSubdistrict = value!.nameSubdistrict;
           waterProvider.water.subdistrictId = value.subdistrictId;

@@ -34,14 +34,7 @@ class UserProvider with ChangeNotifier {
     _userProfile.lastName = userProfile.lastName;
     _userProfile.mobileNumber = userProfile.mobileNumber;
     _userProfile.position = userProfile.position;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('email', userProfile.email.toString());
-    await prefs.setStringList('user', <String>[
-      _userProfile.email.toString(),
-      _userProfile.firstName.toString(),
-      _userProfile.lastName.toString(),
-      _userProfile.mobileNumber.toString()
-    ]);
+
     notifyListeners();
   }
 
@@ -50,8 +43,9 @@ class UserProvider with ChangeNotifier {
       'lastName': userProfile.lastName,
       'firstName': userProfile.firstName,
       'mobileNumber': userProfile.mobileNumber,
+      'position': userProfile.position,
     };
-
+    print(userData);
     await FirebaseFirestore.instance
         .collection('users')
         .doc(uid)
@@ -60,14 +54,7 @@ class UserProvider with ChangeNotifier {
     _userProfile.firstName = userProfile.firstName;
     _userProfile.lastName = userProfile.lastName;
     _userProfile.mobileNumber = userProfile.mobileNumber;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    await prefs.setStringList('user', <String>[
-      _userProfile.email.toString(),
-      _userProfile.firstName.toString(),
-      _userProfile.lastName.toString(),
-      _userProfile.mobileNumber.toString()
-    ]);
+    _userProfile.position = userProfile.position;
     notifyListeners();
   }
 
@@ -82,29 +69,12 @@ class UserProvider with ChangeNotifier {
     _userProfile.firstName = userData['firstName'];
     _userProfile.lastName = userData['lastName'];
     _userProfile.mobileNumber = userData['mobileNumber'];
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList('user', <String>[
-      _userProfile.email.toString(),
-      _userProfile.firstName.toString(),
-      _userProfile.lastName.toString(),
-      _userProfile.mobileNumber.toString()
-    ]);
-    var user = prefs.getStringList("user");
-
-    print(user);
+    _userProfile.position = userData['position'];
     notifyListeners();
   }
 
   void signOut() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var d = prefs.remove('user');
-    print(d);
     String? userId = FirebaseAuth.instance.currentUser?.uid;
-
-    // if (userId != null) {
-    //   FirebaseMessaging.instance.getToken().then((token) {});
-    // }
-
     FirebaseAuth.instance.signOut();
     _userProfile.uid = "";
     _userProfile.email = '';
@@ -112,6 +82,7 @@ class UserProvider with ChangeNotifier {
     _userProfile.lastName = '';
     _userProfile.mobileNumber = '';
     _userProfile.mobileNumber = '';
+    _userProfile.position = '';
 
     notifyListeners();
   }

@@ -63,7 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     bgcolor: kPrimaryColor,
                     buttonName: 'เพิ่มข้อมูลแหล่งน้ำ',
                     onPreesed: () {
-                      Navigator.pushNamed(context, '/choiceTypeWaterAdd');
+                      Navigator.pushNamed(context, '/addBeginDatawatersource');
                     },
                   )
                 : Row(
@@ -72,7 +72,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       OnBoardNavBtn(
                         name: 'ข้าม',
                         onPressed: () {
-                          Navigator.pushNamed(context, '/choiceTypeWaterAdd');
+                          Navigator.pushNamed(
+                              context, '/addBeginDatawatersource');
                         },
                       ),
                       Row(

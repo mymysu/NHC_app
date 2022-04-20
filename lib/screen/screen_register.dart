@@ -353,6 +353,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   'เจ้าชาวบ้านทั่วไป',
                                   'เจ้าหน้าที่อบต',
                                   'เจ้าหน้าที่อำเภอ',
+                                  'อื่นๆ'
                                 ].map<DropdownMenuItem<String>>((String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,

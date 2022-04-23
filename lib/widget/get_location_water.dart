@@ -63,7 +63,8 @@ Future<Water> getAddressFromLatLong(
       await SubDistrictData.getSubDistrictDropdown(
           waterProvider, context, waterProvider.water.districtId.toString());
 
-      String b = value[1].street.toString();
+      String b = value[0].street.toString();
+
       final splitted = b.split(' ');
       print(splitted);
       String? nameSubdistrict;

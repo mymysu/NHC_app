@@ -26,7 +26,7 @@ class _CancelPageState extends State<CancelPage> {
             (BuildContext context, AsyncSnapshot<List<HistoryWater>> snapshot) {
           if (snapshot.hasError) {
             print(snapshot.error);
-            return Text('Error , Something went wrong');
+            return Text('');
           }
           if (snapshot.connectionState == ConnectionState.done) {
             return ListView.builder(

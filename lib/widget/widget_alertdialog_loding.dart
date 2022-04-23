@@ -12,7 +12,7 @@ Future<void> showAlertDialog(BuildContext context) async {
             child: Text(
               "รอสักครู่..... ",
               style: GoogleFonts.prompt(
-                color: Colors.black,
+                color: Colors.blue,
                 fontWeight: FontWeight.bold,
               ),
             )),

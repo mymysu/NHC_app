@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:water_resources_application/model/history_water.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
@@ -19,12 +20,16 @@ class UnapprovalPage extends StatelessWidget {
             (BuildContext context, AsyncSnapshot<List<HistoryWater>> snapshot) {
           if (snapshot.hasError) {
             print(snapshot.error);
-            return Text('Error , Something went wrong');
+            return Text('');
           }
           if (snapshot.connectionState == ConnectionState.done) {
             return ListView.builder(
               itemBuilder: (_, i) {
                 var name = snapshot.data![i];
+
+                DateTime a = snapshot.data![i].date!.toDate();
+                final DateFormat formatter2 = DateFormat('dd/MM/yyyy hh:mm:ss');
+                final String formatted = formatter2.format(a);
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
@@ -66,7 +71,7 @@ class UnapprovalPage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "${name.date}",
+                                "${formatted}",
                                 style: GoogleFonts.prompt(
                                   fontSize: 12,
                                   color: Colors.black,

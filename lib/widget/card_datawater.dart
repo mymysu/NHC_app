@@ -51,11 +51,10 @@ class Carddatawater extends StatelessWidget {
                             padding: const EdgeInsets.all(16),
                             child: Image.asset(
                               'assets/icons/flood.png',
-                              height: 55,
+                              height: 40,
                             ),
                           ),
                           Container(
-                            height: 20,
                             width: double.infinity,
                             color: Colors.indigo,
                             child: Center(

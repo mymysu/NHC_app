@@ -79,7 +79,10 @@ class DataUser extends StatelessWidget {
                       ),
                     ),
                   ),
-                  BoxDataUser(userProvider.userProfile.firstName.toString()),
+                  BoxDataUser(
+                    userProvider.userProfile.firstName.toString(),
+                    Icons.person,
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5, bottom: 5),
                     child: Text(
@@ -91,7 +94,10 @@ class DataUser extends StatelessWidget {
                       ),
                     ),
                   ),
-                  BoxDataUser(userProvider.userProfile.lastName.toString()),
+                  BoxDataUser(
+                    userProvider.userProfile.lastName.toString(),
+                    Icons.person,
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5, bottom: 5),
                     child: Text(
@@ -103,7 +109,10 @@ class DataUser extends StatelessWidget {
                       ),
                     ),
                   ),
-                  BoxDataUser(userProvider.userProfile.email.toString()),
+                  BoxDataUser(
+                    userProvider.userProfile.email.toString(),
+                    Icons.email,
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5, bottom: 5),
                     child: Text(
@@ -115,7 +124,8 @@ class DataUser extends StatelessWidget {
                       ),
                     ),
                   ),
-                  BoxDataUser(userProvider.userProfile.mobileNumber.toString()),
+                  BoxDataUser(userProvider.userProfile.mobileNumber.toString(),
+                      Icons.phone_android),
                   Padding(
                     padding: const EdgeInsets.only(top: 5, bottom: 5),
                     child: Text(
@@ -127,7 +137,10 @@ class DataUser extends StatelessWidget {
                       ),
                     ),
                   ),
-                  BoxDataUser(userProvider.userProfile.position.toString()),
+                  BoxDataUser(
+                    userProvider.userProfile.position.toString(),
+                    Icons.supervised_user_circle,
+                  ),
                 ],
               ),
             )
@@ -138,7 +151,7 @@ class DataUser extends StatelessWidget {
   }
 }
 
-Widget BoxDataUser(String userData) {
+Widget BoxDataUser(String userData, IconData icon) {
   return Container(
     height: 60,
     decoration: BoxDecoration(
@@ -154,7 +167,7 @@ Widget BoxDataUser(String userData) {
           width: 10,
         ),
         Icon(
-          Icons.person,
+          icon,
           color: Colors.blueAccent.shade700,
         ),
         Text(

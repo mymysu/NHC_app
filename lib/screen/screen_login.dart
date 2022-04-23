@@ -7,12 +7,11 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
-import 'package:water_resources_application/size_configs.dart';
 import 'package:water_resources_application/widget/widget_alertdialog_loding.dart';
 
 class LoginProfile {
-  late String email;
-  late String password;
+  String? email;
+  String? password;
 }
 
 class LoginScreen extends StatefulWidget {
@@ -27,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   LoginProfile profile = LoginProfile();
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
   UserProvider userProvider = UserProvider();
-  User? result = FirebaseAuth.instance.currentUser;
+  // User? result = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   cursorColor: Colors.blueAccent,
                                   enableSuggestions: false,
                                   autocorrect: false,
-                                  initialValue: result!.email,
+                                  // initialValue: result!.email ,
                                   decoration: InputDecoration(
                                     fillColor: Colors.blueAccent,
                                     prefixIcon: const Icon(
@@ -234,8 +233,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           showAlertDialog(context);
                                           await FirebaseAuth.instance
                                               .signInWithEmailAndPassword(
-                                                  email: profile.email,
-                                                  password: profile.password)
+                                                  email: profile.email!,
+                                                  password: profile.password!)
                                               .then((value) async {
                                             userProvider
                                                 .getProfileFromFirestore(

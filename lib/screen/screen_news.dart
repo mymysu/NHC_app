@@ -91,28 +91,30 @@ cardnews(BuildContext context, String titleH, String contentD,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    titleH,
-                    style: GoogleFonts.prompt(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 1, 40, 99),
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      titleH,
+                      style: GoogleFonts.prompt(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 1, 40, 99),
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    contentD,
-                    style: GoogleFonts.prompt(
-                      fontSize: 14,
-                      color: Color.fromARGB(255, 1, 40, 99),
+                    SizedBox(
+                      height: 10,
                     ),
-                  ),
-                ],
+                    Text(
+                      contentD,
+                      style: GoogleFonts.prompt(
+                        fontSize: 14,
+                        color: Color.fromARGB(255, 1, 40, 99),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               // SizedBox(
               //   width: 50,

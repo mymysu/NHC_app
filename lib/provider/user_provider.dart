@@ -12,7 +12,7 @@ class UserProvider with ChangeNotifier {
 
   bool get isLogin => _userProfile.uid != null;
 
-  void addProfileToFirestore(Profile userProfile) async {
+  Future addProfileToFirestore(Profile userProfile) async {
     Map<String, dynamic> userData = {
       'uid': userProfile.uid,
       'email': userProfile.email,

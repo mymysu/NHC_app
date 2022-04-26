@@ -25,8 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final formKey = GlobalKey<FormState>();
   LoginProfile profile = LoginProfile();
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
-  UserProvider userProvider = UserProvider();
-  // User? result = FirebaseAuth.instance.currentUser;
+
+  User? result = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   cursorColor: Colors.blueAccent,
                                   enableSuggestions: false,
                                   autocorrect: false,
-                                  // initialValue: result!.email ,
+                                  initialValue: result!.email ?? "",
                                   decoration: InputDecoration(
                                     fillColor: Colors.blueAccent,
                                     prefixIcon: const Icon(
@@ -251,23 +251,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                           });
                                         } on FirebaseAuthException catch (e) {
                                           Navigator.pop(context);
-                                          String? message = e.message;
-                                          print(e.message!);
-                                          if (e.code ==
+                                          String message = "";
+
+                                          if (e.message ==
                                               "The password is invalid or the user does not have a password.") {
                                             message =
                                                 "รหัสผ่านไม่ถูกต้องหรือผู้ใช้ไม่ถูกต้อง";
-                                          } else if (e.code ==
+                                          } else if (e.message ==
                                               "There is no user record corresponding to this identifier. The user may have been deleted.") {
                                             message =
                                                 "ไม่มีบันทึกผู้ใช้ที่สอดคล้อง";
-                                          } else if (e.code ==
+                                            print(message);
+                                          } else if (e.message ==
                                               "We have blocked all requests from this device due to unusual activity. Try again later.") {
                                             message =
                                                 "มีข้อผิดพลาด ลองอีกครั้งในภายหลัง";
                                           } else {
                                             message = e.message!;
                                           }
+
+                                          print(e.message!);
 
                                           Fluttertoast.showToast(
                                               msg: message,

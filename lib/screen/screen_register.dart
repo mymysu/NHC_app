@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:water_resources_application/model/profile.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
 import 'package:water_resources_application/screen/screen_home.dart';
@@ -20,11 +21,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Profile profile = Profile();
   final formKey = GlobalKey<FormState>();
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
-  UserProvider userProvider = UserProvider();
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
+    UserProvider userProvider = Provider.of<UserProvider>(context);
 
     return FutureBuilder(
         future: firebase,
@@ -389,16 +390,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             .createUserWithEmailAndPassword(
                                                 email: profile.email!,
                                                 password: profile.password!)
-                                            .then((value) {
+                                            .then((value) async {
                                           profile.uid = value.user?.uid;
                                           print(profile.uid);
-                                          userProvider
+                                          await userProvider
                                               .addProfileToFirestore(profile);
+                                          print("\n");
+                                          print(userProvider
+                                              .userProfile.firstName);
+                                          print("\n\n");
                                           Fluttertoast.showToast(
                                               msg:
                                                   "สร้างบัญชีผู้ใช้เรียบร้อยแล้ว",
                                               gravity: ToastGravity.CENTER);
                                           formKey.currentState!.reset();
+                                          print("\n");
+                                          print(userProvider
+                                              .userProfile.mobileNumber);
+                                          print("\n\n");
                                           Navigator.pushReplacement(context,
                                               MaterialPageRoute(
                                                   builder: (context) {

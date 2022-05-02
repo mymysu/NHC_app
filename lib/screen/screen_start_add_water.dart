@@ -32,7 +32,40 @@ class _BeginAddwaterState extends State<BeginAddwater> {
     final configs = ImagePickerConfigs();
     configs.appBarTextColor = Colors.white;
     configs.appBarBackgroundColor = Colors.green;
-    configs.translateFunc = (name, value) => Intl.message(value, name: name);
+    configs.translateFunc = (name, value) {
+      switch (name) {
+        case 'image_picker_select_images_title':
+          return 'จำนวนภาพที่เลือก';
+        case 'image_picker_select_images_guide':
+          return 'คุณสามารถลากรูปภาพเพื่อจัดเรียงรายการ...';
+        case 'image_picker_camera_title':
+          return 'กล้อง';
+        case 'image_picker_album_title':
+          return 'อัลบั้ม';
+        case 'image_picker_preview_title':
+          return 'ตัวอย่าง';
+        case 'image_picker_confirm_delete':
+          return 'คุณต้องการลบภาพนี้หรือไม่?';
+        case "image_picker_confirm_reset_changes":
+          return 'คุณต้องการล้างการเปลี่ยนแปลงทั้งหมดของภาพนี้หรือไม่?';
+        case "image_picker_exit_without_selecting":
+          return 'คุณต้องการออกโดยไม่เลือกรูปภาพหรือไม่?';
+
+        case 'image_picker_no_images':
+          return 'ไม่มีภาพ...';
+        case 'image_picker_select_button_title':
+          return 'ส่ง';
+        case 'image_picker_confirm':
+          return 'ยืนยัน';
+        case 'no':
+          return 'ยกเลิก';
+        case 'yes':
+          return 'ตกลง';
+
+        default:
+          return value;
+      }
+    };
     configs.albumGridCount = 4;
     configs.cropFeatureEnabled = false;
     configs.adjustFeatureEnabled = false;
@@ -155,7 +188,7 @@ class _BeginAddwaterState extends State<BeginAddwater> {
                 child: RaisedButton(
                   color: Colors.blue.shade900,
                   child: Text(
-                    "เริ่มกาารเพิ่มข้อมูล",
+                    "เริ่มการเพิ่มข้อมูล",
                     style: GoogleFonts.prompt(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

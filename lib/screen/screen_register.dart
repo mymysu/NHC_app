@@ -45,7 +45,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             return Scaffold(
               backgroundColor: Colors.white,
               appBar: AppBar(
-                backgroundColor: Color(0xFF11048B),
+                backgroundColor: Colors.blueAccent[700],
                 centerTitle: true,
                 leading: IconButton(
                   padding: EdgeInsets.only(left: 20.0),
@@ -76,7 +76,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 style: GoogleFonts.prompt(
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF11048B),
+                                  color: Colors.blueAccent[700],
                                 ),
                               )),
                               SizedBox(
@@ -85,19 +85,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               SizedBox(
                                 child: TextFormField(
                                   style: GoogleFonts.prompt(
-                                    color: Color(0xFF11048B),
+                                    color: Colors.blueAccent[700],
                                   ),
                                   cursorColor: Colors.blueAccent[800],
                                   enableSuggestions: false,
                                   autocorrect: false,
                                   decoration: InputDecoration(
-                                    fillColor: Color(0xFF11048B),
+                                    fillColor: Colors.blueAccent[700],
                                     labelText: 'ชื่อจริง',
-                                    labelStyle:
-                                        TextStyle(color: Color(0xFF11048B)),
+                                    labelStyle: TextStyle(
+                                        color: Colors.blueAccent[700]),
                                     prefixIcon: const Icon(
                                       Icons.person,
-                                      color: Color(0xFF11048B),
+                                      color: Colors.blueAccent,
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(25.0),
@@ -131,19 +131,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 width: height,
                                 child: TextFormField(
                                   style: GoogleFonts.prompt(
-                                    color: Color(0xFF11048B),
+                                    color: Colors.blueAccent[700],
                                   ),
-                                  cursorColor: Color(0xFF11048B),
+                                  cursorColor: Colors.blueAccent[700],
                                   enableSuggestions: false,
                                   autocorrect: false,
                                   decoration: InputDecoration(
-                                    fillColor: Color(0xFF11048B),
+                                    fillColor: Colors.blueAccent[700],
                                     labelText: 'นามสกุล',
-                                    labelStyle:
-                                        TextStyle(color: Color(0xFF11048B)),
+                                    labelStyle: TextStyle(
+                                        color: Colors.blueAccent[700]),
                                     prefixIcon: Icon(
                                       Icons.person,
-                                      color: Color(0xFF11048B),
+                                      color: Colors.blueAccent[700],
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(25.0),
@@ -175,19 +175,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               TextFormField(
                                 style: GoogleFonts.prompt(
-                                  color: Color(0xFF11048B),
+                                  color: Colors.blueAccent[700],
                                 ),
                                 enableSuggestions: false,
                                 autocorrect: false,
                                 decoration: InputDecoration(
                                   fillColor: Colors.white,
                                   labelStyle: GoogleFonts.prompt(
-                                    color: Color(0xFF11048B),
+                                    color: Colors.blueAccent[700],
                                   ),
                                   labelText: 'อีเมล',
                                   prefixIcon: Icon(
                                     Icons.email,
-                                    color: Color(0xFF11048B),
+                                    color: Colors.blueAccent[700],
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(25.0),
@@ -218,20 +218,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               TextFormField(
                                 style: GoogleFonts.prompt(
-                                  color: Color(0xFF11048B),
+                                  color: Colors.blueAccent[700],
                                 ),
-                                cursorColor: Color(0xFF11048B),
+                                cursorColor: Colors.blueAccent[700],
                                 enableSuggestions: false,
                                 autocorrect: false,
                                 decoration: InputDecoration(
                                   fillColor: Colors.white,
                                   labelText: 'เบอร์มือถือ',
                                   labelStyle: GoogleFonts.prompt(
-                                    color: Color(0xFF11048B),
+                                    color: Colors.blueAccent[700],
                                   ),
                                   prefixIcon: Icon(
                                     Icons.phone_android,
-                                    color: Color(0xFF11048B),
+                                    color: Colors.blueAccent[700],
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(25.0),
@@ -267,17 +267,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               TextFormField(
                                 style: GoogleFonts.prompt(
-                                  color: Color(0xFF11048B),
+                                  color: Colors.blueAccent[700],
                                 ),
-                                cursorColor: Color(0xFF11048B),
+                                cursorColor: Colors.blueAccent[700],
                                 decoration: InputDecoration(
                                   labelText: 'รหัสผ่าน',
                                   labelStyle: GoogleFonts.prompt(
-                                    color: Color(0xFF11048B),
+                                    color: Colors.blueAccent[700],
                                   ),
                                   prefixIcon: Icon(
                                     Icons.lock,
-                                    color: Color(0xFF11048B),
+                                    color: Colors.blueAccent[700],
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(25.0),
@@ -308,18 +308,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 value: dropdownValue,
                                 icon: const Icon(
                                   Icons.keyboard_arrow_down,
-                                  color: Color(0xFF11048B),
+                                  color: Colors.blueAccent,
                                   size: 20.09,
                                 ),
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   labelText: 'ตำแหน่งหน่วยงาน',
                                   labelStyle: GoogleFonts.prompt(
-                                    color: Color(0xFF11048B),
+                                    color: Colors.blueAccent[700],
                                   ),
                                   prefixIcon: const Icon(
                                     Icons.supervised_user_circle,
-                                    color: Color(0xFF11048B),
+                                    color: Colors.blueAccent,
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(25.0),
@@ -335,7 +335,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 iconSize: 24,
                                 elevation: 16,
                                 style: GoogleFonts.prompt(
-                                  color: Color(0xFF11048B),
+                                  color: Colors.blueAccent[700],
                                 ),
                                 dropdownColor: Colors.white,
                                 isExpanded: true,
@@ -371,7 +371,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   style: ElevatedButton.styleFrom(
                                     padding: EdgeInsets.symmetric(
                                         horizontal: 40.0, vertical: 15.0),
-                                    primary: Color(0xFF11048B),
+                                    primary: Colors.blueAccent[700],
                                     shape: StadiumBorder(),
                                   ),
                                   child: Text(

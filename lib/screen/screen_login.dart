@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   LoginProfile profile = LoginProfile();
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
 
-  User? result = FirebaseAuth.instance.currentUser;
+  var result = FirebaseAuth.instance.currentUser?.email ?? "";
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   cursorColor: Colors.blueAccent,
                                   enableSuggestions: false,
                                   autocorrect: false,
-                                  initialValue: result!.email ?? "",
+                                  initialValue: result,
                                   decoration: InputDecoration(
                                     fillColor: Colors.blueAccent,
                                     prefixIcon: const Icon(

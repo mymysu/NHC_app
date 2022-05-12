@@ -19,10 +19,10 @@ List<OnBoarding> onboardingContents = [
       details1: 'หน้าแรกจะบอกข้อมูลที่ต้องการจะเก็บข้อมูลและแนะนำ',
       details2: 'ให้รู้ความหมายแหล่งน้ำก่อนจะเพิ่มข้อมูล'),
   OnBoarding(
-      title: 'แรกการเพิ่มข้อมูล',
+      title: 'ขั้นแรกการเพิ่มข้อมูล',
       image: 'assets/images/2.png',
       details1: 'เมื่อรู้ความหมายและกดเลือกเพิ่มข้อมูล',
-      details2: 'ทำการถ่ายรูปภาพแหล่งน้ำประกอบ ถ่ายเสร็จกด selected'),
+      details2: 'ทำการถ่ายรูปภาพแหล่งน้ำประกอบ ถ่ายเสร็จกด ส่ง'),
   OnBoarding(
       title: 'หน้าแอดข้อมูลแหล่งน้ำ',
       image: 'assets/images/3.png',

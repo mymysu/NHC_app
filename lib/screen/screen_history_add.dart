@@ -59,7 +59,7 @@ class _HistoryWaterState extends State<HistoryWater>
           tabs: [
             Tab(
               child: Text(
-                "รอนุมัติ",
+                "รออนุมัติ",
                 style: GoogleFonts.prompt(
                   fontSize: 14,
                   color: Colors.white,

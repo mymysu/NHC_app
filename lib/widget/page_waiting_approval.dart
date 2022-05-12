@@ -39,10 +39,10 @@ class _WaitapprovalPageState extends State<WaitapprovalPage> {
               //   top: 10.0,
               // ),
               title: Text(
-                "ยกเลิกการเพิ่มข้อมูลแหล่งน้ำ",
-                textAlign: TextAlign.center,
+                " ยกเลิกการเพิ่มข้อมูลแหล่งน้ำ",
+                textAlign: TextAlign.start,
                 style: GoogleFonts.prompt(
-                  fontSize: 20.0,
+                  fontSize: 18,
                   color: Colors.red,
                   fontWeight: FontWeight.bold,
                 ),

@@ -172,8 +172,6 @@ Future<List<HistoryWater>> getHistoryWaterApproved(
 void cancelWaterResourcesToFirestore(HistoryWater historyWater,
     UserProvider userProvider, String cancelNote) async {
   DateTime now = DateTime.now();
-  // final DateFormat formatter = DateFormat('dd/MM/yyyy hh:mm');
-  // final String formatted = formatter.format(now);
   await FirebaseFirestore.instance
       .collection("water_source_information_new")
       .doc(historyWater.idDocs)

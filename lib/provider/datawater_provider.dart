@@ -121,7 +121,7 @@ class DataWater with ChangeNotifier {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 15,
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.green,
             textColor: Colors.white,
             fontSize: 16.0);
       });
@@ -131,29 +131,5 @@ class DataWater with ChangeNotifier {
     }
     Navigator.pop(context);
     Navigator.popAndPushNamed(context, '/historyAdd');
-
-    // // if (ckkmlFile != "NULL") {
-    // //   print("up kmlFile");
-    // //   try {
-    // //     await FirebaseStorage.instance
-    // //         .ref("/kml_resources/${dataWater.water.kmlFile!.names[0]}")
-    // //         .putFile(
-    // //             File(dataWater.water.kmlFile!.files[0].path!),
-    // //             SettableMetadata(customMetadata: {
-    // //               'uploaded_by': userProvider.userProfile.uid.toString(),
-    // //               'description':
-    // //                   "typeWarte:{typeWater.typeAbbr} subtypeWarte:{typeWater.subtypeAbbr}"
-    // //             }))
-    // //         .then((value) {
-    // //       value.ref.getDownloadURL().then((value) {
-    // //         dataWater.water.urlkmlFile = value;
-    // //       });
-    // //     });
-    // //   } on FirebaseException catch (error) {
-    // //     print("error up kmlFile");
-    // //     print(error.code);
-    // //   }
-    // // }
-    // // print(dataWater.water.urlkmlFile);
   }
 }

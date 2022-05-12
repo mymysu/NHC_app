@@ -296,6 +296,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 validator: RequiredValidator(
                                     errorText: 'กรุณาป้อนรหัสผ่าน'),
                                 obscureText: true,
+                                keyboardType: TextInputType.number,
                                 onSaved: (value) {
                                   profile.password = value!;
                                 },

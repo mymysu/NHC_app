@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:water_resources_application/app_styles.dart';
 import 'package:water_resources_application/model/history_water.dart';
@@ -19,9 +20,8 @@ class _CancelPageState extends State<CancelPage> {
     DataWater dataWater = Provider.of<DataWater>(context);
 
     return FutureBuilder(
-        future: getHistoryWaterUnapproved(
-            userProvider.userProfile.uid.toString(),
-            'water_source_information_cancel'),
+        future: getHistoryWaterCancel(userProvider.userProfile.uid.toString(),
+            'water_source_information_cancel', 'date'),
         builder:
             (BuildContext context, AsyncSnapshot<List<HistoryWater>> snapshot) {
           if (snapshot.hasError) {
@@ -32,7 +32,11 @@ class _CancelPageState extends State<CancelPage> {
             return ListView.builder(
               itemBuilder: (_, i) {
                 var name = snapshot.data![i];
+                print(snapshot.data![i].dateCancel);
+                var a = snapshot.data![i].dateCancel!.toDate();
 
+                final DateFormat formatter2 = DateFormat('dd/MM/yyyy hh:mm:ss');
+                final String formatted = formatter2.format(a);
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
@@ -74,7 +78,7 @@ class _CancelPageState extends State<CancelPage> {
                                 ),
                               ),
                               Text(
-                                "${name.dateCancel}",
+                                "${formatted}",
                                 style: GoogleFonts.prompt(
                                   fontSize: 12,
                                   color: Colors.black,

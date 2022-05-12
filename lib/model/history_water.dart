@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
 
 class HistoryWater {
@@ -21,7 +20,7 @@ class HistoryWater {
   String? note, uid, email;
   double? longitude, latitude;
   bool? status;
-  Timestamp? date, dateCancel;
+  var date, dateCancel, dateApproved;
   String? idDocs, cancelNote, unapprovedNote;
 
   HistoryWater(
@@ -50,7 +49,8 @@ class HistoryWater {
       this.dateCancel,
       this.cancelNote,
       this.unapprovedNote,
-      this.idDocs});
+      this.idDocs,
+      this.dateApproved});
 }
 
 Future<List<HistoryWater>> getHistoryWaterAuthorization(
@@ -90,14 +90,53 @@ Future<List<HistoryWater>> getHistoryWaterAuthorization(
       .toList();
 }
 
-Future<List<HistoryWater>> getHistoryWaterUnapproved(
-    String uid, String nameCollection) async {
+Future<List<HistoryWater>> getHistoryWaterCancel(
+    String uid, String nameCollection, String date) async {
   QuerySnapshot qShot = await FirebaseFirestore.instance
       .collection(nameCollection)
       .where('uid', isEqualTo: uid)
       .get();
-
   return qShot.docs
+      .map(
+        (doc) => HistoryWater(
+          typeID: (doc.data() as dynamic)['type_ID'],
+          typeAbbr: (doc.data() as dynamic)['type_Abbr'],
+          subtypeEN: (doc.data() as dynamic)['subType_EN'],
+          subTypeID: (doc.data() as dynamic)['subType_ID'],
+          nameGeography: (doc.data() as dynamic)['nameGeography'],
+          geographyId: (doc.data() as dynamic)['geography_ID'],
+          provinceId: (doc.data() as dynamic)['province_ID'],
+          districtId: (doc.data() as dynamic)['district_ID'],
+          subdistrictId: (doc.data() as dynamic)['subdistrict_ID'],
+          subTypeTH: (doc.data() as dynamic)['subType_TH'],
+          typeTH: (doc.data() as dynamic)['type_TH'],
+          nameProvince: (doc.data() as dynamic)['nameProvince'],
+          nameDistrict: (doc.data() as dynamic)['nameDistrict'],
+          nameSubdistrict: (doc.data() as dynamic)['nameSubdistrict'],
+          fileNameURL: (doc.data() as dynamic)['URL_FileImage'],
+          note: (doc.data() as dynamic)['note'],
+          email: (doc.data() as dynamic)['email'],
+          latitude: (doc.data() as dynamic)['latitude'],
+          longitude: (doc.data() as dynamic)['longitude'],
+          date: (doc.data() as dynamic)[date],
+          status: (doc.data() as dynamic)['status'],
+          dateCancel: (doc.data() as dynamic)['dateCancel'],
+          cancelNote: (doc.data() as dynamic)['cancelNote'],
+          idDocs: doc.id as dynamic,
+        ),
+      )
+      .toList();
+}
+
+Future<List<HistoryWater>> getHistoryWaterApproved(
+    String uid, bool status) async {
+  QuerySnapshot qShot = await FirebaseFirestore.instance
+      .collection("water_source_information_approved")
+      .where('uid', isEqualTo: uid)
+      .where('status', isEqualTo: status)
+      .get();
+
+  var a = qShot.docs
       .map(
         (doc) => HistoryWater(
           typeID: (doc.data() as dynamic)['type_ID'],
@@ -118,8 +157,7 @@ Future<List<HistoryWater>> getHistoryWaterUnapproved(
           email: (doc.data() as dynamic)['email'],
           latitude: (doc.data() as dynamic)['latitude'],
           longitude: (doc.data() as dynamic)['longitude'],
-          date: (doc.data() as dynamic)['date'],
-          dateCancel: (doc.data() as dynamic)['dateCancel'],
+          dateApproved: (doc.data() as dynamic)['dateApproved'],
           status: (doc.data() as dynamic)['status'],
           cancelNote: (doc.data() as dynamic)['cancelNote'],
           unapprovedNote: (doc.data() as dynamic)['unapprovedNote'],
@@ -127,6 +165,8 @@ Future<List<HistoryWater>> getHistoryWaterUnapproved(
         ),
       )
       .toList();
+
+  return a;
 }
 
 void cancelWaterResourcesToFirestore(HistoryWater historyWater,

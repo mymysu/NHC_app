@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:water_resources_application/model/profile.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
-import 'package:water_resources_application/widget/profile_widget.dart.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({Key? key}) : super(key: key);
@@ -25,11 +23,6 @@ class MoreScreen extends StatelessWidget {
               color: Colors.blueAccent.shade700,
               size: 125,
             ),
-            // ProfileWidget(
-            //   imagePath:
-            //       'https://images.unsplash.com/photo-1554080353-a576cf803bda?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80',
-            //   onClicked: () async {},
-            // ),
             const SizedBox(height: 24),
             buildName(userProvider.userProfile),
             const SizedBox(height: 10),

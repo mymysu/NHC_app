@@ -13,10 +13,8 @@ class ApprovedPage extends StatelessWidget {
     UserProvider userProvider = Provider.of<UserProvider>(context);
 
     return FutureBuilder(
-        future: getHistoryWaterAuthorization(
-            userProvider.userProfile.uid.toString(),
-            "water_source_information_approved",
-            "dateApproved"),
+        future: getHistoryWaterApproved(
+            userProvider.userProfile.uid.toString(), true),
         builder:
             (BuildContext context, AsyncSnapshot<List<HistoryWater>> snapshot) {
           if (snapshot.hasError) {
@@ -27,7 +25,7 @@ class ApprovedPage extends StatelessWidget {
             return ListView.builder(
               itemBuilder: (_, i) {
                 var name = snapshot.data![i];
-                var a = snapshot.data![i].date!.toDate();
+                var a = snapshot.data![i].dateApproved!.toDate();
 
                 final DateFormat formatter2 = DateFormat('dd/MM/yyyy hh:mm:ss');
                 final String formatted = formatter2.format(a);
@@ -72,7 +70,7 @@ class ApprovedPage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "${formatted}",
+                                "เวลาอนุมัติ : ${formatted}",
                                 style: GoogleFonts.prompt(
                                   fontSize: 12,
                                   color: Colors.black,

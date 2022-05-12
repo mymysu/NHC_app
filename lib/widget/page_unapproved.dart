@@ -13,9 +13,8 @@ class UnapprovalPage extends StatelessWidget {
     UserProvider userProvider = Provider.of<UserProvider>(context);
 
     return FutureBuilder(
-        future: getHistoryWaterUnapproved(
-            userProvider.userProfile.uid.toString(),
-            "water_source_information_unapproved"),
+        future: getHistoryWaterApproved(
+            userProvider.userProfile.uid.toString(), false),
         builder:
             (BuildContext context, AsyncSnapshot<List<HistoryWater>> snapshot) {
           if (snapshot.hasError) {
@@ -27,7 +26,7 @@ class UnapprovalPage extends StatelessWidget {
               itemBuilder: (_, i) {
                 var name = snapshot.data![i];
 
-                DateTime a = snapshot.data![i].date!.toDate();
+                DateTime a = snapshot.data![i].dateApproved!.toDate();
                 final DateFormat formatter2 = DateFormat('dd/MM/yyyy hh:mm:ss');
                 final String formatted = formatter2.format(a);
                 return Padding(
@@ -71,7 +70,7 @@ class UnapprovalPage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "${formatted}",
+                                "เวลาตรวจสอบ ${formatted}",
                                 style: GoogleFonts.prompt(
                                   fontSize: 12,
                                   color: Colors.black,

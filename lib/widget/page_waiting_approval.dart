@@ -35,9 +35,6 @@ class _WaitapprovalPageState extends State<WaitapprovalPage> {
                   Radius.circular(10),
                 ),
               ),
-              // contentPadding: EdgeInsets.only(
-              //   top: 10.0,
-              // ),
               title: Text(
                 " ยกเลิกการเพิ่มข้อมูลแหล่งน้ำ",
                 textAlign: TextAlign.start,

@@ -129,6 +129,7 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                     width: MediaQuery.of(context).size.width,
                     child: TextButton(
                       onPressed: () {
+                        print(dataWater.water.note);
                         if (userProvider.userProfile.uid == null) {
                           Fluttertoast.showToast(
                             msg: " ลงทะเบียนเข้าใช้งานก่อน ",
@@ -137,13 +138,20 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.CENTER,
                           );
-                        }
-                        if (dataWater.water.subTypeTH == null) {
+                        } else if (dataWater.water.subTypeTH == null) {
                           Fluttertoast.showToast(
-                            msg: "โปรดเลือก ประเภทแหล่งน้ำ ",
+                            msg: "โปรดเลือกประเภทแหล่งน้ำ ",
                             textColor: Colors.orange,
                             backgroundColor: Colors.black,
-                            fontSize: 18,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                          );
+                        } else if (dataWater.water.note == null ||
+                            dataWater.water.note == "") {
+                          Fluttertoast.showToast(
+                            msg: "โปรดกรอกคำอธิบายเพิ่มเติม ",
+                            textColor: Colors.orange,
+                            backgroundColor: Colors.black,
                             toastLength: Toast.LENGTH_SHORT,
                             gravity: ToastGravity.CENTER,
                           );

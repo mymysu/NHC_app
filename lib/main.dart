@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:water_resources_application/provider/dataWater_provider.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
+import 'package:water_resources_application/screen/screen_data_watersource.dart';
 import 'package:water_resources_application/screen/screen_edit_user.dart';
 import 'package:water_resources_application/screen/screen_history_add.dart';
 import 'package:water_resources_application/screen/screen_home.dart';
@@ -49,9 +50,10 @@ class MyApp extends StatelessWidget {
               '/dataUser': (context) => DataUser(),
               '/historyAdd': (context) => HistoryWater(),
               '/addBeginDatawatersource': (context) => BeginAddwater(),
-              '/more': (context) => MoreScreen()
+              '/more': (context) => MoreScreen(),
+
               // '/choiceTypeWaterAdd': (context) => ChoiceTypeWaterAdd(),
-              // '/datawatersource': (context) => Datawatersource()
+              '/datawatersource': (context) => Datawatersource()
             },
           ),
         ));

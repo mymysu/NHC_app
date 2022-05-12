@@ -133,12 +133,13 @@ class _WaitapprovalPageState extends State<WaitapprovalPage> {
     return FutureBuilder(
         future: getHistoryWaterAuthorization(
             userProvider.userProfile.uid.toString(),
-            'water_source_information_new'),
+            'water_source_information_new',
+            'date'),
         builder:
             (BuildContext context, AsyncSnapshot<List<HistoryWater>> snapshot) {
           if (snapshot.hasError) {
             print(snapshot.error);
-            return Text('');
+            return Text("");
           }
           if (snapshot.connectionState == ConnectionState.done) {
             return ListView.builder(

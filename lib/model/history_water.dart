@@ -54,7 +54,7 @@ class HistoryWater {
 }
 
 Future<List<HistoryWater>> getHistoryWaterAuthorization(
-    String uid, String nameCollection) async {
+    String uid, String nameCollection, String date) async {
   QuerySnapshot qShot = await FirebaseFirestore.instance
       .collection(nameCollection)
       .where('uid', isEqualTo: uid)
@@ -82,7 +82,7 @@ Future<List<HistoryWater>> getHistoryWaterAuthorization(
           email: (doc.data() as dynamic)['email'],
           latitude: (doc.data() as dynamic)['latitude'],
           longitude: (doc.data() as dynamic)['longitude'],
-          date: (doc.data() as dynamic)['date'],
+          date: (doc.data() as dynamic)[date],
           status: (doc.data() as dynamic)['status'],
           idDocs: doc.id as dynamic,
         ),

@@ -64,9 +64,10 @@ Future<Water> getAddressFromLatLong(
           waterProvider, context, waterProvider.water.districtId.toString());
 
       String b = value[0].street.toString();
+      print(b);
 
       final splitted = b.split(' ');
-      print(splitted);
+      // print(splitted);
       String? nameSubdistrict;
       String? nameDistrict;
       String? nameProvince;
@@ -103,31 +104,40 @@ Future<Water> getAddressFromLatLong(
 
       final int index1 = waterProvider.water.listNameProvince!
           .indexWhere(((value) => value.nameProvince == nameProvince));
+      // print(nameProvince);
       final int index2 = waterProvider.water.listNameDistrict!
           .indexWhere(((value) => value.nameDistrict == nameDistrict));
+      // print(nameDistrict);
+
       final int index3 = waterProvider.water.listNameSubdistrict!
           .indexWhere(((value) => value.nameSubdistrict == nameSubdistrict));
+      // print(nameSubdistrict);
+      // print(index3);
       // print("index1 $index1");
       // print("index2 $index2");
       // print("index3 $index3");
 
       waterProvider.water.geographyId =
           waterProvider.water.listNameProvince![index1].geographiesId;
+      // print(waterProvider.water.geographyId);
       waterProvider.water.provinceId =
           waterProvider.water.listNameProvince![index1].provinceId;
+
       waterProvider.water.districtId =
           waterProvider.water.listNameDistrict![index2].districtId;
+
       waterProvider.water.subdistrictId =
           waterProvider.water.listNameSubdistrict![index3].subdistrictId;
 
       waterProvider.water.nameGeography =
           waterProvider.water.listNameProvince![index1].namegeographies;
+
       waterProvider.water.nameProvince = nameProvince;
+
       waterProvider.water.nameDistrict = nameDistrict;
       waterProvider.water.nameSubdistrict = nameSubdistrict;
 
       waterProvider.water.latitude = latitude;
       waterProvider.water.longitude = longitude;
-
       return waterProvider.water;
     });

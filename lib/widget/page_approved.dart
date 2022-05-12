@@ -15,7 +15,8 @@ class ApprovedPage extends StatelessWidget {
     return FutureBuilder(
         future: getHistoryWaterAuthorization(
             userProvider.userProfile.uid.toString(),
-            "water_source_information_approved"),
+            "water_source_information_approved",
+            "dateApproved"),
         builder:
             (BuildContext context, AsyncSnapshot<List<HistoryWater>> snapshot) {
           if (snapshot.hasError) {
@@ -26,8 +27,8 @@ class ApprovedPage extends StatelessWidget {
             return ListView.builder(
               itemBuilder: (_, i) {
                 var name = snapshot.data![i];
+                var a = snapshot.data![i].date!.toDate();
 
-                DateTime a = snapshot.data![i].date!.toDate();
                 final DateFormat formatter2 = DateFormat('dd/MM/yyyy hh:mm:ss');
                 final String formatted = formatter2.format(a);
                 return Padding(

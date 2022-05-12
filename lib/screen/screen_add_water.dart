@@ -129,6 +129,7 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                     width: MediaQuery.of(context).size.width,
                     child: TextButton(
                       onPressed: () {
+                        formKey.currentState!.save();
                         print(dataWater.water.note);
                         if (userProvider.userProfile.uid == null) {
                           Fluttertoast.showToast(
@@ -156,7 +157,6 @@ class _AddWaterResourcesScreenState extends State<AddWaterResourcesScreen> {
                             gravity: ToastGravity.CENTER,
                           );
                         } else {
-                          formKey.currentState!.save();
                           ShowdialogConfirm.showDialogConfirm(
                               context, dataWater, userProvider);
                           formKey.currentState!.reset();

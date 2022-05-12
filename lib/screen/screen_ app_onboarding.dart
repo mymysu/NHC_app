@@ -136,11 +136,6 @@ class onboard_page1 extends StatelessWidget {
             TextSpan(
                 text: onboardingContents[index].details2,
                 style: TextStyle(color: kPrimaryColor)),
-            // TextSpan(text: 'TO BE A BETTER '),
-            // TextSpan(text: 'VERSION OF '),
-            // TextSpan(
-            //     text: 'YOURSELF ',
-            //     style: TextStyle(color: kPrimaryColor)),
           ]),
         ),
         Padding(

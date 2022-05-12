@@ -160,7 +160,7 @@ Future<List<HistoryWater>> getHistoryWaterApproved(
           dateApproved: (doc.data() as dynamic)['dateApproved'],
           status: (doc.data() as dynamic)['status'],
           cancelNote: (doc.data() as dynamic)['cancelNote'],
-          unapprovedNote: (doc.data() as dynamic)['unapprovedNote'],
+          unapprovedNote: (doc.data() as dynamic)['Reason'],
           idDocs: doc.id as dynamic,
         ),
       )

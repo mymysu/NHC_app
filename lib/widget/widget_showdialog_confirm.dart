@@ -44,7 +44,7 @@ class ShowdialogConfirm {
                     title: Text(
                       "ตรวจสอบข้อมูล",
                       style: GoogleFonts.prompt(
-                        fontSize: 24.0,
+                        fontSize: 22.0,
                         color: aPrimaryColor,
                         fontWeight: FontWeight.bold,
                       ),
@@ -107,7 +107,7 @@ class ShowdialogConfirm {
                                     text: "ที่อยู่",
                                     style: GoogleFonts.prompt(
                                       color: Color(0xFF11048B),
-                                      fontSize: 18,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),
                                     children: <TextSpan>[
@@ -116,40 +116,40 @@ class ShowdialogConfirm {
                                         style: GoogleFonts.prompt(
                                             color: Color(0xFF11048B),
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 16),
+                                            fontSize: 14),
                                       ),
                                       TextSpan(
                                         text: "${dataWater.water.nameProvince}",
                                         style: GoogleFonts.prompt(
                                             color: Colors.blueAccent,
-                                            fontSize: 16),
+                                            fontSize: 14),
                                       ),
                                       TextSpan(
                                         text: "\n   อำเภอ : ",
                                         style: GoogleFonts.prompt(
                                             color: Color(0xFF11048B),
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 16),
+                                            fontSize: 14),
                                       ),
                                       TextSpan(
                                         text: "${dataWater.water.nameDistrict}",
                                         style: GoogleFonts.prompt(
                                             color: Colors.blueAccent,
-                                            fontSize: 16),
+                                            fontSize: 14),
                                       ),
                                       TextSpan(
                                         text: "\n   ตำบล : ",
                                         style: GoogleFonts.prompt(
                                             color: Color(0xFF11048B),
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 16),
+                                            fontSize: 14),
                                       ),
                                       TextSpan(
                                         text:
                                             "${dataWater.water.nameSubdistrict}",
                                         style: GoogleFonts.prompt(
                                             color: Colors.blueAccent,
-                                            fontSize: 16),
+                                            fontSize: 14),
                                       ),
                                     ]),
                               ),
@@ -204,7 +204,7 @@ textdata(String titleH, String contentD) {
           children: <TextSpan>[
             TextSpan(
               text: contentD,
-              style: GoogleFonts.prompt(color: Colors.blueAccent, fontSize: 16),
+              style: GoogleFonts.prompt(color: Colors.blueAccent, fontSize: 14),
             )
           ]),
     ),

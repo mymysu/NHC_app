@@ -47,21 +47,20 @@ Future<Water> getAddressFromLatLong(
     await placemarkFromCoordinates(latitude, longitude).then((
       value,
     ) async {
-      print(value[0]);
+      // print(value[0]);
       await DistrictData.getDistrictdropdown(
           waterProvider, context, waterProvider.water.provinceId.toString());
       await ProvincesData.getProvincedropdown(waterProvider, context);
       await SubDistrictData.getSubDistrictDropdown(
           waterProvider, context, waterProvider.water.districtId.toString());
-
+      print(value[0].name);
       String b = value[0].street.toString();
       print(b);
 
       final splitted = b.split(' ');
-      // print(splitted);
-      String? nameSubdistrict;
-      String? nameDistrict;
-      String? nameProvince;
+      String? nameSubdistrict = "";
+      String? nameDistrict = "";
+      String? nameProvince = "";
 
       for (int i = 0; i < splitted.length; i++) {
         // print("splitted[i] :  ${splitted[i]}  ");
@@ -74,17 +73,26 @@ Future<Water> getAddressFromLatLong(
           }
         }
 
-        if (splitted[i].contains("เขต")) {
+        if (splitted[i].contains("เขต") &&
+            !splitted[i].contains("อำเภอ") &&
+            !splitted[i].contains("ตำบล") &&
+            splitted[i] == "") {
+          // print(splitted[i].contains("เขต"));
+          // print(splitted[i]);
           if (splitted[i].length > 3) {
             nameDistrict = splitted[i].replaceAll(RegExp(" |เขต"), "");
+            // print("nameDistrict1 $nameDistrict");
           } else {
             nameDistrict = splitted[i + 1];
+            // print("nameDistrict2 $nameDistrict");
           }
         } else if (splitted[i].contains("อำเภอ")) {
           if (splitted[i].length > 5) {
             nameDistrict = splitted[i].replaceAll(RegExp("อำเภอ| "), "");
+            // print("nameDistrict3 $nameDistrict");
           } else {
             nameDistrict = splitted[i + 1];
+            // print("nameDistrict4 $nameDistrict");
           }
         }
       }
@@ -95,17 +103,16 @@ Future<Water> getAddressFromLatLong(
 
       final int index1 = waterProvider.water.listNameProvince!
           .indexWhere(((value) => value.nameProvince == nameProvince));
-      // print(nameProvince);
+
       final int index2 = waterProvider.water.listNameDistrict!
           .indexWhere(((value) => value.nameDistrict == nameDistrict));
-      // print(nameDistrict);
 
       final int index3 = waterProvider.water.listNameSubdistrict!
           .indexWhere(((value) => value.nameSubdistrict == nameSubdistrict));
 
       waterProvider.water.geographyId =
           waterProvider.water.listNameProvince![index1].geographiesId;
-      // print(waterProvider.water.geographyId);
+
       waterProvider.water.provinceId =
           waterProvider.water.listNameProvince![index1].provinceId;
 
@@ -125,5 +132,6 @@ Future<Water> getAddressFromLatLong(
 
       waterProvider.water.latitude = latitude;
       waterProvider.water.longitude = longitude;
+      // print(waterProvider.water.nameSubdistrict);
       return waterProvider.water;
     });

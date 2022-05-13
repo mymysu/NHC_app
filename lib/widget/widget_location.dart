@@ -48,6 +48,7 @@ class _LocationWidgetState extends State<LocationWidget> {
                     ),
                     content: Container(
                       height: MediaQuery.of(context).size.height * 0.4,
+                      alignment: Alignment.center,
                       child: Form(
                         key: formKey,
                         child: SingleChildScrollView(

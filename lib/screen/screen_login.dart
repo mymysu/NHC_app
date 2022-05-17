@@ -239,12 +239,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                             userProvider
                                                 .getProfileFromFirestore(
                                                     value.user?.uid);
-
                                             formKey.currentState!.reset();
-                                            print("\n");
-                                            print(userProvider
-                                                .userProfile.firstName);
-                                            print("\n\n");
+
                                             Navigator.pop(context);
                                             Navigator.pushReplacementNamed(
                                                 context, '/');

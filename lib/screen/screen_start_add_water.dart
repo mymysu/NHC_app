@@ -210,7 +210,7 @@ class _BeginAddwaterState extends State<BeginAddwater> {
                         _imgObjs = objects!;
                         waterProvider.water.image = objects;
                       });
-                      Position position = await getGeoLocationPosition();
+                      Position position = await getGeoLocationPosition(context);
 
                       await getAddressFromLatLong(
                         position.latitude,

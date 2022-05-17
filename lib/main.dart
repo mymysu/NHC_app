@@ -51,8 +51,6 @@ class MyApp extends StatelessWidget {
               '/historyAdd': (context) => HistoryWater(),
               '/addBeginDatawatersource': (context) => BeginAddwater(),
               '/more': (context) => MoreScreen(),
-
-              // '/choiceTypeWaterAdd': (context) => ChoiceTypeWaterAdd(),
               '/datawatersource': (context) => Datawatersource()
             },
           ),

@@ -21,8 +21,6 @@ class UserProvider with ChangeNotifier {
       'position': userProfile.position,
       'mobileNumber': userProfile.mobileNumber,
     };
-    print(userData);
-
     await FirebaseFirestore.instance
         .collection('users')
         .doc(userProfile.uid)

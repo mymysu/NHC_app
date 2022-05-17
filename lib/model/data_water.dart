@@ -52,18 +52,3 @@ Future<List<WaterSourceDetails>> getWaterSourceDetails(String nameClass) async {
       )
       .toList();
 }
-
-// Future<List<WaterSourceDetails>> getWaterSourceSize(String nameClass) async {
-//   QuerySnapshot qShot = await FirebaseFirestore.instance
-//       .collection('size_data_water_source')
-//       .get();
-
-//   return qShot.docs
-//       .map(
-//         (doc) => WaterSourceDetails(
-//           details: (doc.data() as dynamic)['details'],
-//           sizewater: (doc.data() as dynamic)['size'],
-//         ),
-//       )
-//       .toList();
-// }

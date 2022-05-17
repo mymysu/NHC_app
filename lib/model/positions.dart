@@ -1,24 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class JobPositions {
-  String? positions;
-  JobPositions({this.positions});
+  String positions;
+  JobPositions({required this.positions});
+  @override
+  String toString() => positions;
 }
 
 Future<List<JobPositions>> getPositions() async {
-  QuerySnapshot qShot = await FirebaseFirestore.instance
-      .collection('users')
-      .doc("ozJiDBr67YKy0gsqCLlX")
-      .collection("JobPositions")
-      .get();
+  QuerySnapshot qShot =
+      await FirebaseFirestore.instance.collection('JobTitles').get();
 
   var a = qShot.docs
       .map(
         (doc) => JobPositions(
-          positions: (doc.data() as dynamic)['Positions'],
+          positions: (doc.data() as dynamic)['JobTitle'],
         ),
       )
       .toList();
-  // print(a[1].positions);
+  print(a[0].positions);
   return a;
 }

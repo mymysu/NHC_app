@@ -43,9 +43,6 @@ Future<Position> getGeoLocationPosition(
 
   permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {
-    permission = await Geolocator.checkPermission();
-    print("permission == LocationPermission.denied");
-    permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
       Navigator.pop(context);
       Fluttertoast.showToast(

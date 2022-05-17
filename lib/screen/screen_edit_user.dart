@@ -320,7 +320,7 @@ class EditUser extends StatelessWidget {
                                   'ผู้นำชุมชน ',
                                   'เจ้าหน้าที่สสน',
                                   'อสม',
-                                  'เจ้าชาวบ้านทั่วไป',
+                                  'ชาวบ้าน',
                                   'เจ้าหน้าที่อบต',
                                   'เจ้าหน้าที่อำเภอ',
                                 ].map<DropdownMenuItem<String>>((String value) {

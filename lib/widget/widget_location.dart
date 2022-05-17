@@ -283,7 +283,7 @@ class _LocationWidgetState extends State<LocationWidget> {
                             onPressed: () async {
                               showAlertDialog(context);
                               Position position =
-                                  await getGeoLocationPosition();
+                                  await getGeoLocationPosition(context);
                               setState(() {
                                 Future<Water> newlocation =
                                     getAddressFromLatLong(

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -5,9 +6,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:water_resources_application/model/positions.dart';
 import 'package:water_resources_application/model/profile.dart';
 import 'package:water_resources_application/provider/user_provider.dart';
 import 'package:water_resources_application/screen/screen_home.dart';
+import 'package:water_resources_application/widget/dropdown_jobtitle_widget%20.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -17,7 +20,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  String dropdownValue = 'อสม';
+  String? dropdownValue;
   Profile profile = Profile();
   final formKey = GlobalKey<FormState>();
   final Future<FirebaseApp> firebase = Firebase.initializeApp();
@@ -385,7 +388,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   onPressed: () async {
                                     if (formKey.currentState!.validate()) {
                                       formKey.currentState!.save();
-                                      print(profile);
                                       try {
                                         await FirebaseAuth.instance
                                             .createUserWithEmailAndPassword(
@@ -393,32 +395,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 password: profile.password!)
                                             .then((value) async {
                                           profile.uid = value.user?.uid;
-                                          print(profile.uid);
                                           await userProvider
                                               .addProfileToFirestore(profile);
-                                          print("\n");
-                                          print(userProvider
-                                              .userProfile.firstName);
-                                          print("\n\n");
                                           Fluttertoast.showToast(
                                               msg:
                                                   "สร้างบัญชีผู้ใช้เรียบร้อยแล้ว",
                                               gravity: ToastGravity.CENTER);
                                           formKey.currentState!.reset();
-                                          print("\n");
-                                          print(userProvider
-                                              .userProfile.mobileNumber);
-                                          print("\n\n");
-                                          Navigator.pushReplacement(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return HomeScreen();
-                                          }));
+                                          Navigator.popAndPushNamed(
+                                              context, '/');
                                         });
                                       } on FirebaseAuthException catch (e) {
-                                        // print(e.code);
-                                        // print(e.message);
-
                                         String message = '';
                                         if (e.code == 'email-already-in-use') {
                                           message =

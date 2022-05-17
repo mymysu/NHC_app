@@ -47,7 +47,7 @@ class NewsScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => Datawatersource()),
               );
             }),
-            cardnews(context, "การเพิ่มข้อมูลแหล่งน้ำ",
+            cardnews(context, "โครงการ\nเพิ่มข้อมูลแหล่งน้ำ",
                 "วัตถุประสงค์การเพิ่มข้อมูลแหล่งน้ำ", () {
               Navigator.push(
                 context,
@@ -89,18 +89,20 @@ cardnews(BuildContext context, String titleH, String contentD,
           padding: const EdgeInsets.all(16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      titleH,
-                      style: GoogleFonts.prompt(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 1, 40, 99),
+                    Container(
+                      child: Text(
+                        titleH,
+                        style: GoogleFonts.prompt(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 1, 40, 99),
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -120,7 +122,7 @@ cardnews(BuildContext context, String titleH, String contentD,
               //   width: 50,
               // ),
               Container(
-                alignment: Alignment.bottomRight,
+                alignment: Alignment.bottomCenter,
                 child: FlatButton(
                   onPressed: onPreesed,
                   child: Container(

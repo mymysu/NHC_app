@@ -121,7 +121,7 @@ class onboard_page1 extends StatelessWidget {
         ),
         Container(
           height: sizeV * 40,
-          child: Image.asset(
+          child: Image.network(
             onboardingContents[index].image,
             fit: BoxFit.contain,
           ),
@@ -197,7 +197,7 @@ class onboard_page2 extends StatelessWidget {
         ),
         Container(
           height: sizeV * 40,
-          child: Image.asset(
+          child: Image.network(
             onboardingContents[index].image,
             fit: BoxFit.contain,
           ),

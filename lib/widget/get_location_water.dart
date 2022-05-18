@@ -43,10 +43,11 @@ Future<Position> getGeoLocationPosition(
 
   permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
       Navigator.pop(context);
       Fluttertoast.showToast(
-        msg: "การอนุญาตตำแหน่งถูกปฏิเสธ",
+        msg: "การอนุญาตตำแหน่งถูกปฏิเสธ\nกรุณาอนุญาตการเข้าถึงตำแหน่ง",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 200,
@@ -68,6 +69,9 @@ Future<Position> getGeoLocationPosition(
       backgroundColor: Colors.orange,
       textColor: Colors.white,
     );
+    Timer(Duration(seconds: 3), () async {
+      await Geolocator.openLocationSettings();
+    });
 
     return Future.error(
         'Location permissions are permanently denied, we cannot request permissions.');
@@ -81,7 +85,8 @@ Future<Water> getAddressFromLatLong(
   double longitude,
   DataWater waterProvider,
   BuildContext context,
-) async =>
+) async {
+  try {
     await placemarkFromCoordinates(latitude, longitude).then((
       value,
     ) async {
@@ -176,3 +181,19 @@ Future<Water> getAddressFromLatLong(
       // print(waterProvider.water.nameSubdistrict);
       return waterProvider.water;
     });
+  } catch (error) {
+    Navigator.pop(context);
+    print(error);
+    Fluttertoast.showToast(
+      msg: "เกิดข้อผิดพลาดระหว่างการดึงข้อมูล\nไม่พบพิกัดในฐานข้อมูล",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 300,
+      backgroundColor: Colors.orange,
+      textColor: Colors.white,
+    );
+    return waterProvider.water;
+  }
+
+  return waterProvider.water;
+}

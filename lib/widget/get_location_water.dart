@@ -43,10 +43,11 @@ Future<Position> getGeoLocationPosition(
 
   permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {
+    permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
       Navigator.pop(context);
       Fluttertoast.showToast(
-        msg: "การอนุญาตตำแหน่งถูกปฏิเสธ",
+        msg: "การอนุญาตตำแหน่งถูกปฏิเสธ\nกรุณาอนุญาตการเข้าถึงตำแหน่ง",
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.CENTER,
         timeInSecForIosWeb: 200,
@@ -68,6 +69,9 @@ Future<Position> getGeoLocationPosition(
       backgroundColor: Colors.orange,
       textColor: Colors.white,
     );
+    Timer(Duration(seconds: 3), () async {
+      await Geolocator.openLocationSettings();
+    });
 
     return Future.error(
         'Location permissions are permanently denied, we cannot request permissions.');

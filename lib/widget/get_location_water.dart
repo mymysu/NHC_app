@@ -85,7 +85,8 @@ Future<Water> getAddressFromLatLong(
   double longitude,
   DataWater waterProvider,
   BuildContext context,
-) async =>
+) async {
+  try {
     await placemarkFromCoordinates(latitude, longitude).then((
       value,
     ) async {
@@ -180,3 +181,19 @@ Future<Water> getAddressFromLatLong(
       // print(waterProvider.water.nameSubdistrict);
       return waterProvider.water;
     });
+  } catch (error) {
+    Navigator.pop(context);
+    print(error);
+    Fluttertoast.showToast(
+      msg: "เกิดข้อผิดพลาดระหว่างการดึงข้อมูล\nไม่พบพิกัดในฐานข้อมูล",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.CENTER,
+      timeInSecForIosWeb: 300,
+      backgroundColor: Colors.orange,
+      textColor: Colors.white,
+    );
+    return waterProvider.water;
+  }
+
+  return waterProvider.water;
+}

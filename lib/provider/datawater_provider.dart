@@ -42,15 +42,10 @@ class DataWater with ChangeNotifier {
     List<File> imageFile = [];
     DateTime now = DateTime.now();
     final DateFormat formatter = DateFormat('ddMMyyyyhhmmss');
-    // final DateFormat formatter2 = DateFormat('dd/MM/yyyy hh:mm:ss');
     final String formatted = formatter.format(now);
-    // final String formatted2 = formatter2.format(now);
-
     String FileNameimage =
         "/image_resources/${formatted}-${dataWater.water.typeID}-${dataWater.water.subTypeID}";
-    // String ckkmlFile = (dataWater.water.kmlFile ?? "NULL").toString();
     String ckImage = (dataWater.water.image ?? "NULL").toString();
-    print(formatted);
 
     if (ckImage != "NULL") {
       for (int i = 0; i < dataWater.water.image!.length; i++) {
@@ -71,10 +66,7 @@ class DataWater with ChangeNotifier {
                   }))
               .then((value) {
             value.ref.getDownloadURL().then((value) {
-              // print(value);
               fileNameURL.add(value);
-              // print(fileNameURL[i]);
-              // print(fileNameURL.length);
             });
           });
         } on FirebaseException catch (error) {
@@ -91,8 +83,6 @@ class DataWater with ChangeNotifier {
           .doc(
               "${formatted}${dataWater.water.typeID}${dataWater.water.subTypeID}")
           .set({
-        // "name_TH": dataWater.water.nameTH ?? "",
-        // "URL_FileXml": dataWater.water.urlkmlFile,
         "type_Abbr": dataWater.water.typeAbbr,
         "type_TH": dataWater.water.typeTH,
         "type_ID": dataWater.water.typeID,

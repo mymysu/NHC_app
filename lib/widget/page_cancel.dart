@@ -41,60 +41,58 @@ class _CancelPageState extends State<CancelPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
                     color: Colors.orange.shade100,
-                    child: Stack(children: [
-                      Padding(
-                        padding: const EdgeInsets.all(24),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${name.typeTH} ",
-                                style: GoogleFonts.prompt(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${name.typeTH} ",
+                              style: GoogleFonts.prompt(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
-                              Text(
-                                "${name.subTypeTH} ",
-                                style: GoogleFonts.prompt(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
+                            ),
+                            Text(
+                              "${name.subTypeTH} ",
+                              style: GoogleFonts.prompt(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
-                              Text(
-                                "ละติจู ${name.latitude!.toStringAsFixed(8)} ลองติจู ${name.longitude!.toStringAsFixed(8)}",
-                                style: GoogleFonts.prompt(
-                                  fontSize: 14,
-                                  color: Colors.black,
-                                ),
+                            ),
+                            Text(
+                              "ละติจู ${name.latitude!.toStringAsFixed(8)} ลองติจู ${name.longitude!.toStringAsFixed(8)}",
+                              style: GoogleFonts.prompt(
+                                fontSize: 14,
+                                color: Colors.black,
                               ),
-                              Text(
-                                "ตำบล ${name.nameSubdistrict} อำเภอ ${name.nameDistrict} จังหวัด ${name.nameProvince}",
-                                style: GoogleFonts.prompt(
-                                  fontSize: 12,
-                                  color: Colors.black,
-                                ),
+                            ),
+                            Text(
+                              "ตำบล ${name.nameSubdistrict} อำเภอ ${name.nameDistrict} จังหวัด ${name.nameProvince}",
+                              style: GoogleFonts.prompt(
+                                fontSize: 12,
+                                color: Colors.black,
                               ),
-                              Text(
-                                "${formatted}",
-                                style: GoogleFonts.prompt(
-                                  fontSize: 12,
-                                  color: Colors.black,
-                                ),
+                            ),
+                            Text(
+                              "${formatted}",
+                              style: GoogleFonts.prompt(
+                                fontSize: 12,
+                                color: Colors.black,
                               ),
-                              Text(
-                                "\nเหตุผลที่ยกเลิก ${name.cancelNote}",
-                                style: GoogleFonts.prompt(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.deepOrangeAccent.shade700,
-                                ),
+                            ),
+                            Text(
+                              "\nเหตุผลที่ยกเลิก ${name.cancelNote}",
+                              style: GoogleFonts.prompt(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.deepOrangeAccent.shade700,
                               ),
-                            ]),
-                      ),
-                    ]),
+                            ),
+                          ]),
+                    ),
                   ),
                 );
               },

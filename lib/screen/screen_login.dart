@@ -248,7 +248,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                         } on FirebaseAuthException catch (e) {
                                           Navigator.pop(context);
                                           String message = "";
-
                                           if (e.message ==
                                               "The password is invalid or the user does not have a password.") {
                                             message =
@@ -265,9 +264,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                           } else {
                                             message = e.message!;
                                           }
-
-                                          print(e.message!);
-
                                           Fluttertoast.showToast(
                                               msg: message,
                                               gravity: ToastGravity.CENTER);

@@ -18,8 +18,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-
-  // FirebaseAppCheck.instance.activate.call();
   runApp(MyApp());
 }
 

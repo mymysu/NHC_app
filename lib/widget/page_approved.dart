@@ -11,7 +11,6 @@ class ApprovedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of<UserProvider>(context);
-
     return FutureBuilder(
         future: getHistoryWaterApproved(
             userProvider.userProfile.uid.toString(), true),
@@ -19,70 +18,67 @@ class ApprovedPage extends StatelessWidget {
             (BuildContext context, AsyncSnapshot<List<HistoryWater>> snapshot) {
           if (snapshot.hasError) {
             print(snapshot.error);
-            return Text('');
+            return Text(snapshot.error.toString());
           }
           if (snapshot.connectionState == ConnectionState.done) {
             return ListView.builder(
+              itemCount: snapshot.data!.length,
               itemBuilder: (_, i) {
                 var name = snapshot.data![i];
                 var a = snapshot.data![i].dateApproved!.toDate();
-
                 final DateFormat formatter2 = DateFormat('dd/MM/yyyy hh:mm:ss');
                 final String formatted = formatter2.format(a);
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
                     color: Colors.orange.shade100,
-                    child: Stack(children: [
-                      Padding(
-                        padding: const EdgeInsets.all(24),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${name.typeTH} ",
-                                style: GoogleFonts.prompt(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${name.typeTH} ",
+                              style: GoogleFonts.prompt(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
-                              Text(
-                                "${name.subTypeTH} ",
-                                style: GoogleFonts.prompt(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
+                            ),
+                            Text(
+                              "${name.subTypeTH} ",
+                              style: GoogleFonts.prompt(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
-                              Text(
-                                "ละติจู ${name.latitude!.toStringAsFixed(8)} ลองติจู ${name.longitude!.toStringAsFixed(8)}",
-                                style: GoogleFonts.prompt(
-                                  fontSize: 14,
-                                  color: Colors.black,
-                                ),
+                            ),
+                            Text(
+                              "ละติจูด ${name.latitude!.toStringAsFixed(8)} ลองติจูด ${name.longitude!.toStringAsFixed(8)}",
+                              style: GoogleFonts.prompt(
+                                fontSize: 14,
+                                color: Colors.black,
                               ),
-                              Text(
-                                "ตำบล ${name.nameSubdistrict} อำเภอ ${name.nameDistrict} จังหวัด ${name.nameProvince}",
-                                style: GoogleFonts.prompt(
-                                  fontSize: 12,
-                                  color: Colors.black,
-                                ),
+                            ),
+                            Text(
+                              "ตำบล ${name.nameSubdistrict} อำเภอ ${name.nameDistrict} จังหวัด ${name.nameProvince}",
+                              style: GoogleFonts.prompt(
+                                fontSize: 12,
+                                color: Colors.black,
                               ),
-                              Text(
-                                "เวลาอนุมัติ : ${formatted}",
-                                style: GoogleFonts.prompt(
-                                  fontSize: 12,
-                                  color: Colors.black,
-                                ),
+                            ),
+                            Text(
+                              "เวลาอนุมัติ : ${formatted}",
+                              style: GoogleFonts.prompt(
+                                fontSize: 12,
+                                color: Colors.black,
                               ),
-                            ]),
-                      ),
-                    ]),
+                            ),
+                          ]),
+                    ),
                   ),
                 );
               },
-              itemCount: snapshot.data!.length,
             );
           }
 

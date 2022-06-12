@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+// import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:water_resources_application/app_styles.dart';
@@ -16,9 +17,9 @@ class ShowdialogConfirm {
     var size_page = MediaQuery.of(context).size;
     Completer<GoogleMapController> _controller = Completer();
     DateTime now = DateTime.now();
-    final DateFormat formatter = DateFormat('dd/MM/yyyy hh:mm');
+    final DateFormat formatter = DateFormat('dd/MM/yyyy HH:mm');
     final String nowtime = formatter.format(now);
-
+    // initializeDateFormatting('en-IN', '');
     Set<Marker> _markers = {
       Marker(
         markerId: MarkerId("myLocation"),
@@ -97,7 +98,7 @@ class ShowdialogConfirm {
                             ),
                             textdata('ประเภทข้อมูลแหล่งน้ำ',
                                 "\n   ${dataWater.water.typeTH}  ${dataWater.water.subTypeTH}"),
-                            textdata("ละติจู ลองติจู",
+                            textdata("ละติจูด ลองติจูด",
                                 "\n   ${dataWater.water.latitude!.toStringAsFixed(6)},${dataWater.water.longitude!.toStringAsFixed(6)}"),
                             Padding(
                               padding:

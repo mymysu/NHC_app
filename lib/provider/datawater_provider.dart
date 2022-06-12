@@ -100,6 +100,7 @@ class DataWater with ChangeNotifier {
         "nameProvince": dataWater.water.nameProvince,
         "nameDistrict": dataWater.water.nameDistrict,
         "nameSubdistrict": dataWater.water.nameSubdistrict,
+        "uid": userProvider.userProfile.uid.toString(),
         "note": dataWater.water.note ?? "",
         "email": userProvider.userProfile.email,
         "date": now,

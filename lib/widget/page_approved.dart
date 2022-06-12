@@ -11,7 +11,6 @@ class ApprovedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of<UserProvider>(context);
-
     return FutureBuilder(
         future: getHistoryWaterApproved(
             userProvider.userProfile.uid.toString(), true),
@@ -19,14 +18,14 @@ class ApprovedPage extends StatelessWidget {
             (BuildContext context, AsyncSnapshot<List<HistoryWater>> snapshot) {
           if (snapshot.hasError) {
             print(snapshot.error);
-            return Text('');
+            return Text(snapshot.error.toString());
           }
           if (snapshot.connectionState == ConnectionState.done) {
             return ListView.builder(
+              itemCount: snapshot.data!.length,
               itemBuilder: (_, i) {
                 var name = snapshot.data![i];
                 var a = snapshot.data![i].dateApproved!.toDate();
-
                 final DateFormat formatter2 = DateFormat('dd/MM/yyyy hh:mm:ss');
                 final String formatted = formatter2.format(a);
                 return Padding(
@@ -55,7 +54,7 @@ class ApprovedPage extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "ละติจู ${name.latitude!.toStringAsFixed(8)} ลองติจู ${name.longitude!.toStringAsFixed(8)}",
+                              "ละติจูด ${name.latitude!.toStringAsFixed(8)} ลองติจูด ${name.longitude!.toStringAsFixed(8)}",
                               style: GoogleFonts.prompt(
                                 fontSize: 14,
                                 color: Colors.black,
@@ -80,7 +79,6 @@ class ApprovedPage extends StatelessWidget {
                   ),
                 );
               },
-              itemCount: snapshot.data!.length,
             );
           }
 

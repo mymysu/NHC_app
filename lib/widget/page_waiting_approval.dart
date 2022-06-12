@@ -138,12 +138,12 @@ class _WaitapprovalPageState extends State<WaitapprovalPage> {
           }
           if (snapshot.connectionState == ConnectionState.done) {
             return ListView.builder(
+              itemCount: snapshot.data!.length,
               itemBuilder: (_, i) {
                 var name = snapshot.data![i];
                 DateTime a = snapshot.data![i].date!.toDate();
                 final DateFormat formatter2 = DateFormat('dd/MM/yyyy hh:mm:ss');
                 final String formatted = formatter2.format(a);
-
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
@@ -170,7 +170,7 @@ class _WaitapprovalPageState extends State<WaitapprovalPage> {
                               ),
                             ),
                             Text(
-                              "ละติจู ${name.latitude!.toStringAsFixed(8)} ลองติจู ${name.longitude!.toStringAsFixed(8)}",
+                              "ละติจูด ${name.latitude!.toStringAsFixed(8)} ลองติจูด ${name.longitude!.toStringAsFixed(8)}",
                               style: GoogleFonts.prompt(
                                 fontSize: 14,
                                 color: Colors.black,
@@ -206,7 +206,6 @@ class _WaitapprovalPageState extends State<WaitapprovalPage> {
                   ),
                 );
               },
-              itemCount: snapshot.data!.length,
             );
           }
 

@@ -136,7 +136,7 @@ Future<List<HistoryWater>> getHistoryWaterApproved(
       .where('status', isEqualTo: status)
       .get();
 
-  var a = qShot.docs
+  return qShot.docs
       .map(
         (doc) => HistoryWater(
           typeID: (doc.data() as dynamic)['type_ID'],
@@ -165,8 +165,6 @@ Future<List<HistoryWater>> getHistoryWaterApproved(
         ),
       )
       .toList();
-
-  return a;
 }
 
 void cancelWaterResourcesToFirestore(HistoryWater historyWater,

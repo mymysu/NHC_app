@@ -72,8 +72,8 @@ class _LocationWidgetState extends State<LocationWidget> {
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(),
-                                      hintText: 'กรอกเลขละติจู',
-                                      labelText: 'ละติจู'),
+                                      hintText: 'กรอกเลขละติจูด',
+                                      labelText: 'ละติจูด'),
                                   onSaved: (value) {
                                     setState(() {
                                       waterProvider.water.latitude =
@@ -83,10 +83,10 @@ class _LocationWidgetState extends State<LocationWidget> {
                                   validator: (String? val) {
                                     if (val!.contains(",") ||
                                         val.contains(" ")) {
-                                      return "กรุณากรอกเลขละติจูให้ถูกต้อง";
+                                      return "กรุณากรอกเลขละติจูดให้ถูกต้อง";
                                     }
                                     if (val.isEmpty) {
-                                      return "กรุณากรอกเลขละติจู";
+                                      return "กรุณากรอกเลขละติจูด";
                                     }
                                   },
                                 ),
@@ -97,8 +97,8 @@ class _LocationWidgetState extends State<LocationWidget> {
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(),
-                                      hintText: 'กรอกเลขลองติจู',
-                                      labelText: 'ลองติจู'),
+                                      hintText: 'กรอกเลขลองติจูด',
+                                      labelText: 'ลองติจูด'),
                                   onSaved: (value) {
                                     setState(() {
                                       waterProvider.water.longitude =
@@ -108,10 +108,10 @@ class _LocationWidgetState extends State<LocationWidget> {
                                   validator: (String? val) {
                                     if (val!.contains(",") ||
                                         val.contains(" ")) {
-                                      return "กรุณากรอกเลขลองติจูให้ถูกต้อง";
+                                      return "กรุณากรอกเลขลองติจูดให้ถูกต้อง";
                                     }
                                     if (val.isEmpty) {
-                                      return "กรุณากรอกเลขลองติจู";
+                                      return "กรุณากรอกเลขลองติจูด";
                                     }
                                   },
                                 ),
@@ -191,7 +191,7 @@ class _LocationWidgetState extends State<LocationWidget> {
                     padding: const EdgeInsets.only(left: 24, bottom: 12),
                     child: RichText(
                       text: TextSpan(
-                          text: 'ละติจู , ลองติจู : ',
+                          text: 'ละติจูด , ลองติจูด : ',
                           style: GoogleFonts.prompt(
                             color: Color(0xFF11048B),
                             fontSize: 14,

@@ -63,7 +63,7 @@ class _CancelPageState extends State<CancelPage> {
                               ),
                             ),
                             Text(
-                              "ละติจู ${name.latitude!.toStringAsFixed(8)} ลองติจู ${name.longitude!.toStringAsFixed(8)}",
+                              "ละติจูด ${name.latitude!.toStringAsFixed(8)} ลองติจูด ${name.longitude!.toStringAsFixed(8)}",
                               style: GoogleFonts.prompt(
                                 fontSize: 14,
                                 color: Colors.black,

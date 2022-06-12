@@ -140,7 +140,7 @@ class _BeginAddwaterState extends State<BeginAddwater> {
                       ),
                       TextSpan(
                         text:
-                            "\n   + ที่อยู่ ละติจู ลองติจู ตำบล อำเภอ จังหวัด\n",
+                            "\n   + ที่อยู่ ละติจูด ลองติจูด ตำบล อำเภอ จังหวัด\n",
                         style: GoogleFonts.prompt(
                             color: Colors.indigo.shade900,
                             fontWeight: FontWeight.bold,

@@ -44,7 +44,7 @@ List<OnBoarding> onboardingContents = [
           'https://firebasestorage.googleapis.com/v0/b/db-water-resources.appspot.com/o/images_onboarding%2F5.png?alt=media&token=b86a1786-a9f2-4501-965f-a9245515e91e',
       details1: 'โดยข้อมูลเริ่มต้นคือที่ตั้งในมือถือ',
       details2:
-          'หากต้องการกรอกที่ตั้งเอง สามารถใส่เลขละติจูลองติจูเป็นที่ตั้งได้'),
+          'หากต้องการกรอกที่ตั้งเอง สามารถใส่เลขละติจูดลองติจูดเป็นที่ตั้งได้'),
   OnBoarding(
       title: 'คำอธิบาย',
       image:
